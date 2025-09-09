@@ -1,0 +1,102 @@
+.notes-toolbar {
+  margin: 0 0 1rem;
+}
+#notes-search {
+  width: 100%;
+  max-width: 520px;
+  padding: .6rem .8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.note-card {
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  cursor: pointer;
+  outline: none;
+}
+.note-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.note-card:focus { box-shadow: 0 0 0 3px rgba(0,122,255,.25); }
+
+.note-title {
+  font-weight: 600;
+  margin: 2px 0 8px;
+}
+.note-excerpt {
+  font-size: .95rem;
+  color: #333;
+}
+
+/* Modal (centered + animated) */
+.note-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;                 /* keep laid out so transitions work */
+  align-items: center;           /* center */
+  justify-content: center;       /* center */
+  opacity: 0;                    /* hidden by default */
+  pointer-events: none;          /* clicks pass through when closed */
+  z-index: 1000;
+  transition: opacity 0.22s ease;/* fade parent on open/close */
+}
+
+.note-modal[open] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.note-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.note-modal[open] .note-modal__backdrop {
+  opacity: 1;
+}
+
+
+.note-modal__dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  padding: 18px 18px 22px;
+
+  /* size */
+  max-width: 720px;
+  width: 100%;            /* always use full available */
+  margin: 0 12px;         /* ensure min 12px gap left/right on tiny screens */
+  max-height: 85vh;
+  overflow-y: auto;
+
+  /* animation */
+  transform: translateY(6px) scale(.98);
+  opacity: 0;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+.note-modal[open] .note-modal__dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.note-modal__close {
+  position: absolute;
+  right: 10px; top: 8px;
+  border: none; background: transparent;
+  font-size: 1.6rem; line-height: 1; cursor: pointer;
+}
+
+.note-modal__title { margin: 0 0 10px; }
+.note-modal__content > :first-child { margin-top: 0; }

@@ -1,3 +1,4 @@
+
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your whole blog, values
@@ -31,6 +32,17 @@ github_username:  tufvalinde
 theme: minima
 plugins:
   - jekyll-feed
+
+
+url: "http://127.0.0.1:4001"
+baseurl: ""
+
+
+# for the notes page :)
+collections:
+  notes:
+    output: false   # notes won't generate their own pages
+    permalink: /notes/:name
 
 # Exclude from processing.
 # The following items will not be processed, by default.
