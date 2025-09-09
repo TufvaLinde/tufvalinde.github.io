@@ -16,20 +16,32 @@ class SmsChat extends HTMLElement {
         .group { display:flex; flex-direction:column; gap:6px; margin: 10px 0 18px; }
         .time { text-align:center; font-size: .75rem; opacity: .6; margin-bottom: 6px; }
         .row { display:flex; }
+        .row.tight { margin-top: -6px; }   /* <-- cancel part of the 6px gap so net spacing ~2px */
         .me   { justify-content: flex-end; }
         .them { justify-content: flex-start; }
 
+        /* Bubble base */
         .bubble {
           max-width: 80%;
           padding: 10px 12px;
-          border-radius: 18px;
+          border-radius: 14px;
           line-height: 1.25;
           word-wrap: break-word;
           box-shadow: 0 1px 1px rgba(0,0,0,.05);
         }
-        /* ✅ fixed colors */
-        .bubble.them { background:#f1f1f1; color:#111; border-top-left-radius:6px; }
-        .bubble.me   { background:#007aff; color:#fff;  border-top-right-radius:6px; }
+
+        /* Colors */
+        .bubble.them { background:#f1f1f1; color:#111; }
+        .bubble.me   { background:rgb(137, 255, 245); color:#000; }
+
+        /* Stack roles */
+        .bubble.stack { border-radius: 14px; }     /* middle/upper bubbles */
+        .bubble.end.me   { border-top-right-radius:14px; border-bottom-right-radius:8px; }
+        .bubble.end.them { border-top-left-radius:14px;  border-bottom-left-radius:8px; }
+
+        /* Optional name label */
+        .name { font-size: .72rem; opacity: .65; margin: 2px 6px 2px; }
+        .name.me { text-align: right; }
       </style>
       <div class="wrap"></div>
     `;
@@ -53,6 +65,7 @@ class SmsChat extends HTMLElement {
     // normalize + sort
     this._messages = this._messages.map(m => ({
       who: (m.who || 'them').toLowerCase() === 'me' ? 'me' : 'them',
+      name: (m.name ?? '').toString().trim(),
       text: String(m.text ?? ''),
       time: m.time ? new Date(m.time) : null
     })).sort((a,b)=>(a.time?.getTime()??0)-(b.time?.getTime()??0));
@@ -79,21 +92,24 @@ class SmsChat extends HTMLElement {
       return;
     }
 
-    // group by exact timestamp or within N minutes
-    const groups = [];
+    // time buckets (compare to previous message)
+    const buckets = [];
+    let lastTs = null;
     for (const msg of this._messages) {
       const ts = msg.time?.getTime() ?? 0;
-      if (!groups.length) { groups.push({ start: ts, msgs: [msg] }); continue; }
-      const last = groups[groups.length - 1];
-      const diffMin = Math.abs(ts - last.start) / 60000;
-      const sameBucket = this._groupByMinutes > 0 ? (diffMin <= this._groupByMinutes) : (ts === last.start);
-      sameBucket ? last.msgs.push(msg) : groups.push({ start: ts, msgs: [msg] });
+      const gapMin = lastTs == null ? 0 : Math.abs(ts - lastTs) / 60000;
+      if (!buckets.length || (this._groupByMinutes > 0 && gapMin > this._groupByMinutes)) {
+        buckets.push({ start: ts, msgs: [msg] });
+      } else {
+        buckets[buckets.length - 1].msgs.push(msg);
+      }
+      lastTs = ts;
     }
 
-    // render groups
+    // render
     let currentDay = '';
-    for (const g of groups) {
-      const dt = new Date(g.start);
+    for (const b of buckets) {
+      const dt = new Date(b.start);
       const dayKey = dt.toDateString();
       if (dayKey !== currentDay) {
         currentDay = dayKey;
@@ -102,10 +118,34 @@ class SmsChat extends HTMLElement {
       const groupEl = this._el('div', { class: 'group' });
       groupEl.appendChild(this._el('div', { class: 'time' }, this._formatTimestamp(dt)));
 
-      for (const m of g.msgs) {
-        const row = this._el('div', { class: 'row ' + (m.who === 'me' ? 'me' : 'them') });
-        row.appendChild(this._el('div', { class: 'bubble ' + (m.who === 'me' ? 'me' : 'them') }, m.text));
-        groupEl.appendChild(row);
+      // runs by identity
+      let i = 0;
+      while (i < b.msgs.length) {
+        const first = b.msgs[i];
+        const senderKey = first.who === 'me' ? 'me' : (first.name || 'them');
+        const senderClass = first.who === 'me' ? 'me' : 'them';
+        const showName = senderKey !== 'me' && !!first.name;
+
+        const run = [first]; i++;
+        while (i < b.msgs.length) {
+          const cur = b.msgs[i];
+          const curKey = cur.who === 'me' ? 'me' : (cur.name || 'them');
+          if (curKey !== senderKey) break;
+          run.push(cur); i++;
+        }
+
+        if (showName) groupEl.appendChild(this._el('div', { class: 'name ' + senderClass }, first.name));
+
+        for (let j = 0; j < run.length; j++) {
+          const m = run[j];
+          const isEnd = j === run.length - 1;
+          const bubbleCls = 'bubble ' + senderClass + ' ' + (isEnd ? 'end' : 'stack');
+
+          // 👇 add 'tight' to non-last rows to reduce spacing (works with gap)
+          const row = this._el('div', { class: 'row ' + senderClass + (isEnd ? '' : ' tight') });
+          row.appendChild(this._el('div', { class: bubbleCls, role: 'text' }, m.text));
+          groupEl.appendChild(row);
+        }
       }
 
       root.appendChild(groupEl);

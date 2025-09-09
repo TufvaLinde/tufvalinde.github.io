@@ -1,8 +1,9 @@
 ---
 title: dresscode for girls on a trading floor with no dresscode
 ---
-    
-1. do not wear visibly torn garments  
+<!--more-->
+
+1. do not wear visibly torn garments 
 2. do not wear visibly dirty garments  
 3. if you wear a skirt, it must end no higher than mid-thigh  
 4. do not wear sparkling tops unless you also wear a collar  

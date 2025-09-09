@@ -43,8 +43,10 @@ permalink: /notes/
 <div class="note-modal" id="note-modal" aria-hidden="true">
   <div class="note-modal__backdrop" data-close></div>
   <div class="note-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="note-modal-title">
-    <button class="note-modal__close" type="button" aria-label="Close" data-close>×</button>
-    <h2 class="note-modal__title" id="note-modal-title"></h2>
+    <header class="note-modal__header">
+      <h2 class="note-modal__title" id="note-modal-title"></h2>
+      <button class="note-modal__close" type="button" aria-label="Close" data-close>×</button>
+    </header>
     <div class="note-modal__content" id="note-modal-content"></div>
   </div>
 </div>
