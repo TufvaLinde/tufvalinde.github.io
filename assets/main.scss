@@ -1,0 +1,85 @@
+---
+---
+@import "minima";
+
+.site-header { border: none; }
+
+/* Reduce extra space if you want it snug */
+.page-content { padding-top: 0; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  /* Prefer modern viewport units; fall back to 100vh */
+  min-height: 100vh;
+  min-height: 100dvh; /* modern browsers handle browser UI better */
+
+  /* Optional: for iOS Safari older quirks */
+  @supports (height: 100svh) {
+    min-height: 100svh;
+  }
+
+  background-color: #ffffff;
+  color: #111;
+}
+
+.page-content {
+  flex: 1;  /* grows to push footer down */
+}
+
+ul, ol .wrapper {
+  list-style: none;
+  margin-left: 0; /* remove left indent */
+  padding-left: 0;
+}
+
+/* Default link (not visited) */
+a:link {
+  color: #0000ff;  /* blue */
+  text-decoration: none;
+}
+
+/* Visited link */
+a:visited {
+  color: #9908be; /* purple-ish (or whatever you like) */
+  text-decoration: none;
+}
+
+/* Hovered link (applies whether visited or not) */
+a:hover,
+a:focus {
+  color: #a65ee5; /* teal */
+  text-decoration: underline;
+}
+
+/* Active link (while clicking/tapping) */
+a:active {
+  color: #ff6600; /* optional: orange flash when pressed */
+}
+
+// h1, h2, h3 {
+//   font-family: 'Coral Pixels', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+// }
+
+
+.site-footer {
+  margin-top: auto; /* sits at bottom only if page is short */
+  border: none;
+  font-family: "Coral Pixels";
+}
+
+footer .wrapper{
+    font-size: 0.8em;
+    color: rgb(166, 166, 166);
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

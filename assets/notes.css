@@ -78,7 +78,7 @@
   max-width: 720px;
   width: 100%;            /* always use full available */
   margin: 0 12px;         /* ensure min 12px gap left/right on tiny screens */
-  max-height: 85vh;
+  max-height: 90%;
   overflow-y: auto;
 
   /* animation */

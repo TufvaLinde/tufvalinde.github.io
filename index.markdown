@@ -2,9 +2,9 @@
 layout: default
 nav_exclude: true
 ---
+👽 means i have nothing good to say
 
-# Posts
-
+## posts
 <ul>
   {% for post in site.posts %}
     <li>

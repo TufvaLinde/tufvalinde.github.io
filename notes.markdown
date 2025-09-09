@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Notes
+title: notes
 permalink: /notes/
 ---
 
 <link rel="stylesheet" href="{{ '/assets/notes.css' | relative_url }}">
 
-<h1>Notes</h1>
+<h1>notes</h1>
 <div class="notes-toolbar">
   <input id="notes-search" type="search" placeholder="Search notes…">
 </div>
