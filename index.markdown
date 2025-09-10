@@ -3,11 +3,6 @@ layout: default
 nav_exclude: true
 ---
 
-hcjvkbjnjhgjfhdgxfhgjljhkgjfthdgsfzdgfg  sdkfjbsdn fseuc jsekcs hefksjvefks dciskefhvsa ,ned fkwuef sadkfv ckwe fakeuvf kamnd fkauevf amndsfkhvef ksn vksubef s
-
-
-riubvsoeufjbsljd vcsuief seocskevc sjkecks skje fcskecuiskev cskecusebj cscksuj fcvskejc wkejcsej csejkc scks bekcsk
-
 👽 means i have nothing good to say.
 
 ## **posts**
