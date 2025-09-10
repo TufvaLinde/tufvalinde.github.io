@@ -16,11 +16,10 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  /* robust viewport height for Safari/iOS too */
   min-height: 100vh;
   min-height: 100dvh;
-  background-color: #ffffff;
   color: #111;
+//   background-color: #00242e;
 }
 
 @supports (height: 100svh) {
@@ -42,9 +41,9 @@ body {
 
 /* Restore a centered content width like Minima’s */
 .wrapper {
-  max-width: 800px;     /* tweak to taste (e.g., 860px) */
-  margin: 0 auto;       /* center */
-  padding: 0 1rem;      /* comfy side padding on small screens */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* media should never overflow width */
@@ -59,27 +58,9 @@ code {
 /* =========================
    Typography / Links
    ========================= */
-.site-title { font-family: 'Coral Pixels'; }
-
-/* link states (LVHA order) */
-a:link {
-  color: #0000ff;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #9908be;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #a65ee5;
-  text-decoration: underline;
-}
-
-a:active {
-  color: #ff6600;
+.site-title { 
+//   font-family: 'Coral Pixels';
+  font-weight: bold;
 }
 
 /* =========================
@@ -90,23 +71,54 @@ a:active {
 .site-footer {
   margin-top: auto;
   border: none;
-  font-family: "Coral Pixels";
-  text-align: center; /* force inline text to center */
+//   font-family: "Coral Pixels";
+  text-align: center;
 }
 
 footer .wrapper {
   font-size: 0.8em;
   color: rgb(166, 166, 166);
   width: 100%;
-  margin: 0 auto;      /* center block content */
-  padding: 0;          /* remove stray padding */
-  display: block;      /* switch off flex, use text-align */
+  margin: 0 auto;
+  padding: 0;
+  display: block;
 }
 
-.post-list ul { list-style: none; margin-left: 0; padding-left: 0; }
-.post-list li { margin-bottom: .5rem; }
+/* =========================
+   Posts list
+   ========================= */
+.post-list {
+  list-style: none;   /* remove bullets */
+  margin: 0;
+  padding: 0;
+}
+
+.post-list > li {
+  margin: 0 0 .5rem 0;
+}
+
+.post-link {
+  font-size: 1em;
+  display: block;
+  padding: .1rem 0;
+  color: #0000ff;        /* blue titles */
+  text-decoration: none; /* no underline */
+}
+
+.post-link:visited {
+  color: #0000ff;        /* same blue when visited */
+}
+
 .post-date {
-  margin-left: 1em;   /* or 2em if you want more spacing */
-  font-size: 0.8em;  /* keep it smaller if you like */
-  color: #666;        /* optional: tone down */
+  margin-left: 1em;
+  font-size: .85em;
+  color: #515151;           /* gray dates */
+}
+
+/* Hover row -> both title & date highlight */
+.post-list > li:hover .post-link,
+.post-list > li:hover .post-date {
+  color: #9cd7ff !important; /* highlight color */
+  text-decoration: none !important;
+  transition: linear 0.1s;
 }
