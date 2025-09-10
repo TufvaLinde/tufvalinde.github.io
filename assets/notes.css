@@ -1,13 +1,18 @@
+/* Toolbar */
 .notes-toolbar {
   margin: 0 0 1rem;
+  display: flex;
+  justify-content: center; /* center search bar */
 }
 #notes-search {
   width: 100%;
+  max-width: 520px;
   padding: .6rem .8rem;
   border: 1px solid #ddd;
   border-radius: 8px;
 }
 
+/* Notes grid */
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -23,6 +28,7 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.04);
   cursor: pointer;
   outline: none;
+  transition: box-shadow .18s ease;
 }
 .note-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .note-card:focus { box-shadow: 0 0 0 3px rgba(0,122,255,.25); }
@@ -31,24 +37,56 @@
   font-weight: 600;
   margin: 2px 0 8px;
 }
+
+/* Excerpt with real lists + fade truncation */
 .note-excerpt {
-  font-size: .95rem;
+  font-size: .8rem;
   color: #333;
+  max-height: 6rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.note-excerpt ul {
+  list-style: disc;
+  margin: 0 0 .6rem 1.25rem;
+  padding: 0;
+}
+.note-excerpt ol {
+  list-style: decimal;
+  margin: 0 0 .6rem 1.25rem;
+  padding: 0;
+}
+.note-excerpt li { margin: .25rem 0; }
+
+.note-excerpt p,
+.note-excerpt h1,
+.note-excerpt h2,
+.note-excerpt h3 {
+  margin: 0 0 .5rem;
+}
+
+.note-excerpt::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2.5rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
 }
 
 /* Modal (centered + animated) */
 .note-modal {
   position: fixed;
   inset: 0;
-  display: flex;                 /* keep laid out so transitions work */
-  align-items: center;           /* center */
-  justify-content: center;       /* center */
-  opacity: 0;                    /* hidden by default */
-  pointer-events: none;          /* clicks pass through when closed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
   z-index: 1000;
-  transition: opacity 0.22s ease;/* fade parent on open/close */
+  transition: opacity 0.22s ease;
 }
-
 .note-modal[open] {
   opacity: 1;
   pointer-events: auto;
@@ -61,25 +99,19 @@
   opacity: 0;
   transition: opacity 0.22s ease;
 }
-.note-modal[open] .note-modal__backdrop {
-  opacity: 1;
-}
+.note-modal[open] .note-modal__backdrop { opacity: 1; }
 
 .note-modal__dialog {
   position: relative;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 28px rgba(0,0,0,.25);
-  padding: 18px 18px 22px;
-
-  /* size */
+  padding: 0 18px 22px; /* remove top padding (header handles it) */
   max-width: 720px;
-  width: 100%;            /* always use full available */
-  margin: 0 12px;         /* ensure min 12px gap left/right on tiny screens */
+  width: 100%;
+  margin: 0 12px;
   max-height: 90%;
   overflow-y: auto;
-
-  /* animation */
   transform: translateY(6px) scale(.98);
   opacity: 0;
   transition: transform 0.22s ease, opacity 0.22s ease;
@@ -89,51 +121,39 @@
   opacity: 1;
 }
 
-.note-modal__close {
-  position: absolute;
-  right: 25px; top: 20px;
-  border: none; background: transparent;
-  font-size: 1.6rem; cursor: pointer;
+/* Modal header: title + close button */
+.note-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0 10px;
 }
-
-.note-modal__title { margin: 0 0 10px; }
-.note-modal__content > :first-child { margin-top: 0; }
-
-
-/* Card body typography (keep real list styling) */
-.note-excerpt {
-  font-size: .8rem;
-  color: #333;
-
-  /* limit visible height; let CSS hide the rest with a gentle fade */
-  max-height: 6rem;         /* adjust to taste */
+.note-modal__title {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  flex: 1 1 auto;
+  min-width: 0;
   overflow: hidden;
-  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.note-modal__close {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: #000;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+}
+.note-modal__close:hover,
+.note-modal__close:focus {
+  color: #111;
+  outline: none;
 }
 
-/* Real bullets/numbers + sane indents inside cards */
-.note-excerpt ul { list-style: disc;  margin: 0 0 .6rem 1.25rem; padding: 0; }
-.note-excerpt ol { list-style: decimal; margin: 0 0 .6rem 1.25rem; padding: 0; }
-.note-excerpt li { margin: .25rem 0; }
-
-/* Headings/paragraphs tighten up inside small cards */
-.note-excerpt p,
-.note-excerpt h1,
-.note-excerpt h2,
-.note-excerpt h3 {
-  margin: 0 0 .5rem;
-}
-
-/* Nice fade-out at bottom so truncation feels natural */
-.note-excerpt::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 2.5rem;              /* size of the fade */
-  pointer-events: none;
-  /* light background fade; change the color stop to match your card bg */
-  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
-}
-
-/* If your cards use a non-white background, match it here */
-.note-card { background: #fff; }
+.note-modal__content > :first-child { margin-top: 0; }
