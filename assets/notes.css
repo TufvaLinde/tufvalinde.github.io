@@ -135,6 +135,7 @@
   text-overflow: clip;
   word-break: break-word;
   overflow-wrap: anywhere;
+  font-weight: 600;
 }
 .note-modal__close {
   appearance: none;
