@@ -32,7 +32,7 @@ class SmsChat extends HTMLElement {
 
         /* Colors */
         .bubble.them { background:#f1f1f1; color:#111; }
-        .bubble.me   { background:rgb(137, 255, 245); color:#000; }
+        .bubble.me   { background:rgb(0, 121, 130); color:#fff; }
 
         /* Stack roles */
         .bubble.stack { border-radius: 14px; }     /* middle/upper bubbles */

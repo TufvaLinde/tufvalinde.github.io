@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   color: #111;
-//   background-color: #00242e;
+  // background-color: #00242e;
 }
 
 @supports (height: 100svh) {
@@ -39,9 +39,9 @@ body {
   max-width: 100%;
 }
 
-/* Restore a centered content width like Minima’s */
+/* Centered content width */
 .wrapper {
-  max-width: 800px;
+  max-width: 600px;   /* <- tweak to taste (e.g., 720 / 800) */
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -58,20 +58,105 @@ code {
 /* =========================
    Typography / Links
    ========================= */
-.site-title { 
-//   font-family: 'Coral Pixels';
+.site-title {
+  // font-family: 'Coral Pixels';
   font-weight: bold;
+  align-items: baseline;
 }
 
 /* =========================
-   Components
+   Header / Nav (force inline always)
    ========================= */
-.site-header { border: none; }
+.site-header {
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+/* title + nav inline, wrap if needed */
+.site-header .wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* nuke Minima’s small-screen nav behavior */
+.site-nav {
+  float: none !important;
+  font-size: 1.3rem;
+  margin-left: 0 !important;
+  position: static !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* never show hamburger */
+.site-nav .nav-trigger,
+.site-nav label[for="nav-trigger"],
+.site-nav .menu-icon {
+  display: none !important;
+}
+
+/* always show links inline */
+.site-nav .trigger {
+  display: flex !important;
+  gap: 1rem;
+  align-items: center;
+  position: static !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* tidy header links */
+.site-nav .page-link {
+  text-decoration: none;
+  color: inherit;
+  padding: .25rem 0;
+  margin-right: 0 !important;
+}
+.site-nav .page-link:hover,
+.site-nav .page-link:focus {
+  color: rgb(156, 203, 206);
+  transition: linear 0.1s;
+}
+
+/* RE-OVERRIDE on tiny screens to beat Minima’s @media rules */
+@media (max-width: 640px) {
+  .site-nav {
+    float: none !important;
+    margin-left: 0 !important;
+    position: static !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .site-nav .page-link{
+    margin-left: 0 !important;
+  }
+  .site-nav .trigger {
+    display: flex !important;
+    gap: .9rem;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =========================
+   Footer
+   ========================= */
 .site-footer {
   margin-top: auto;
   border: none;
-//   font-family: "Coral Pixels";
+  // font-family: "Coral Pixels";
   text-align: center;
 }
 
@@ -84,12 +169,15 @@ footer .wrapper {
   display: block;
 }
 
+/* =========================
+   Blockquotes
+   ========================= */
 blockquote {
-  font-style: italic;   /* turn off italics */
-  font-size: 1rem;      /* reset to base font size */
-  line-height: 1.5;     /* reset line spacing */
-  color: inherit;       /* use normal text color */
-  font-family: inherit; /* force same font as body */
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: inherit;
+  font-family: inherit;
   border-left: 4px solid #575757;
   letter-spacing: inherit;
   padding-left: 1em;
@@ -100,7 +188,7 @@ blockquote {
    Posts list
    ========================= */
 .post-list {
-  list-style: none;   /* remove bullets */
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -113,24 +201,24 @@ blockquote {
   font-size: 1em;
   display: block;
   padding: .1rem 0;
-  color: #0000ff;        /* blue titles */
-  text-decoration: none; /* no underline */
+  color: rgb(0, 121, 130);
+  text-decoration: none;
 }
 
 .post-link:visited {
-  color: #0000ff;        /* same blue when visited */
+  color: rgb(0, 121, 130);
 }
 
 .post-date {
   margin-left: 1em;
   font-size: .85em;
-  color: #515151;           /* gray dates */
+  color: #515151;
 }
 
 /* Hover row -> both title & date highlight */
 .post-list > li:hover .post-link,
 .post-list > li:hover .post-date {
-  color: #9cd7ff !important; /* highlight color */
+  color: rgb(156, 203, 206) !important;
   text-decoration: none !important;
   transition: linear 0.1s;
 }
