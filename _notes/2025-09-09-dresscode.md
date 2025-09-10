@@ -14,9 +14,9 @@ date: 2025-09-10
 9. do not wear jeans*  
 10. do not show both shoulders and knees at the same time  
 
----
+> **the friday clause**  
+on fridays you may break **ONE** rule of your choice, from 4–10.
 
-📌 **the friday clause**  
-on fridays you may break **ONE** rule of your choice, from 4–10.  
+  
 
 \* if invoking the friday clause, only dark-wash jeans are allowed.

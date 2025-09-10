@@ -84,6 +84,18 @@ footer .wrapper {
   display: block;
 }
 
+blockquote {
+  font-style: italic;   /* turn off italics */
+  font-size: 1rem;      /* reset to base font size */
+  line-height: 1.5;     /* reset line spacing */
+  color: inherit;       /* use normal text color */
+  font-family: inherit; /* force same font as body */
+  border-left: 4px solid #575757;
+  letter-spacing: inherit;
+  padding-left: 1em;
+  margin: 1em 0;
+}
+
 /* =========================
    Posts list
    ========================= */
