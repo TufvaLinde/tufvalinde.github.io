@@ -2,84 +2,106 @@
 ---
 @import "minima";
 
-.site-header { border: none; }
-
-/* Reduce extra space if you want it snug */
-.page-content { padding-top: 0; }
-
-html, body {
-  height: 100%;
+/* =========================
+   Layout / Page skeleton
+   ========================= */
+html,
+body {
   margin: 0;
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
   display: flex;
   flex-direction: column;
-
-  /* Prefer modern viewport units; fall back to 100vh */
+  /* robust viewport height for Safari/iOS too */
   min-height: 100vh;
-  min-height: 100dvh; /* modern browsers handle browser UI better */
-
-  /* Optional: for iOS Safari older quirks */
-  @supports (height: 100svh) {
-    min-height: 100svh;
-  }
-
+  min-height: 100dvh;
   background-color: #ffffff;
   color: #111;
+  padding-left: 10px;
 }
 
+@supports (height: 100svh) {
+  body { min-height: 100svh; }
+}
+
+/* Main content grows to push footer down */
 .page-content {
-  flex: 1;  /* grows to push footer down */
+  flex: 1;
+  padding-top: 0;
 }
 
-ul, ol .wrapper {
-  list-style: none;
-  margin-left: 0; /* remove left indent */
-  padding-left: 0;
+/* keep common wrappers from overflowing on mobile */
+.wrapper,
+.page-content,
+.site-header,
+.site-footer {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-/* Default link (not visited) */
+/* media should never overflow width */
+img,
+iframe,
+pre,
+code {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Typography / Links
+   ========================= */
+.site-title { font-family: 'Coral Pixels'; }
+
+/* link states (LVHA order) */
 a:link {
-  color: #0000ff;  /* blue */
+  color: #0000ff;
   text-decoration: none;
 }
 
-/* Visited link */
 a:visited {
-  color: #9908be; /* purple-ish (or whatever you like) */
+  color: #9908be;
   text-decoration: none;
 }
 
-/* Hovered link (applies whether visited or not) */
 a:hover,
 a:focus {
-  color: #a65ee5; /* teal */
+  color: #a65ee5;
   text-decoration: underline;
 }
 
-/* Active link (while clicking/tapping) */
 a:active {
-  color: #ff6600; /* optional: orange flash when pressed */
+  color: #ff6600;
 }
 
-// h1, h2, h3 {
-//   font-family: 'Coral Pixels', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-// }
-
+/* =========================
+   Components
+   ========================= */
+.site-header { border: none; }
 
 .site-footer {
-  margin-top: auto; /* sits at bottom only if page is short */
+  margin-top: auto;   /* sits at bottom when page is short */
   border: none;
-  font-family: "Coral Pixels";
+  font-family: 'Coral Pixels';
 }
 
-footer .wrapper{
-    font-size: 0.8em;
-    color: rgb(166, 166, 166);
-    align-items: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+footer .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-size: 0.8em;
+  color: rgb(166, 166, 166);
+}
+
+.post-list ul { list-style: none; margin-left: 0; padding-left: 0; }
+.post-list li { margin-bottom: .5rem; }
+.post-date {
+  margin-left: 1em;   /* or 2em if you want more spacing */
+  font-size: 0.8em;  /* keep it smaller if you like */
+  color: #666;        /* optional: tone down */
 }
