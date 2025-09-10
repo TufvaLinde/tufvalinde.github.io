@@ -2,7 +2,7 @@
 layout: default
 nav_exclude: true
 ---
-👽 means i have nothing good to say
+👽 means i have nothing good to say.
 
 ## posts
 <ul class="post-list">
