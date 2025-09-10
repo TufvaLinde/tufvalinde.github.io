@@ -21,7 +21,6 @@ body {
   min-height: 100dvh;
   background-color: #ffffff;
   color: #111;
-  padding-left: 10px;
 }
 
 @supports (height: 100svh) {
@@ -35,12 +34,17 @@ body {
 }
 
 /* keep common wrappers from overflowing on mobile */
-.wrapper,
 .page-content,
 .site-header,
 .site-footer {
   max-width: 100%;
-  overflow-x: hidden;
+}
+
+/* Restore a centered content width like Minima’s */
+.wrapper {
+  max-width: 800px;     /* tweak to taste (e.g., 860px) */
+  margin: 0 auto;       /* center */
+  padding: 0 1rem;      /* comfy side padding on small screens */
 }
 
 /* media should never overflow width */
