@@ -88,18 +88,19 @@ a:active {
 .site-header { border: none; }
 
 .site-footer {
-  margin-top: auto;   /* sits at bottom when page is short */
+  margin-top: auto;
   border: none;
-  font-family: 'Coral Pixels';
+  font-family: "Coral Pixels";
+  text-align: center; /* force inline text to center */
 }
 
 footer .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
   font-size: 0.8em;
   color: rgb(166, 166, 166);
+  width: 100%;
+  margin: 0 auto;      /* center block content */
+  padding: 0;          /* remove stray padding */
+  display: block;      /* switch off flex, use text-align */
 }
 
 .post-list ul { list-style: none; margin-left: 0; padding-left: 0; }
