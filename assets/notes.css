@@ -3,7 +3,6 @@
 }
 #notes-search {
   width: 100%;
-  max-width: 520px;
   padding: .6rem .8rem;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -99,3 +98,42 @@
 
 .note-modal__title { margin: 0 0 10px; }
 .note-modal__content > :first-child { margin-top: 0; }
+
+
+/* Card body typography (keep real list styling) */
+.note-excerpt {
+  font-size: .8rem;
+  color: #333;
+
+  /* limit visible height; let CSS hide the rest with a gentle fade */
+  max-height: 6rem;         /* adjust to taste */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Real bullets/numbers + sane indents inside cards */
+.note-excerpt ul { list-style: disc;  margin: 0 0 .6rem 1.25rem; padding: 0; }
+.note-excerpt ol { list-style: decimal; margin: 0 0 .6rem 1.25rem; padding: 0; }
+.note-excerpt li { margin: .25rem 0; }
+
+/* Headings/paragraphs tighten up inside small cards */
+.note-excerpt p,
+.note-excerpt h1,
+.note-excerpt h2,
+.note-excerpt h3 {
+  margin: 0 0 .5rem;
+}
+
+/* Nice fade-out at bottom so truncation feels natural */
+.note-excerpt::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2.5rem;              /* size of the fade */
+  pointer-events: none;
+  /* light background fade; change the color stop to match your card bg */
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
+}
+
+/* If your cards use a non-white background, match it here */
+.note-card { background: #fff; }

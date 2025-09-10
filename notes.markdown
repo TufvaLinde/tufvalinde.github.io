@@ -22,13 +22,10 @@ permalink: /notes/
   {% for n in notes %}
     <article class="note-card" tabindex="0" data-title="{{ n.title | escape }}">
       <header class="note-title">{{ n.title }}</header>
-      <div class="note-excerpt">
-        {% if n.excerpt %}
-          {{ n.excerpt | strip_html | truncate: 180 }}
-        {% else %}
-          {{ n.content | strip_html | truncate: 180 }}
-        {% endif %}
-      </div>
+        <div class="note-excerpt">
+          {% assign html = n.excerpt | default: n.content %}
+          {{ html | markdownify }}
+        </div>
       <template class="note-full">
         {{ n.content | markdownify }}
       </template>

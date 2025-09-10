@@ -1,7 +1,7 @@
 ---
 title: dresscode for girls on a trading floor with no dresscode
+date: 2025-09-10
 ---
-<!--more-->
 
 1. do not wear visibly torn garments 
 2. do not wear visibly dirty garments  

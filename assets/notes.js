@@ -9,6 +9,7 @@ function openModal(title, html) {
   modalContent.innerHTML = html || '';
   modal.setAttribute('open', '');
   modal.setAttribute('aria-hidden', 'false');
+
   // focus trap start
   modal.querySelector('.note-modal__close').focus();
   document.body.style.overflow = 'hidden';
@@ -34,7 +35,10 @@ function wireCards() {
   grid.querySelectorAll('.note-card').forEach(card => {
     card.addEventListener('click', onCardClick);
     card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onCardClick({ currentTarget: card }); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onCardClick({ currentTarget: card });
+      }
     });
   });
 }
@@ -50,11 +54,16 @@ function wireModal() {
 
 function wireSearch() {
   if (!search) return;
+
   const cards = Array.from(grid.querySelectorAll('.note-card')).map(card => {
     const title = (card.dataset.title || '');
     const tags  = (card.dataset.tags || '');
-    const excerptText = (card.querySelector('.note-excerpt')?.textContent || '');
-    return { card, haystack: (title + ' ' + tags + ' ' + excerptText).toLowerCase() };
+    // Use innerHTML to keep lists/markup visible in search haystack
+    const excerptHtml = (card.querySelector('.note-excerpt')?.innerHTML || '');
+    const haystack = (title + ' ' + tags + ' ' + excerptHtml)
+      .replace(/<[^>]+>/g, '') // strip HTML tags for searching
+      .toLowerCase();
+    return { card, haystack };
   });
 
   const apply = (q) => {
@@ -68,7 +77,9 @@ function wireSearch() {
   // filter as you type
   search.addEventListener('input', (e) => apply(e.target.value));
   // pressing Enter shouldn't submit anything
-  search.addEventListener('keydown', (e) => { if (e.key === 'Enter') e.preventDefault(); });
+  search.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') e.preventDefault();
+  });
 }
 
 wireCards();

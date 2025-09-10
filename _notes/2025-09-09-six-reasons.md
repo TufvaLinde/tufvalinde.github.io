@@ -1,7 +1,6 @@
 ---
 title: 6 reasons why 6 is my favourite number
 ---
-<!--more-->
 
 1. it is the smallest (mathematically) perfect number
 2. it is also equal to the product of its proper divisors
