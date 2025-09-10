@@ -2,7 +2,7 @@
 .notes-toolbar {
   margin: 0 0 1rem;
   display: flex;
-  justify-content: center; /* center search bar */
+  justify-content: center;
 }
 #notes-search {
   width: 100%;
@@ -46,7 +46,6 @@
   overflow: hidden;
   position: relative;
 }
-
 .note-excerpt ul {
   list-style: disc;
   margin: 0 0 .6rem 1.25rem;
@@ -58,14 +57,10 @@
   padding: 0;
 }
 .note-excerpt li { margin: .25rem 0; }
-
 .note-excerpt p,
 .note-excerpt h1,
 .note-excerpt h2,
-.note-excerpt h3 {
-  margin: 0 0 .5rem;
-}
-
+.note-excerpt h3 { margin: 0 0 .5rem; }
 .note-excerpt::after {
   content: "";
   position: absolute;
@@ -106,7 +101,7 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 8px 28px rgba(0,0,0,.25);
-  padding: 0 18px 22px; /* remove top padding (header handles it) */
+  padding: 0 18px 22px;
   max-width: 720px;
   width: 100%;
   margin: 0 12px;
@@ -121,10 +116,10 @@
   opacity: 1;
 }
 
-/* Modal header: title + close button */
+/* Modal header: title wraps; close stays right */
 .note-modal__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   padding: 16px 0 10px;
@@ -132,12 +127,14 @@
 .note-modal__title {
   margin: 0;
   font-size: 1.125rem;
-  line-height: 1.2;
+  line-height: 1.25;
   flex: 1 1 auto;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .note-modal__close {
   appearance: none;
@@ -149,6 +146,7 @@
   line-height: 1;
   cursor: pointer;
   padding: 6px;
+  flex: 0 0 auto;
 }
 .note-modal__close:hover,
 .note-modal__close:focus {
