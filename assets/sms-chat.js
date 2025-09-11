@@ -1,11 +1,25 @@
+
 class SmsChat extends HTMLElement {
-  static get observedAttributes() { return ['timestamp-format','group-by-minutes']; }
+  static get observedAttributes() {
+    return ['timestamp-format','group-by-minutes','locale','show-day-separators','show-group-time','bubble-timestamps'];
+  }
 
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+
+    // config
     this._fmt = this.getAttribute('timestamp-format') || 'YYYY-MM-DD HH:mm';
     this._groupByMinutes = parseInt(this.getAttribute('group-by-minutes') || '0', 10);
+    this._locale = this._resolveLocale(this.getAttribute('locale'));
+    this._showDaySep    = this._boolAttr('show-day-separators', true);
+    this._showGroupTime = this._boolAttr('show-group-time', false);
+    this._bubbleStamps  = this._boolAttr('bubble-timestamps', true);
+
+    // formatters (Intl so Safari respects reader locale)
+    this._dayFmt  = new Intl.DateTimeFormat(this._locale, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+    this._timeFmt = new Intl.DateTimeFormat(this._locale, { hour:'2-digit', minute:'2-digit' });
+
     this._messages = [];
 
     this.shadowRoot.innerHTML = `
@@ -14,14 +28,15 @@ class SmsChat extends HTMLElement {
         .wrap { max-width: 680px; margin: 0 auto; }
         .day-sep { text-align:center; font-size: .8rem; opacity: .7; margin: 16px 0; }
         .group { display:flex; flex-direction:column; gap:6px; margin: 10px 0 18px; }
-        .time { text-align:center; font-size: .75rem; opacity: .6; margin-bottom: 6px; }
+        .time { text-align:center; font-size: .75rem; opacity: .6; margin: 6px 0; }
         .row { display:flex; }
-        .row.tight { margin-top: -6px; }   /* <-- cancel part of the 6px gap so net spacing ~2px */
+        .row.tight { margin-top: -6px; } /* collapse gap between stacked bubbles */
         .me   { justify-content: flex-end; }
         .them { justify-content: flex-start; }
 
         /* Bubble base */
         .bubble {
+          position: relative;          /* for in-bubble timestamp */
           max-width: 80%;
           padding: 10px 12px;
           border-radius: 14px;
@@ -32,14 +47,27 @@ class SmsChat extends HTMLElement {
 
         /* Colors */
         .bubble.them { background:#f1f1f1; color:#111; }
-        .bubble.me   { background:rgb(0, 121, 130); color:#fff; }
+        .bubble.me   { background:rgb(0,121,130); color:#fff; }
 
         /* Stack roles */
-        .bubble.stack { border-radius: 14px; }     /* middle/upper bubbles */
-        .bubble.end.me   { border-top-right-radius:14px; border-bottom-right-radius:8px; }
-        .bubble.end.them { border-top-left-radius:14px;  border-bottom-left-radius:8px; }
+        .bubble.stack { border-radius: 14px; }
+        .bubble.end.me   { border-top-right-radius:14px; border-bottom-right-radius:3px; }
+        .bubble.end.them { border-top-left-radius:14px;  border-bottom-left-radius:3px; }
 
-        /* Optional name label */
+        /* In-bubble timestamp (optional) */
+        .stamp {
+          position: absolute;
+          right: 8px;
+          bottom: 6px;
+          font-size: .7rem;
+          opacity: .6;
+          white-space: nowrap;
+          pointer-events: none;
+        }
+        /* add bottom padding so stamp doesn’t overlap text */
+        .bubble.has-stamp { padding-bottom: 24px; }
+
+        /* Optional name label for group chats */
         .name { font-size: .72rem; opacity: .65; margin: 2px 6px 2px; }
         .name.me { text-align: right; }
       </style>
@@ -48,7 +76,7 @@ class SmsChat extends HTMLElement {
   }
 
   connectedCallback() {
-    // inline JSON
+    // Read inline JSON
     const inline = this.querySelector('script[type="application/json"]');
     if (inline) {
       try {
@@ -56,7 +84,7 @@ class SmsChat extends HTMLElement {
         this._messages = Array.isArray(data) ? data : (Array.isArray(data?.messages) ? data.messages : []);
       } catch (e) { console.warn('sms-chat: invalid JSON', e); }
     }
-    // or data-messages attr
+    // Or from data attribute
     if (!this._messages.length && this.hasAttribute('data-messages')) {
       try { this._messages = JSON.parse(this.getAttribute('data-messages') || '[]'); }
       catch (e) { console.warn('sms-chat: invalid data-messages JSON', e); }
@@ -76,6 +104,14 @@ class SmsChat extends HTMLElement {
   attributeChangedCallback(name, _oldV, newV) {
     if (name === 'timestamp-format') this._fmt = newV || 'YYYY-MM-DD HH:mm';
     if (name === 'group-by-minutes') this._groupByMinutes = parseInt(newV || '0', 10);
+    if (name === 'locale') {
+      this._locale = this._resolveLocale(newV);
+      this._dayFmt  = new Intl.DateTimeFormat(this._locale, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+      this._timeFmt = new Intl.DateTimeFormat(this._locale, { hour:'2-digit', minute:'2-digit' });
+    }
+    if (name === 'show-day-separators') this._showDaySep = this._boolAttr('show-day-separators', true);
+    if (name === 'show-group-time')    this._showGroupTime = this._boolAttr('show-group-time', false);
+    if (name === 'bubble-timestamps')  this._bubbleStamps  = this._boolAttr('bubble-timestamps', true);
     this.render();
   }
 
@@ -92,7 +128,7 @@ class SmsChat extends HTMLElement {
       return;
     }
 
-    // time buckets (compare to previous message)
+    // Build time buckets (by gap from previous message)
     const buckets = [];
     let lastTs = null;
     for (const msg of this._messages) {
@@ -106,19 +142,26 @@ class SmsChat extends HTMLElement {
       lastTs = ts;
     }
 
-    // render
+    // Render
     let currentDay = '';
     for (const b of buckets) {
       const dt = new Date(b.start);
       const dayKey = dt.toDateString();
-      if (dayKey !== currentDay) {
-        currentDay = dayKey;
-        root.appendChild(this._el('div', { class: 'day-sep' }, this._formatDay(dt)));
-      }
-      const groupEl = this._el('div', { class: 'group' });
-      groupEl.appendChild(this._el('div', { class: 'time' }, this._formatTimestamp(dt)));
 
-      // runs by identity
+      // Day separator
+      if (this._showDaySep && dayKey !== currentDay) {
+        currentDay = dayKey;
+        root.appendChild(this._el('div', { class: 'day-sep' }, this._dayFmt.format(dt)));
+      }
+
+      const groupEl = this._el('div', { class: 'group' });
+
+      // Optional: group time line (usually off if bubble stamps are on)
+      if (this._showGroupTime && !this._bubbleStamps) {
+        groupEl.appendChild(this._el('div', { class: 'time' }, this._formatTimestamp(dt)));
+      }
+
+      // Render runs of same sender (so stacked bubbles group visually)
       let i = 0;
       while (i < b.msgs.length) {
         const first = b.msgs[i];
@@ -140,10 +183,18 @@ class SmsChat extends HTMLElement {
           const m = run[j];
           const isEnd = j === run.length - 1;
           const bubbleCls = 'bubble ' + senderClass + ' ' + (isEnd ? 'end' : 'stack');
+          const rowCls = 'row ' + senderClass + (isEnd ? '' : ' tight');
+          const row = this._el('div', { class: rowCls });
 
-          // 👇 add 'tight' to non-last rows to reduce spacing (works with gap)
-          const row = this._el('div', { class: 'row ' + senderClass + (isEnd ? '' : ' tight') });
-          row.appendChild(this._el('div', { class: bubbleCls, role: 'text' }, m.text));
+          const bubble = this._el('div', { class: bubbleCls + (this._bubbleStamps ? ' has-stamp' : '') , role: 'text' }, m.text);
+
+          // In-bubble small timestamp
+          if (this._bubbleStamps && m.time) {
+            const stamp = this._el('span', { class: 'stamp', 'aria-hidden':'true' }, this._timeFmt.format(m.time));
+            bubble.appendChild(stamp);
+          }
+
+          row.appendChild(bubble);
           groupEl.appendChild(row);
         }
       }
@@ -152,7 +203,22 @@ class SmsChat extends HTMLElement {
     }
   }
 
+  /* --- helpers --- */
+  _resolveLocale(attr) {
+    if (!attr || attr === 'auto') {
+      return (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+    }
+    return attr;
+  }
+
+  _boolAttr(name, defaultVal) {
+    const v = this.getAttribute(name);
+    if (v === null) return defaultVal;
+    return !(v === 'false' || v === '0');
+  }
+
   _formatTimestamp(d){
+    // Keep your token formatter for the optional group-time line
     const pad=n=>String(n).padStart(2,'0');
     return (this._fmt||'YYYY-MM-DD HH:mm')
       .replace('YYYY', d.getFullYear())
@@ -161,10 +227,7 @@ class SmsChat extends HTMLElement {
       .replace('HH', pad(d.getHours()))
       .replace('mm', pad(d.getMinutes()));
   }
-  _formatDay(d){
-    try { return d.toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'}); }
-    catch { return d.toDateString(); }
-  }
+
   _el(tag, attrs={}, text=null){
     const el=document.createElement(tag);
     for (const [k,v] of Object.entries(attrs)) el.setAttribute(k,v);
@@ -172,4 +235,5 @@ class SmsChat extends HTMLElement {
     return el;
   }
 }
+
 if (!customElements.get('sms-chat')) customElements.define('sms-chat', SmsChat);
