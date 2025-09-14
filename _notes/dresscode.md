@@ -1,6 +1,5 @@
 ---
 title: dresscode for girls on a trading floor with no dresscode
-date: 2025-09-10
 ---
 
 1. do not wear visibly torn garments 
@@ -17,6 +16,5 @@ date: 2025-09-10
 > **the friday clause**  
 on fridays you may break **ONE** rule of your choice, from 4–10.
 
-  
 
 \* if invoking the friday clause, only dark-wash jeans are allowed.
