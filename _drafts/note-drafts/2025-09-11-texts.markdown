@@ -1,0 +1,16 @@
+---
+title: example of a meaningful text conversation
+---
+
+<sms-chat bubble-timestamps="true" show-group-time="false" show-day-separators="false" locale="en-US">
+  <script type="application/json">
+  [
+    { "who": "them", "text": "Hola! Are you in Stockholm?", "time": "2025-09-11T14:24:00" },
+    { "who": "me",   "text": "nah", "time": "2025-09-11T22:23:00" },
+    { "who": "me",   "text": "and I’ll only come back under the promise that people hang out with me", "time": "2025-09-11T22:24:00" },
+    { "who": "me",   "text": "I want to lie on the floor and feel like shit together", "time": "2025-09-11T22:24:00" },
+    { "who": "them", "text": "Haha, that’s exactly what I was about to suggest!", "time": "2025-09-11T22:26:00" }
+  ]
+  </script>
+</sms-chat>
+

@@ -27,10 +27,10 @@ class SmsChat extends HTMLElement {
         :host { display:block; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
         .wrap { max-width: 680px; margin: 0 auto; }
         .day-sep { text-align:center; font-size: .8rem; opacity: .7; margin: 16px 0; }
-        .group { display:flex; flex-direction:column; gap:6px; margin: 10px 0 18px; }
+        .group { display:flex; flex-direction:column; gap:4px; margin: 10px 0 18px; }
         .time { text-align:center; font-size: .75rem; opacity: .6; margin: 6px 0; }
         .row { display:flex; }
-        .row.tight { margin-top: -6px; } /* collapse gap between stacked bubbles */
+        .row.tight { margin-top: -2px;} /* collapse gap between stacked bubbles */
         .me   { justify-content: flex-end; }
         .them { justify-content: flex-start; }
 
@@ -38,6 +38,7 @@ class SmsChat extends HTMLElement {
         .bubble {
           position: relative;          /* for in-bubble timestamp */
           max-width: 80%;
+          min-width: 50px;
           padding: 10px 12px;
           border-radius: 14px;
           line-height: 1.25;
