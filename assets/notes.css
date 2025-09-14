@@ -1,158 +1,56 @@
 /* Toolbar */
-.notes-toolbar {
-  margin: 0 0 1rem;
-  display: flex;
-  justify-content: center;
-}
-#notes-search {
-  width: 100%;
-  max-width: 520px;
-  padding: .6rem .8rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
+.notes-toolbar { margin: 0 0 1rem; display: flex; justify-content: center; }
+#notes-search { width: 100%; max-width: 520px; padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 8px; }
 
-/* Notes grid */
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
-  align-items: start;
-}
+/* Grid */
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; align-items: start; }
 
 .note-card {
-  background: #fff;
-  border: 1px solid #e7e7e7;
-  border-radius: 12px;
-  padding: 10px 12px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
-  cursor: pointer;
-  outline: none;
-  transition: box-shadow .18s ease;
+  background: #fff; border: 1px solid #e7e7e7; border-radius: 12px;
+  padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  cursor: pointer; outline: none; transition: box-shadow .18s ease;
 }
 .note-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .note-card:focus { box-shadow: 0 0 0 3px rgba(0,122,255,.25); }
 
-.note-title {
-  font-weight: 600;
-  margin: 2px 0 8px;
-}
+.note-title { font-weight: 600; margin: 2px 0 4px; }
 
-/* Excerpt with real lists + fade truncation */
-.note-excerpt {
-  font-size: .8rem;
-  color: #333;
-  max-height: 6rem;
-  overflow: hidden;
-  position: relative;
-}
-.note-excerpt ul {
-  list-style: disc;
-  margin: 0 0 .6rem 1.25rem;
-  padding: 0;
-}
-.note-excerpt ol {
-  list-style: decimal;
-  margin: 0 0 .6rem 1.25rem;
-  padding: 0;
-}
+/* NEW: tiny meta line under title on cards */
+.note-card .note-meta { font-size: .75rem; color: #777; }
+.note-meta .note-date { color: inherit; }
+.note-meta .note-tags { color: inherit; }
+.note-meta .note-tags { display: flex; flex-direction: row; align-items: safe;} 
+.note-meta .note-tag { color: #fff; background:rgb(141, 168, 176); border-radius: 10px; padding-inline: 10px; padding-top: 2px; padding-bottom:2px; margin-right: 4px;}
+
+
+/* Excerpt with lists + fade */
+.note-excerpt { font-size: .8rem; color: #333; max-height: 6rem; overflow: hidden; position: relative; }
+.note-excerpt ul { list-style: disc; margin: 0 0 .6rem 1.25rem; padding: 0; }
+.note-excerpt ol { list-style: decimal; margin: 0 0 .6rem 1.25rem; padding: 0; }
 .note-excerpt li { margin: .25rem 0; }
-.note-excerpt p,
-.note-excerpt h1,
-.note-excerpt h2,
-.note-excerpt h3 { margin: 0 0 .5rem; }
-.note-excerpt::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 2.5rem;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%);
-}
+.note-excerpt p, .note-excerpt h1, .note-excerpt h2, .note-excerpt h3 { margin: 0 0 .5rem; }
+.note-excerpt::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5rem; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 80%); }
 
-/* Modal (centered + animated) */
-.note-modal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1000;
-  transition: opacity 0.22s ease;
-}
-.note-modal[open] {
-  opacity: 1;
-  pointer-events: auto;
-}
+/* Modal */
+.note-modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; z-index: 1000; transition: opacity 0.22s ease; }
+.note-modal[open] { opacity: 1; pointer-events: auto; }
 
-.note-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.35);
-  opacity: 0;
-  transition: opacity 0.22s ease;
-}
+.note-modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.35); opacity: 0; transition: opacity 0.22s ease; }
 .note-modal[open] .note-modal__backdrop { opacity: 1; }
 
 .note-modal__dialog {
-  position: relative;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 28px rgba(0,0,0,.25);
-  padding: 0 18px 22px;
-  max-width: 720px;
-  width: 100%;
-  margin: 0 12px;
-  max-height: 90%;
-  overflow-y: auto;
-  transform: translateY(6px) scale(.98);
-  opacity: 0;
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  position: relative; background: #fff; border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  padding: 0 18px 22px; max-width: 720px; width: 100%; margin: 0 12px; max-height: 90%; overflow-y: auto;
+  transform: translateY(6px) scale(.98); opacity: 0; transition: transform 0.22s ease, opacity 0.22s ease;
 }
-.note-modal[open] .note-modal__dialog {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
+.note-modal[open] .note-modal__dialog { transform: translateY(0) scale(1); opacity: 1; }
 
-/* Modal header: title wraps; close stays right */
-.note-modal__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 0 10px;
-}
-.note-modal__title {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.25;
-  flex: 1 1 auto;
-  min-width: 0;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  font-weight: 600;
-}
-.note-modal__close {
-  appearance: none;
-  -webkit-appearance: none;
-  border: none;
-  background: transparent;
-  color: #000;
-  font-size: 1.6rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 6px;
-  flex: 0 0 auto;
-}
-.note-modal__close:hover,
-.note-modal__close:focus {
-  color: #111;
-  outline: none;
-}
+/* header: title wraps; meta below; close on right */
+.note-modal__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px 0 10px; }
+.note-modal__headings { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1 1 auto; }
+.note-modal__title { margin: 0; font-size: 1.125rem; line-height: 1.25; font-weight: 600; word-break: break-word; overflow-wrap: anywhere; }
+.note-modal__meta { font-size: .8rem; color: #777; }
+.note-modal__close { appearance: none; -webkit-appearance: none; border: none; background: transparent; color: #000; font-size: 1.6rem; line-height: 1; cursor: pointer; padding: 6px; flex: 0 0 auto; }
+.note-modal__close:hover, .note-modal__close:focus { color: #111; outline: none; }
 
 .note-modal__content > :first-child { margin-top: 0; }
