@@ -68,6 +68,6 @@
   }
 }
 
-@media (max-width: 420px) {
-  #doors-grid { --gap: 16px; --colw: 190px; }
+@media (max-width: 500px) {
+  #doors-grid { --gap: 16px; --colw: 100px; }
 }
