@@ -19,34 +19,38 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   color: #111;
-  // background-color: #00242e;
+}
+
+p a {
+  color: rgb(0, 121, 130);
+}
+p a:hover {
+    color: rgb(156, 203, 206) !important;
+  text-decoration: none !important;
+  transition: linear 0.1s;
 }
 
 @supports (height: 100svh) {
   body { min-height: 100svh; }
 }
 
-/* Main content grows to push footer down */
 .page-content {
   flex: 1;
   padding-top: 0;
 }
 
-/* keep common wrappers from overflowing on mobile */
 .page-content,
 .site-header,
 .site-footer {
   max-width: 100%;
 }
 
-/* Centered content width */
 .wrapper {
-  max-width: 600px;   /* <- tweak to taste (e.g., 720 / 800) */
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* media should never overflow width */
 img,
 iframe,
 pre,

@@ -1,0 +1,50 @@
+.doors-wrap.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#doors-grid {
+  position: relative;
+  --gap: 24px;
+  --colw: 150px;
+  min-height: 200px;
+}
+
+#doors-grid.measuring .door-card {
+  position: static !important;
+}
+
+.door-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--colw);
+  margin: 0; 
+}
+
+.door {
+  display: block;
+  transform: translate(var(--dx,0px), var(--dy,0px)) rotate(var(--rot,0deg)) scale(1);
+  will-change: transform;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.door img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.12));
+}
+
+@media (hover:hover) {
+  .door-card:hover { z-index: 5; }
+  .door-card:hover .door {
+    transform: translate(var(--dx,0px), var(--dy,0px)) rotate(var(--rot,0deg)) scale(1.05);
+    filter: drop-shadow(0 8px 22px rgba(0,0,0,.25));
+  }
+}
+
+@media (max-width: 420px) {
+  #doors-grid { --gap: 16px; --colw: 80px; }
+}
