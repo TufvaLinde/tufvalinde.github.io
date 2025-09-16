@@ -7,7 +7,7 @@
 #doors-grid {
   position: relative;
   --gap: 24px;
-  --colw: 240px;
+  --colw: 150px;
   min-height: 200px;
 }
 #doors-grid.measuring .door-card { position: static !important; }
