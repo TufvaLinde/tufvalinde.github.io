@@ -1,6 +1,6 @@
 ---
 title: ""
-image: "/assets/doors/09.png"
+image: "/assets/doors/optimized/09.webp"
 location: ""
 thoughts: ""
 tags: []
