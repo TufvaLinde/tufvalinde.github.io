@@ -7,34 +7,57 @@
 #doors-grid {
   position: relative;
   --gap: 24px;
-  --colw: 150px;
+  --colw: 240px;
   min-height: 200px;
 }
-
-#doors-grid.measuring .door-card {
-  position: static !important;
-}
+#doors-grid.measuring .door-card { position: static !important; }
 
 .door-card {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0; top: 0;
   width: var(--colw);
-  margin: 0; 
+  margin: 0;
 }
 
 .door {
   display: block;
   transform: translate(var(--dx,0px), var(--dy,0px)) rotate(var(--rot,0deg)) scale(1);
   will-change: transform;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition: transform .25s ease, filter .25s ease;
 }
 
-.door img {
+.door-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio, 3/5);
+  border-radius: 8px;
+  overflow: hidden;
+  /* skeleton-shimmer */
+  background: linear-gradient(90deg, #f2f2f2 0%, #e9e9e9 50%, #f2f2f2 100%);
+  background-size: 200% 100%;
+  animation: doors-shimmer 1.2s infinite linear;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+@keyframes doors-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.door-media img {
   display: block;
   width: 100%;
   height: auto;
+  opacity: 0;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.12));
+  transition: opacity .25s ease;
+}
+.door-media.is-loaded img {
+  opacity: 1;
+}
+.door-media.is-loaded {
+  animation: none; 
+  background: transparent;
 }
 
 @media (hover:hover) {
@@ -46,5 +69,5 @@
 }
 
 @media (max-width: 420px) {
-  #doors-grid { --gap: 16px; --colw: 80px; }
+  #doors-grid { --gap: 16px; --colw: 190px; }
 }

@@ -17,13 +17,24 @@ permalink: /doors/
 <div class="doors-grid" id="doors-grid">
   {% assign doors = site.doors %}
   {% for door in doors %}
-    <article class="door-card" data-title="{{ door.title }}">
-      <div class="door" data-tilt="2">
-        <img src="{{ door.image | relative_url }}" alt="{{ door.title }}">
+    <article class="door-card">
+      <div class="door">
+        <!-- Placeholder-wrapper med aspect ratio (justeras i JS efter naturlig storlek) -->
+        <div class="door-media" style="--ratio: 3/5">
+          <img
+            src="{{ door.image | relative_url }}"
+            alt="{{ door.title | escape }}"
+            loading="lazy"
+            decoding="async"
+            {% if forloop.index0 < 6 %}fetchpriority="high"{% else %}fetchpriority="low"{% endif %}
+          >
+        </div>
       </div>
     </article>
   {% endfor %}
 </div>
+
 </div>
 
+<link rel="stylesheet" href="{{ '/assets/doors.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <script src="{{ '/assets/doors.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
