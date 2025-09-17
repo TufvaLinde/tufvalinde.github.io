@@ -13,13 +13,51 @@ body {
   overflow-x: hidden;
 }
 
+.dm-serif-display-regular {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dm-serif-display-regular-italic {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
   color: #111;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
 }
+
+h1 {
+    font-family: "Noto Serif Display", serif;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+h2 {
+    font-family: "Noto Serif Display", serif;
+    font-weight: 300;
+    font-size: 2rem;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000;
+}
+
+h3 {
+    font-family: "Noto Serif Display", serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid #000;
+}
+
 
 p a {
   color: rgb(0, 121, 130);
@@ -62,9 +100,11 @@ code {
 /* =========================
    Typography / Links
    ========================= */
-.site-title {
-  // font-family: 'Coral Pixels';
-  font-weight: bold;
+.site-title, .site-title:visited {
+  font-family: 'Noto Serif Display';
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: #000;
   align-items: baseline;
 }
 
@@ -216,6 +256,7 @@ blockquote {
 .post-date {
   margin-left: 1em;
   font-size: .85em;
+  font-style: italic;
   color: #515151;
 }
 
@@ -225,4 +266,15 @@ blockquote {
   color: rgb(156, 203, 206) !important;
   text-decoration: none !important;
   transition: linear 0.1s;
+}
+
+.post-header h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000;
+}
+
+.post-header .post-meta {
+    font-family: 'Noto Serif Display';
+    font-style: italic;
+    color: rgb(96, 96, 96);
 }
