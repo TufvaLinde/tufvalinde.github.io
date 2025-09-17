@@ -9,9 +9,9 @@ permalink: /doors/
 <div class="doors-wrap wrapper">
   <h1>good doors</h1>
   <p>
-    this is my growing collection of good doors. please submit new good doors by sending me an email:
+    this is my collection of good doors. please submit new good doors by sending me an email:
     <a href="mailto:tufva@tufvalinde.com">tufva@tufvalinde.com</a>
-    with a picture of the door, where you found the door and what you think is behind it.
+    with a picture of the door, where you found it and what you think is behind it.
   </p>
 
 <div class="doors-grid" id="doors-grid">
