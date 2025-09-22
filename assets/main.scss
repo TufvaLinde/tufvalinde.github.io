@@ -98,7 +98,7 @@ code {
 }
 
 /* =========================
-   Typography / Links
+   Links
    ========================= */
 .site-title, .site-title:visited {
   font-family: 'Noto Serif Display';
@@ -109,7 +109,7 @@ code {
 }
 
 /* =========================
-   Header / Nav (force inline always)
+   Header
    ========================= */
 .site-header {
   border: none;
@@ -117,7 +117,6 @@ code {
   margin-bottom: 20px;
 }
 
-/* title + nav inline, wrap if needed */
 .site-header .wrapper {
   display: flex;
   align-items: baseline;
@@ -125,7 +124,6 @@ code {
   flex-wrap: wrap;
 }
 
-/* nuke Minima’s small-screen nav behavior */
 .site-nav {
   float: none !important;
   font-size: 1.3rem;
@@ -136,14 +134,12 @@ code {
   box-shadow: none !important;
 }
 
-/* never show hamburger */
 .site-nav .nav-trigger,
 .site-nav label[for="nav-trigger"],
 .site-nav .menu-icon {
   display: none !important;
 }
 
-/* always show links inline */
 .site-nav .trigger {
   display: flex !important;
   gap: 1rem;
@@ -156,7 +152,6 @@ code {
   box-shadow: none !important;
 }
 
-/* tidy header links */
 .site-nav .page-link {
   text-decoration: none;
   color: inherit;
@@ -169,7 +164,6 @@ code {
   transition: linear 0.1s;
 }
 
-/* RE-OVERRIDE on tiny screens to beat Minima’s @media rules */
 @media (max-width: 640px) {
   .site-nav {
     float: none !important;
@@ -260,7 +254,6 @@ blockquote {
   color: #515151;
 }
 
-/* Hover row -> both title & date highlight */
 .post-list > li:hover .post-link,
 .post-list > li:hover .post-date {
   color: rgb(156, 203, 206) !important;

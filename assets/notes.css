@@ -45,10 +45,9 @@
 }
 .note-modal[open] .note-modal__dialog { transform: translateY(0) scale(1); opacity: 1; }
 
-/* header: title wraps; meta below; close on right */
-.note-modal__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px 0 10px; }
+.note-modal__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px 0 10px; font-family: "Open Sans", sans-serif; }
 .note-modal__headings { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1 1 auto; }
-.note-modal__title { margin: 0; font-size: 1.125rem; line-height: 1.25; font-weight: 600; word-break: break-word; overflow-wrap: anywhere; }
+.note-modal__title { margin: 0; font-size: 1.5rem; line-height: 1.25; font-weight: 600; word-break: break-word; overflow-wrap: anywhere; }
 .note-modal__meta { font-size: .8rem; color: #777; }
 .note-modal__close { appearance: none; -webkit-appearance: none; border: none; background: transparent; color: #000; font-size: 1.6rem; line-height: 1; cursor: pointer; padding: 6px; flex: 0 0 auto; }
 .note-modal__close:hover, .note-modal__close:focus { color: #111; outline: none; }

@@ -72,7 +72,7 @@ permalink: /notes/
   <div class="note-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="note-modal-title">
     <div class="note-modal__header">
       <div class="note-modal__headings">
-        <h2 class="note-modal__title" id="note-modal-title"></h2>
+        <p class="note-modal__title" id="note-modal-title"></p>
         <div class="note-modal__meta" id="note-modal-meta" aria-live="polite"></div>
       </div>
       <button class="note-modal__close" type="button" aria-label="Close" data-close>×</button>
