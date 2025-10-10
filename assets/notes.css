@@ -130,7 +130,6 @@
   100% { transform: translateY(10px) scale(.985); opacity: 0; }
 }
 
-/* Header */
 .note-modal__header {
   display: flex;
   align-items: flex-start;

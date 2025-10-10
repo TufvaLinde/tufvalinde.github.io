@@ -43,6 +43,9 @@ collections:
     permalink: /notes/:name
   doors:
     output: true   # makes each door accessible at its own URL
+  ubtstops:
+    output: true
+    permalink: /ubt/:title/
 
 # Exclude from processing.
 # The following items will not be processed, by default.

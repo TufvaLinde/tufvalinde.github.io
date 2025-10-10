@@ -271,3 +271,47 @@ blockquote {
     font-style: italic;
     color: rgb(96, 96, 96);
 }
+
+.leaflet-tile {
+  image-rendering: pixelated !important;
+  image-rendering: crisp-edges !important;
+}
+
+/* Margin notes base */
+.annot-wrap {
+  position: relative; /* anchor for absolutely-positioned notes */
+}
+
+/* The highlighted text in-flow */
+.annotated {
+  background: linear-gradient(transparent 60%,  rgba(0, 0, 255, 0.2) 60%);
+  padding: 0 2px;
+}
+
+/* The note bubble in the margin */
+.margin-note {
+  position: static;
+  font-family: 'coral pixels';
+  margin-left: 100%;
+  margin-top: -60px;
+  width: 200px;
+  max-width: 15vw;
+  background: rgba(0, 0, 255, 0.2);
+  border: 3px solid #0000ff;
+  box-shadow: 10px 10px rgb(0, 0, 255);
+  padding: 10px 12px;
+  font-size: .9rem;
+  line-height: 1.35;
+  z-index: 1; /* above text */
+}
+
+/* Keep notes readable on narrow screens: show inline under the text */
+@media (max-width: 900px) {
+  .margin-note {
+    position: static;
+    left: auto;
+    width: auto;
+    max-width: none;
+    margin: .5rem 0 1rem;
+  }
+}
