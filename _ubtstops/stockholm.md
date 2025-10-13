@@ -6,8 +6,8 @@ lon: 18.0686
 date: 2025-06-01
 tags: backpacking
 person:
-  - tufva
+  - tuf
   - louise
 ---
 
-old home lololololololololololololol
+old home 

@@ -5,7 +5,7 @@ lon: -86.8515
 date: 2025-11-07
 tags: backpacking, ubt
 person:
-  - tufva
+  - tuf
   - louise
 ---
 
