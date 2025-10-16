@@ -1,0 +1,59 @@
+
+<header
+  class="site-header {% if page.url == '/' %}home-header{% else %}post-header{% endif %}"
+  role="banner"
+>
+  {% if page.url == '/' %}
+  <div class="name-grid">
+    <div>T</div>
+    <div>
+      <a href="/ultimate-beach-tour/" class="linked-letter">
+        U<span class="suffix">ltimate<br></br>beach<br></br>tour</span>
+      </a>
+    </div>
+    <div>F</div>
+    <div>V</div>
+    <div>A</div>
+
+    <div>L</div>
+    <div>I</div>
+    <div>
+      <a href="/notes/" class="linked-letter">
+        N<span class="suffix">otes</span>
+      </a>
+    </div>
+    <div>
+      <a href="/doors/" class="linked-letter">
+        D<span class="suffix">oors</span>
+      </a>
+    </div>
+    <div>E</div>
+  </div>
+
+
+
+
+
+  {% else %}
+    <!-- 🧭 POST / INNER PAGE HEADER -->
+    <div class="wrapper">
+      <a class="logo-link" href="{{ "/" | relative_url }}">
+        <span class="logo-wrap">
+          <img
+            src="{{ '/assets/TL.png' | relative_url }}"
+            alt="Tufva Linde"
+            class="site-logo"
+          >
+        </span>
+      </a>
+    </div>
+  {% endif %}
+</header>
+
+
+
+
+
+
+
+

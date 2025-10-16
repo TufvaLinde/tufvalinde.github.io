@@ -5,8 +5,7 @@ nav_exclude: true
 
 👽 means i have nothing good to say.
 
-## **posts**
-
+## posts
 <ul class="post-list">
   {% for post in site.posts %}
   <li>

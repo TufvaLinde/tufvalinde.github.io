@@ -3,52 +3,95 @@ class MarginNote extends HTMLElement {
     const targetId = this.getAttribute("target");
     if (!targetId) return;
 
-    // Find the highlighted text span
+    // Find the target element
     const targetEl = document.querySelector(`[data-note="${targetId}"]`);
-    if (!targetEl) return;
+    if (!targetEl) {
+      console.warn(`MarginNote: no matching annotated element for "${targetId}"`);
+      return;
+    }
 
-    // Add a highlight style to the target text
-    targetEl.classList.add("has-margin-note");
+    const wrapper =
+      document.querySelector(".page-content .wrapper") || document.body;
 
-    // Insert the note bubble into the DOM (after content wrapper)
-    const wrapper = document.querySelector(".page-content .wrapper");
-    if (!wrapper) return;
-
+    // === Create margin bubble (for desktop) ===
     const noteBubble = document.createElement("div");
     noteBubble.className = "margin-note-bubble";
     noteBubble.innerHTML = this.innerHTML;
 
-    // Positioning reference
-    const rect = targetEl.getBoundingClientRect();
-    const containerRect = wrapper.getBoundingClientRect();
-    const yOffset = rect.top - containerRect.top;
+    // === Apply color ===
+    const rawColor =
+      this.getAttribute("color") || this.dataset.color || "rgb(149, 149, 159)";
+    const color = getComputedStyle(document.body)
+      ? rawColor
+      : "rgb(149, 149, 159)";
+    noteBubble.style.setProperty("--note-color", color);
 
-    noteBubble.style.top = `${yOffset}px`;
-
-    function positionNotes() {
-        document.querySelectorAll('.margin-note').forEach(note => {
-            const id = note.dataset.for;
-            const anchor = document.getElementById(id);
-            if (!anchor) return;
-            const rect = anchor.getBoundingClientRect();
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            note.style.top = (rect.top + scrollTop) + "px";
-        });
-    }
-
-    window.addEventListener("load", positionNotes);
-    window.addEventListener("resize", positionNotes);
-    window.addEventListener("scroll", positionNotes);
-
-    // Store for later adjustments
     wrapper.appendChild(noteBubble);
 
-    // On mobile, clicking the highlight shows modal instead
-    targetEl.addEventListener("click", () => {
-      if (window.innerWidth < 720) {
-        alert(this.innerText); // replace with a prettier modal later
+    // === Highlight the annotated text ===
+    targetEl.classList.add("has-margin-note");
+    targetEl.style.setProperty(
+      "--highlight-color",
+      color.replace("rgb", "rgba").replace(")", ", 0.2)")
+    );
+    targetEl.style.cursor = "pointer";
+
+    // === Position the margin note bubble ===
+    const updatePosition = () => {
+      if (window.innerWidth < 950) {
+        noteBubble.style.display = "none";
+        return;
       }
+      noteBubble.style.display = "block";
+      const rect = targetEl.getBoundingClientRect();
+      const containerRect = wrapper.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      const top = rect.top - containerRect.top + scrollY;
+      noteBubble.style.position = "absolute";
+      noteBubble.style.top = `${top}px`;
+      noteBubble.style.left = "calc(100% + 20px)";
+    };
+
+    window.addEventListener("load", updatePosition);
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition);
+    updatePosition();
+
+    // === Mobile modal for narrow viewports ===
+    const modal = document.createElement("div");
+    modal.className = "margin-note-modal";
+    modal.innerHTML = `
+      <div class="margin-note-overlay"></div>
+      <div class="margin-note-modal-content" style="border-color:${color}">
+        <button class="margin-note-close" aria-label="Close">&times;</button>
+        ${this.innerHTML}
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const openModal = (e) => {
+      e.preventDefault();
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("open");
+      document.body.classList.remove("modal-open");
+    };
+
+    // === Corrected: Pass event object ===
+    targetEl.addEventListener("click", (e) => {
+      if (window.innerWidth < 950) openModal(e);
     });
+
+    modal
+      .querySelector(".margin-note-close")
+      .addEventListener("click", closeModal);
+    modal
+      .querySelector(".margin-note-overlay")
+      .addEventListener("click", closeModal);
   }
 }
+
 customElements.define("margin-note", MarginNote);

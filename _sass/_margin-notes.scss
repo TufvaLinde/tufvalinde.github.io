@@ -1,0 +1,113 @@
+
+.page-content .wrapper {
+  position: relative;
+}
+
+margin-note {
+  display: none !important;
+}
+
+[data-note] {
+  position: relative;
+  padding: 0 2px;
+  --note-color: rgb(149, 149, 159);
+  --highlight-color: rgba(149, 149, 159, 0.15);
+  background: linear-gradient(
+    transparent 60%,
+    var(--highlight-color) 60%
+  );
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.has-margin-note:hover {
+  background: linear-gradient(
+    transparent 50%,
+    color-mix(in srgb, var(--note-color) 40%, transparent) 50%
+  );
+}
+
+.margin-note-bubble {
+  position: absolute;
+  left: calc(100%);
+  width: calc((100vw - 600px)/2 - 80px);
+  max-width: 200px;
+  font-family: 'Coral Pixels', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  padding: 10px 12px;
+  z-index: 20;
+  color: #111;
+  background: color-mix(in srgb, var(--note-color, rgb(149, 149, 159)) 12%, white);
+  border: 2px solid var(--note-color, rgb(0, 0, 0));
+  box-shadow: 4px 4px var(--note-color, rgb(0, 0, 0));
+  transition: opacity 0.3s ease;
+}
+
+.page-content .wrapper {
+  display: flow-root;
+}
+
+@media (max-width: 950px) {
+  .margin-note-bubble {
+    display: none !important;
+  }
+}
+
+.margin-note-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.margin-note-modal.open {
+  display: block;
+  pointer-events: all;
+  opacity: 1;
+}
+
+.margin-note-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.margin-note-modal-content {
+  position: relative;
+  background: #fff;
+  border: 3px solid var(--note-color, rgb(0, 0, 0));
+  padding: 1rem;
+  max-width: 90%;
+  width: 320px;
+  margin: 20vh auto 0;
+  font-family: 'Coral Pixels', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #111;
+}
+
+.margin-note-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+}
+
+@media (min-width: 950px) {
+  .margin-note-modal {
+    display: none !important;
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+}

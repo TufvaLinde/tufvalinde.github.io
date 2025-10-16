@@ -1,0 +1,291 @@
+/* =========================
+   HEADER (CLEAN + CONSISTENT)
+   ========================= */
+
+/* --- Reset / Structure --- */
+.site-header {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.home-header {
+    min-height: 250px;
+}
+
+.site-header .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.wrapper::after {
+  content: none;
+}
+
+/* =========================
+   HERO NAME GRID (HOME)
+   ========================= */
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  text-transform: uppercase;
+  color: black;
+  user-select: none;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: clamp(2rem, 6vw, 4rem);
+  letter-spacing: clamp(0.15rem, 1.5vw, 1rem);
+  line-height: 1;
+  position: relative;
+}
+
+.name-grid div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  line-height: 1;
+}
+
+.name-grid a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.25s ease-in-out;
+}
+
+/* === Interactive Letters (N, D, U) === */
+.linked-letter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  cursor: pointer;
+  transition: color 0.25s ease-in-out;
+}
+
+/* Disable underline or scaling entirely */
+.linked-letter:focus,
+.linked-letter:hover,
+.linked-letter:visited,
+.linked-letter:active {
+  text-decoration: none !important;
+  outline: none;
+}
+
+/* === Suffix Text (e.g. "otes", "oors", etc.) === */
+.linked-letter .suffix {
+  position: absolute;
+  font-size: 0.18em;
+  font-weight: normal;
+  text-transform: lowercase;
+  color: inherit;
+  opacity: 0.8;
+  left: 75%;
+  bottom: 10%;
+  transform: translate(0, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-align:left;
+  line-height: 0.5;
+  transition: color 0.25s ease-in-out; /* match parent */
+}
+
+/* === Hover === */
+.linked-letter:hover {
+  color: rgb(156, 203, 206);
+}
+
+/* Make suffix transition *with* parent (syncs timing perfectly) */
+.linked-letter:hover .suffix {
+  color: rgb(156, 203, 206);
+}
+
+/* =========================
+   HOMEPAGE HERO HEADER
+   ========================= */
+.home-header {
+  text-align: center;
+  background: none;
+}
+
+/* Large homepage logo (static, not interactive) */
+.hero-logo {
+  width: min(80vw, 600px);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem;
+  pointer-events: none;
+}
+
+/* Centered navigation below hero logo */
+.home-nav {
+  margin-top: 1rem;
+}
+
+.home-nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.05rem;
+}
+
+.home-nav-links a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  transition: color 0.25s ease-in-out;
+}
+
+.home-nav-links a:hover,
+.home-nav-links a:focus {
+  color: rgb(156, 203, 206);
+}
+
+/* =========================
+   Post / Inner Page Header
+   ========================= */
+.logo-wrap {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+  box-shadow: inset 0 0 0 1px black;
+}
+
+/* Two image layers: base + inverted */
+.site-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.site-logo::selection {
+  background: transparent;
+}
+
+/* duplicate the logo as a pseudo-element for inversion */
+.logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 10px; /* match padding */
+  background: url("/assets/TL.png") center/contain no-repeat;
+  filter: invert(1);
+  clip-path: inset(100% 0 0 0); /* start hidden */
+  transition: clip-path 0.4s ease-in;
+  z-index: 2;
+}
+
+/* overlay for black background */
+.logo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: black;
+  clip-path: inset(100% 0 0 0); /* start hidden */
+  transition: clip-path 0.4s ease-in;
+  z-index: 0;
+}
+
+/* Hover effect: wipe both upward */
+.logo-link:hover .logo-wrap::before,
+.logo-link:hover .logo-wrap::after {
+  clip-path: inset(0 0 0 0);
+}
+
+
+/* =========================
+   NAVIGATION (SHARED)
+   ========================= */
+.site-nav {
+  float: none !important;
+  font-size: 1.05rem;
+  position: static !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.site-nav .nav-trigger,
+.site-nav label[for="nav-trigger"],
+.site-nav .menu-icon {
+  display: none !important;
+}
+
+.site-nav .trigger {
+  display: flex !important;
+  gap: 1rem;
+  align-items: center;
+  position: static !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-nav .page-link {
+  text-decoration: none;
+  color: inherit;
+  padding: 0.25rem 0;
+  margin-right: 0 !important;
+  cursor: pointer;
+  transition: color 0.25s ease-in-out;
+}
+
+.site-nav .page-link:hover,
+.site-nav .page-link:focus {
+  color: rgb(156, 203, 206);
+}
+
+/* =========================
+   RESPONSIVE ADJUSTMENTS
+   ========================= */
+@media (max-width: 640px) {
+
+  .hero-logo {
+    width: min(90vw, 400px);
+  }
+
+  .home-nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .post-header {
+    padding: 1rem;
+  }
+}
+
+
+
+/* --- Homepage header fix: ensure height fits grid --- */
+header .home-header {
+  display: block;
+  overflow: visible;
+  margin-bottom: 3rem; /* space before post list */
+}
+
+header .home-header .wrapper {
+  display: block;      /* stop flex from collapsing height */
+  height: auto;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Make sure grid contributes to layout flow */
+header .home-header .name-grid {
+  position: relative;
+  display: grid;
+}
