@@ -12,7 +12,7 @@
 }
 
 .home-header {
-    min-height: 250px;
+    min-height: 230px;
 }
 
 .site-header .wrapper {
@@ -251,6 +251,10 @@
    RESPONSIVE ADJUSTMENTS
    ========================= */
 @media (max-width: 640px) {
+
+  .home-header {
+    min-height: 180px;
+  }
 
   .hero-logo {
     width: min(90vw, 400px);
