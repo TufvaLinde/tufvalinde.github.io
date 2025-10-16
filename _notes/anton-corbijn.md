@@ -1,6 +1,6 @@
 ---
 title: a quote from fotografiska
-date: 2025-09-10
+date: 2025-09-11
 ---
 
 > "What people call your style is simply your inability to do it any other way." 
