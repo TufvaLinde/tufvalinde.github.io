@@ -38,8 +38,7 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  font-size: clamp(2rem, 6vw, 4rem);
-  letter-spacing: clamp(0.15rem, 1.5vw, 1rem);
+  font-size: clamp(1.5rem, 6vw, 3rem);
   line-height: 1;
   position: relative;
 }
@@ -82,12 +81,12 @@
 /* === Suffix Text (e.g. "otes", "oors", etc.) === */
 .linked-letter .suffix {
   position: absolute;
-  font-size: 0.18em;
+  font-size: 0.2em;
   font-weight: normal;
   text-transform: lowercase;
   color: inherit;
   opacity: 0.8;
-  left: 75%;
+  left: 95%;
   bottom: 10%;
   transform: translate(0, -50%);
   pointer-events: none;
