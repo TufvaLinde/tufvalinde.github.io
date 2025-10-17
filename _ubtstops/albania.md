@@ -1,7 +1,7 @@
 ---
-title: Albania
-lat: 40.7058
-lon: 19.9522
+title: albania
+lat: 41.3275
+lon: 19.8189
 date: 2025-10-17
 tags: backpacking
 person:

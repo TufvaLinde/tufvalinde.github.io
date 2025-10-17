@@ -1,5 +1,5 @@
 ---
-title: Stockholm
+title: stockholm
 layout: ubt
 lat: 59.3293
 lon: 18.0686
@@ -8,6 +8,7 @@ tags: backpacking
 person:
   - tuf
   - louise
+  - andrea
 ---
 
 old home 
