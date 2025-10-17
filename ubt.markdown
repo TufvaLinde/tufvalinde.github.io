@@ -1,5 +1,5 @@
 ---
-layout: ubt
+layout: default
 title: UBT
 permalink: /ultimate-beach-tour/
 ---
@@ -15,8 +15,7 @@ permalink: /ultimate-beach-tour/
     word-spacing: 0.3em; 
     display: block;
     width: 100%;
-    white-space: nowrap;     /* don't wrap onto multiple lines */
-    font-size: 7vw;         /* scales with viewport width */
+    /*white-space: nowrap;     /* don't wrap onto multiple lines */
     line-height: 1;
     margin: 0;
     text-align: center;      /* or left, depending on your layout */
@@ -24,7 +23,7 @@ permalink: /ultimate-beach-tour/
 
 </style>
 
-coming soon.
+more to come on this page!
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
