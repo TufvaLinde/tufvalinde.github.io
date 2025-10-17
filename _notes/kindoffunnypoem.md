@@ -1,5 +1,5 @@
 ---
-title: "a kind of funny poem if you get it"
+title: "a kind of funny poem"
 tags: [poetry]
 ---
 
