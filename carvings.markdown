@@ -6,4 +6,4 @@ nav_exclude: true
 sitemap: false
 ---
 
-TODO: take pictures of my carvings.
+<stop-motion folder="/assets/stopmotion-webp/longlimb1" fps="16"></stop-motion>
