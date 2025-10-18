@@ -3,7 +3,6 @@ class StopMotion extends HTMLElement {
     const folder = this.getAttribute("folder");
     const fps = parseFloat(this.getAttribute("fps")) || 12;
     const img = document.createElement("img");
-    img.style.width = "100%";
     this.appendChild(img);
 
     try {
