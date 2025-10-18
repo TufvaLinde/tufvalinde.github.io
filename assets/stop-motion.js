@@ -1,8 +1,10 @@
 class StopMotion extends HTMLElement {
   async connectedCallback() {
     const folder = this.getAttribute("folder");
+    const height = this.getAttribute("height");
     const fps = parseFloat(this.getAttribute("fps")) || 12;
     const img = document.createElement("img");
+    img.style.height = height;
     this.appendChild(img);
 
     try {
