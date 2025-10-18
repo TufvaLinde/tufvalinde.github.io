@@ -97,7 +97,7 @@ A new hobby does not have to begin with intention. I honestly think they rarely 
 
 <div class="text-content" markdown="1">
 <div class="float-gutter">
-  <img src="/assets/post-images/hattifnatt.webp"
+  <img src="/assets/static-pngs/hattifnatt.png"
        alt="Hattifnatt"
        class="hattifnatt-shape">
 </div>
