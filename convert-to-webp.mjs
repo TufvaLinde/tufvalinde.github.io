@@ -3,12 +3,7 @@ import path from "path";
 import sharp from "sharp";
 
 const inputRoot = "./assets";
-
-// folders that should NOT be converted or renamed
-const skipFolders = [
-  "static-png",
-  "post images"
-];
+const skipFolders = ["static-pngs"];
 
 async function walkAndConvert(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -18,20 +13,15 @@ async function walkAndConvert(dir) {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      // skip safe folders
       if (skipFolders.some(f => fullPath.includes(f))) {
         console.log("skipping folder:", fullPath);
         continue;
       }
 
-      const subFrames = await walkAndConvert(fullPath);
-      if (subFrames.length && dir.includes("/stopmotion/")) {
-        writeFramesJson(dir, subFrames);
-      }
+      await walkAndConvert(fullPath);
       continue;
     }
 
-    // only convert pngs not in skip folders
     if (
       entry.isFile() &&
       entry.name.toLowerCase().endsWith(".png") &&
@@ -55,7 +45,9 @@ async function walkAndConvert(dir) {
     }
   }
 
-  return webpFrames;
+  if (webpFrames.length && dir.includes("/stopmotion/")) {
+    writeFramesJson(dir, webpFrames);
+  }
 }
 
 function writeFramesJson(folder, frames) {
@@ -81,13 +73,11 @@ function updateReferences(baseDir = ".") {
 
   for (const file of files) {
     let content = fs.readFileSync(file, "utf-8");
-
-    // only replace png → webp for references NOT in skipFolders
     const replaced = content.replace(
       /(["'(/])([^"'()]+\.png)(['")])/g,
       (match, prefix, pathPart, suffix) => {
         if (skipFolders.some(f => pathPart.includes(f))) {
-          return match; // leave untouched
+          return match;
         }
         return `${prefix}${pathPart.replace(/\.png$/, ".webp")}${suffix}`;
       }
