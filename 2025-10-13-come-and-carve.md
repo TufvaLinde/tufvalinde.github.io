@@ -16,8 +16,8 @@ sitemap: false
   height: auto;
   max-height: 620px;
   margin: 0 24px 24px 0;
-  shape-outside: url("/assets/post-images/hattifnatt.webp");
-  -webkit-shape-outside: url("/assets/post-images/hattifnatt.webp");
+  shape-outside: url("/assets/static-pngs/hattifnatt.png");
+  -webkit-shape-outside: url("/assets/static-pngs/hattifnatt.png");
   shape-image-threshold: 0.5;
   -webkit-shape-image-threshold: 0.5;
   shape-margin: 16px;
