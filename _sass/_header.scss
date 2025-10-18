@@ -180,7 +180,7 @@
   content: "";
   position: absolute;
   inset: 10px; /* match padding */
-  background: url("/assets/TL.png") center/contain no-repeat;
+  background: url("/assets/TL.webp") center/contain no-repeat;
   filter: invert(1);
   clip-path: inset(100% 0 0 0); /* start hidden */
   transition: clip-path 0.4s ease-in;

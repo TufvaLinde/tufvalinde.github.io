@@ -16,8 +16,8 @@ sitemap: false
   height: auto;
   max-height: 620px;
   margin: 0 24px 24px 0;
-  shape-outside: url("/assets/post-images/hattifnatt.png");
-  -webkit-shape-outside: url("/assets/post-images/hattifnatt.png");
+  shape-outside: url("/assets/post-images/hattifnatt.webp");
+  -webkit-shape-outside: url("/assets/post-images/hattifnatt.webp");
   shape-image-threshold: 0.5;
   -webkit-shape-image-threshold: 0.5;
   shape-margin: 16px;
@@ -97,7 +97,7 @@ A new hobby does not have to begin with intention. I honestly think they rarely 
 
 <div class="text-content" markdown="1">
 <div class="float-gutter">
-  <img src="/assets/post-images/hattifnatt.png"
+  <img src="/assets/post-images/hattifnatt.webp"
        alt="Hattifnatt"
        class="hattifnatt-shape">
 </div>
