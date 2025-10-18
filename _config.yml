@@ -37,10 +37,10 @@ baseurl: ""
 
 collections:
   notes:
-    output: false   # notes won't generate their own pages
+    output: false
     permalink: /notes/:name
   doors:
-    output: true   # makes each door accessible at its own URL
+    output: true
   ubtstops:
     output: true
     permalink: /ubt/:title/
@@ -48,6 +48,7 @@ collections:
     output: true
 
 markdown: kramdown
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

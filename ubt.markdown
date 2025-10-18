@@ -15,10 +15,9 @@ permalink: /ultimate-beach-tour/
     word-spacing: 0.3em; 
     display: block;
     width: 100%;
-    /*white-space: nowrap;     /* don't wrap onto multiple lines */
     line-height: 1;
     margin: 0;
-    text-align: center;      /* or left, depending on your layout */
+    text-align: center;   
   }
 
 </style>
@@ -32,7 +31,6 @@ more to come on this page!
 <div id="trip-map" style="height:600px; margin:1rem 0;"></div>
 
 <script>
-// --- Collect data from Jekyll ---
 const people = [
   {% for p in site.ubtpeople %}
   {
@@ -69,7 +67,6 @@ stops.forEach(s => {
   }
 });
 
-// determine each person's current stop
 people.forEach(p => {
   const pastStops = stops.filter(s => s.people?.includes(p.id) && s.dateNum <= now);
   pastStops.sort((a, b) => b.dateNum - a.dateNum);
@@ -83,7 +80,6 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd'
 }).addTo(map);
 
-// helper: HTML composite for multiple faces
 function makeCombinedFaceHTML(faces) {
   const size = 28;
   const overlap = 6;
@@ -135,10 +131,7 @@ people.forEach(p => peopleById[p.id] = p);
 let firstDraw = true;
 
 function drawEverything() {
-  // remove existing non-tile layers
   map.eachLayer(l => { if (!(l instanceof L.TileLayer)) map.removeLayer(l); });
-
-  // build trails
   const trails = {};
   stops.forEach(stop => {
     (stop.people || []).forEach(pid => {
@@ -147,7 +140,6 @@ function drawEverything() {
     });
   });
 
-  // draw curves with offsets for shared legs
   const shared = getSharedSegments(trails);
   Object.entries(trails).forEach(([pid, coords]) => {
     const color = peopleById[pid]?.color || 'gray';
@@ -210,7 +202,6 @@ function drawEverything() {
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
 
-    // build popup text safely (no undefined variable)
     let popupText = null;
     if (stop.popup !== false) {
       if (isFuture) {
@@ -222,7 +213,6 @@ function drawEverything() {
 
     if (popupText) {
       marker.bindPopup(popupText);
-      // click opens popup; link inside goes to page
       marker.on('click', (e) => {
         e.originalEvent?.stopPropagation?.();
         marker.openPopup();
@@ -247,7 +237,6 @@ map.on('zoomend', drawEverything);
   /*box-shadow: 0 2px 6px rgba(0,0,0,.1);*/
 }
 
-/* lowercase the popup title text (your stylistic choice) */
 .leaflet-popup-content b {
   font-weight: 500;
   color: #000;

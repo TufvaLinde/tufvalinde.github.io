@@ -37,12 +37,11 @@ sitemap: false
   line-height: 1.6;
 }
 
-/* --- Float gutter system --- */
 .float-gutter {
   position: relative;
-  margin-left: -350px;   /* open a gutter on the left */
-  padding-left: 180px;   /* keep text start aligned */
-  overflow: visible;     /* let float extend into gutter */
+  margin-left: -350px;
+  padding-left: 170px;
+  overflow: visible;
 }
 
 .step {
@@ -55,7 +54,6 @@ sitemap: false
     padding: 10px;
 }
 
-/* --- The floated image itself --- */
 
 </style>
 
