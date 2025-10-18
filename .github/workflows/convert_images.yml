@@ -27,7 +27,7 @@ jobs:
         run: npm install sharp
 
       - name: Convert all PNGs to WebP + delete originals + update references
-        run: node convert-all-to-webp.mjs
+        run: node convert-to-webp.mjs
 
       - name: Commit and push changes
         run: |
