@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<script type="module" src="{{ '/assets/margin-notes.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/sms-chat.js' | relative_url }}"></script>
+<script src="{{ '/assets/annotations.js' | relative_url }}"></script>
+
+
+<style>
+    .centeringthingy {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 95vh;
+    }
+
+</style>
+
+<body>
+    <div class="centeringthingy">
+        {{ content }}
+    </div>
+    {%- include footer.html -%}
+</body>
+
+</html>
