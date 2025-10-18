@@ -2,60 +2,77 @@ import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 
-const inputRoot = "./assets/stopmotion";
-const outputRoot = "./assets/stopmotion-webp";
+const inputRoot = "./assets";
 
 async function walkAndConvert(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
-  let convertedFiles = [];
 
   for (const entry of entries) {
-    const inputPath = path.join(dir, entry.name);
-    const relPath = path.relative(inputRoot, inputPath);
-    const outputPath = path.join(outputRoot, relPath);
+    const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      if (!fs.existsSync(outputPath)) fs.mkdirSync(outputPath, { recursive: true });
-      await walkAndConvert(inputPath);
-    } else if (entry.isFile() && entry.name.endsWith(".png")) {
-      const webpPath = outputPath.replace(/\.png$/, ".webp");
-      const relWebpPath = relPath.replace(/\.png$/, ".webp");
-      const outputDir = path.dirname(outputPath);
+      await walkAndConvert(fullPath);
+      continue;
+    }
 
-      const pngMtime = fs.statSync(inputPath).mtimeMs;
-      if (fs.existsSync(webpPath)) {
-        const webpMtime = fs.statSync(webpPath).mtimeMs;
-        if (webpMtime >= pngMtime) {
-          convertedFiles.push(path.basename(webpPath));
-          continue;
-        }
-      }
+    if (!entry.isFile() || !entry.name.toLowerCase().endsWith(".png")) continue;
 
-      console.log(`converting ${relPath}????`);
-      await sharp(inputPath)
-        .webp({ quality: 80 })
+    const webpPath = fullPath.replace(/\.png$/i, ".webp");
+
+    try {
+      console.log(`converting ${fullPath}`);
+      await sharp(fullPath)
+        .webp({ quality: 85 })
         .toFile(webpPath);
 
-      convertedFiles.push(path.basename(webpPath));
+      if (fs.existsSync(webpPath)) {
+        fs.unlinkSync(fullPath);
+        console.log(`deleted original PNG: ${fullPath}`);
+      }
+    } catch (err) {
+      console.error(`error converting ${fullPath}:`, err.message);
     }
   }
 
-  if (convertedFiles.length > 0) {
-    const relFolder = path.relative(inputRoot, dir);
-    const outputFolder = path.join(outputRoot, relFolder);
-    const jsonPath = path.join(outputFolder, "frames.json");
-    convertedFiles.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-
-    fs.writeFileSync(
-      jsonPath,
-      JSON.stringify({ frames: convertedFiles }, null, 2)
-    );
-    console.log(`wrote frames.json for ${relFolder || "(root)"}`);
+  const remaining = fs.readdirSync(dir);
+  if (remaining.length === 0 && dir !== inputRoot) {
+    fs.rmdirSync(dir);
+    console.log(`removed empty directory: ${dir}`);
   }
 }
 
-if (!fs.existsSync(outputRoot)) fs.mkdirSync(outputRoot, { recursive: true });
 
-console.log("starting recursive WebP conversion...");
+function updateReferences(baseDir = ".") {
+  const exts = [".html", ".md", ".markdown", ".scss"];
+  const files = [];
+
+  function walk(folder) {
+    for (const item of fs.readdirSync(folder, { withFileTypes: true })) {
+      const fullPath = path.join(folder, item.name);
+      if (item.isDirectory()) walk(fullPath);
+      else if (exts.includes(path.extname(fullPath))) files.push(fullPath);
+    }
+  }
+
+  walk(baseDir);
+
+  for (const file of files) {
+    let content = fs.readFileSync(file, "utf-8");
+    if (content.includes(".png")) {
+      const replaced = content.replace(/(\.png)(['")])/g, ".webp$2");
+      if (replaced !== content) {
+        fs.writeFileSync(file, replaced);
+        console.log(`🪄 Updated .png → .webp refs in: ${file}`);
+      }
+    }
+  }
+}
+
+
+console.log("starting global PNG → WebP conversion...");
 await walkAndConvert(inputRoot);
-console.log("all conversions complete");
+
+console.log("updating file references (.png → .webp)...");
+updateReferences();
+
+console.log("all conversions and replacements complete!");

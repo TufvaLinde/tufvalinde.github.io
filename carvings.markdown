@@ -6,4 +6,4 @@ nav_exclude: true
 sitemap: false
 ---
 
-<stop-motion folder="/assets/stopmotion-webp/longlimb1" fps="16"></stop-motion>
+<stop-motion folder="/assets/longlimb1" fps="16"></stop-motion>
