@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "three steps to unlock a new hobby"
-date:   2025-10-13 17:07:00 +0200
-permalink: /draft/
+date:   2025-10-13
 categories: creativity
 nav_exclude: true
 sitemap: false
@@ -84,7 +83,7 @@ And that's the start of one of my newest hobbies.
 <div class="step" markdown="1">
 
 #### **STEP 1 - say yes to trying something new**
-A new hobby does not have to begin with intention. I honestly think they rarely do. They begin in the spontaneous moments when something catches your attention and you let it pull you along. It might be a message or a sound or a smell. Anything that says *come see what I am* and you say yes.
+A new hobby does not have to begin with intention. I honestly think they rarely do. They begin in the spontaneous moments when something catches your attention and you let it pull you along. It might be a message or a sound or even a smell. Anything that says *come see what I am* and you say yes.
 </div>
 
 <p markdown="1">
@@ -143,7 +142,7 @@ So, step three?
 
 #### **STEP 3 - let it stay what it wants to be**
 There is no rush to turn it into a lifestyle or a side hustle or even a Pinterest board. Let it stay small. Let it stay weird.
-Do it when the light is good, or when you remember. Skip weeks. Forget tools. You are free to invent your own way of pursuing your hobby. We have hobbies for fun, so the only metric for a hobby to be successful is joy.
+Do it when the light is good, or when you remember. Skip weeks. Forget tools. You are free to invent your own way of pursuing your hobby. We have them for fun, so the only metric for it to be successful is joy.
 </div>
 
 The compliments are nice, but what’s better is the soft scraping sound of knife against wood. The hours in the grass, surrounded by shavings. These hours have all been well spent. Not because I've produced good carvings, but because I still find joy in the process. I still delight in the idea of one of these October days being warm enough to go outside and finish the last piece of the season. I still lose track of time when I carve. 
