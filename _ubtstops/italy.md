@@ -1,5 +1,6 @@
 ---
 title: italy
+layout: antdreams
 lat: 46.0150
 lon: 9.2833
 date: 2025-10-21
