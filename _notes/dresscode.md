@@ -10,11 +10,11 @@ title: dresscode for girls on a trading floor with no dresscode
 6. do not wear shorts  
 7. do not wear a t-shirt  
 8. do not wear a hoodie  
-9. do not wear jeans*  
+9. do not wear jeans[^1]
 10. do not show both shoulders and knees at the same time  
 
 > **the friday clause**  
 on fridays you may break **ONE** rule of your choice, from 4–10.
 
 
-\* if invoking the friday clause, only dark-wash jeans are allowed.
+[^1]: if invoking the friday clause, only dark-wash jeans are allowed.
