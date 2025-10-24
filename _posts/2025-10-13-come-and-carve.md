@@ -132,7 +132,7 @@ My friend Wille told me he had no butter knife at home. Knives are easy. I found
 
 Then I rescued a (very rough-looking) wooden man while visiting Konstfack, in a container where students had dumped unfinished pieces from this year's semester. Continued carving on it for about a month. The arms were looking wayyy off. Leaning into the alienness of it, I let the arms stay long enough to reach the floor. It looked intentionally weird. **Finished.**
 
-Inspired by my long-limbed creature, I wanted to make another sculpture. This time with two of the creatures hugging so that their long arms wrap multiple times around each other. I started it from a piece of a fallen aspen my friend and I found on the way to the beach courts. The tree was still cool and damp from the storm. Just as we were feeling the wood, the city workers arrived with chainsaws to clear the area. We asked if we could keep a piece. "HELL YES", they replied, and sawed each of us a chunk. The timing felt like a gift. I’m still finishing the sanding of this piece.[^3]
+Inspired by my long-limbed creature, I wanted to make another sculpture. This time with two of the creatures hugging so that their long arms wrap multiple times around each other. I’m still finishing the sanding of this piece.[^3]
 
 Over the past half year I have thus finished two and a half sculptures and one butter knife. It's not much, *but it's also not little*. And I don't know the types of wood I use. And I cut myself too often. And when I showed up to my second carving night at the studio this September, long-limbed-hugging-sculpture in hand, I was complimented for it by almost everyone there.
 
@@ -149,6 +149,9 @@ The compliments are nice, but what’s better is the soft scraping sound of knif
 
 And that's how I know this new hobby is now mine.
 
+(To see my finished carvings, visit <a href="/carvings/" target="_blank" rel="noopener noreferrer">this</a> link.)
+
 [^1]: Check it out <a href="https://www.kalthoffaxes.se/" target="_blank" rel="noopener noreferrer">here</a>.
 [^2]: This kind of openness has a name in Zen Buddhism: shoshin, or “beginner’s mind.” Roughly, the idea is that when you approach something without expectation or the intention to impress, you’re more likely to enjoy (and actually learn) it.
-[^3]: To see my finished carvings, visit <a href="/carvings/" target="_blank" rel="noopener noreferrer">this</a> link.
+[^3]: I started it from a piece of a fallen aspen my friend and I found on the way to the beach volleyball courts. The tree was still cool and damp from the storm. Just as we were feeling the wood, the city workers arrived with chainsaws to clear the area. We asked if we could keep a piece. "HELL YES", they replied, and sawed each of us a chunk. The timing felt like a gift.
+
