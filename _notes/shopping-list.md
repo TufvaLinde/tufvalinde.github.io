@@ -6,7 +6,7 @@ tags: []
 - anything and everything that keeps you warm
 - a pen and some paper
 - a picnic blanket
-- whatever ball is involved in your sport
+- a ball
 - carabiners
 - something to keep the sun out of your eyes
 - wakame
