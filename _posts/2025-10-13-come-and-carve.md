@@ -149,8 +149,7 @@ The compliments are nice, but what’s better is the soft scraping sound of knif
 
 And that's how I know this new hobby is now mine.
 
-(To see my finished carvings, visit <a href="/carvings/" target="_blank" rel="noopener noreferrer">this</a> link.)
 
 [^1]: Check it out <a href="https://www.kalthoffaxes.se/" target="_blank" rel="noopener noreferrer">here</a>.
 [^2]: This kind of openness has a name in Zen Buddhism: shoshin, or “beginner’s mind.” Roughly, the idea is that when you approach something without expectation or the intention to impress, you’re more likely to enjoy (and actually learn) it.
-[^3]: I started it from a piece of a fallen aspen my friend and I found on the way to the beach volleyball courts. The tree was still cool and damp from the storm. Just as we were feeling the wood, the city workers arrived with chainsaws to clear the area. We asked if we could keep a piece. "HELL YES", they replied, and sawed each of us a chunk. The timing felt like a gift.
+[^3]: To see my finished carvings, visit <a href="/carvings/" target="_blank" rel="noopener noreferrer">this</a> link.
