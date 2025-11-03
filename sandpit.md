@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Tuf’s Sandpit"
-permalink: /~tufva-sandpit/
+permalink: /sandpit/
 robots: noindex
 ---
 <style>
@@ -17,6 +17,7 @@ robots: noindex
 <ul>
   {% assign drafts = site.posts | where: "draft", true %}
   {% for post in drafts %}
+  <script>console.log(post)</script>
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a>
       <small>({{ post.date | date_to_string }})</small>

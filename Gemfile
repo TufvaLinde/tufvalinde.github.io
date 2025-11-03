@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "bigdecimal"
+gem "logger"
 gem "jekyll", "~> 4.4.1"
 gem "sass-embedded", "~> 1.69.5"
 gem "minima", "~> 2.5"
