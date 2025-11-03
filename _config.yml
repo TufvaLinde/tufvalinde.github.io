@@ -32,7 +32,6 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - build_drafts
 
 url: "http://127.0.0.1:4001"
 baseurl: ""
