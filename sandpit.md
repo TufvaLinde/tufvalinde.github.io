@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🕵️ Tuft’s Sandpit"
+title: "Tuf’s Sandpit"
 permalink: /~tufva-sandpit/
 robots: noindex
 ---
@@ -12,7 +12,7 @@ robots: noindex
   a:hover { text-decoration: underline; }
 </style>
 
-<h1>🕵️ Drafts Preview</h1>
+<h1>drafts preview</h1>
 
 <ul>
   {% assign drafts = site.posts | where: "draft", true %}
