@@ -1,8 +1,9 @@
 ---
-layout: post
+layout: floaty_collage
 title:  preview
 date:   2025-01-01
 permalink: /draft-preview/
+folder: /assets/ubt/stockholm
 ---
 
-testing this thing out! 
+testy test

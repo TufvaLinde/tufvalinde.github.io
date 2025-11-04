@@ -1,0 +1,85 @@
+
+<style>
+  body {
+    overflow: hidden;
+    background: #faf9f4;
+    font-family: "Outfit", sans-serif;
+  }
+
+  .collage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .floating {
+    position: absolute;
+    animation: floaty 18s ease-in-out infinite;
+    will-change: transform;
+    transition: transform 0.5s;
+  }
+
+  .floating:hover {
+    transform: scale(1.1) rotate(3deg);
+    z-index: 10;
+  }
+
+  @keyframes floaty {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  .bubble {
+    background: rgba(255,255,255,0.8);
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    max-width: 240px;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  }
+</style>
+
+<div class="collage">
+  {% assign folder = page.folder %}
+  {% assign files = site.static_files | where_exp:"f","f.path contains folder" %}
+
+  {% for file in files %}
+    {% capture ext %}{{ file.extname | downcase }}{% endcapture %}
+
+    <div class="floating" data-index="{{ forloop.index0 }}">
+      {% if ext == ".jpg" or ext == ".jpeg" or ext == ".png" or ext == ".webp" or ext == ".gif" %}
+        <img src="{{ file.path }}" style="max-width:180px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.1);" loading="lazy" />
+      {% elsif ext == ".mp3" or ext == ".wav" %}
+        <audio controls src="{{ file.path }}" style="width:200px;"></audio>
+    {% elsif ext == ".txt" %}
+    <div class="bubble" data-src="{{ file.path }}">loading...</div>
+    {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+    // fetch the text content from any .txt bubble
+document.querySelectorAll('.bubble[data-src]').forEach(el => {
+  fetch(el.dataset.src)
+    .then(r => r.text())
+    .then(t => {
+      el.textContent = t.trim().substring(0, 300); // first ~300 chars
+    })
+    .catch(() => el.textContent = "(couldn't load text)");
+});
+
+
+  // give random-ish placement + float animation offsets
+  document.querySelectorAll('.floating').forEach((el, i) => {
+    const left = Math.random() * 90;  // vw
+    const top = Math.random() * 85;   // vh
+    el.style.left = left + 'vw';
+    el.style.top = top + 'vh';
+    el.style.animationDelay = `${Math.random()*10}s`;
+    el.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px) rotate(${Math.random()*10-5}deg)`;
+  });
+</script>
