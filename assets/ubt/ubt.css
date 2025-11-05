@@ -1,0 +1,104 @@
+#trip-map {
+  border-radius: 8px;
+  height:50vw; 
+  margin:1rem 0;
+  /*box-shadow: 0 2px 6px rgba(0,0,0,.1);*/
+}
+
+@media (max-width: 743px) {
+  #trip-map {
+    height:70vh; 
+  }
+}
+
+.leaflet-popup-content b {
+  font-weight: 500;
+  color: #000;
+  text-transform: lowercase;
+}
+
+.multi-face-marker img {
+  border-radius: 50%;
+}
+
+/* UBT Layout Grid */
+.ubt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Widget styling */
+.ubt-grid section {
+  padding: 1rem;
+}
+
+.ubt-grid p {
+  font-family: "coral pixels";
+}
+
+.ubt-grid h2 {
+  margin-top: 0;
+  text-align: center;
+  font-family: "coral pixels";
+  border-bottom: none;
+}
+
+/* Posts list */
+.ubt-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ubt-posts li { margin: 0.3rem 0; }
+.ubt-posts a { text-decoration: none; color: #0077aa; }
+.ubt-posts a:hover { text-decoration: underline; }
+
+
+.header-thing {
+  font-style: italic;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  font-size: 0.7rem;
+}
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list > li {
+  margin: 0 0 .5rem 0;
+}
+
+.post-link {
+  font-size: 1em;
+  font-family: "coral pixels";
+  display: block;
+  padding: .1rem 0;
+  color: rgb(0, 121, 130);
+  text-decoration: none;
+}
+
+.post-link:visited {
+  color: rgb(0, 121, 130);
+}
+
+.post-date {
+  margin-left: 1em;
+  font-size: .85em;
+  font-style: italic;
+  color: #515151;
+}
+
+.post-list > li:hover .post-link,
+.post-list > li:hover .post-date {
+  opacity: 30%;
+  text-decoration: none !important;
+  transition: linear 0.1s;
+}

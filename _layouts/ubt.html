@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   {%- include head.html -%}
+
   <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$','$$'], ['\\[', '\\]']]
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-<script type="module" src="{{ '/assets/margin-notes.js' | relative_url }}"></script>
-<script type="module" src="{{ '/assets/sms-chat.js' | relative_url }}"></script>
-<script type="module" src="{{ '/assets/stop-motion.js' | relative_url }}"></script>
-<script src="{{ '/assets/annotations.js' | relative_url }}"></script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <script type="module" src="{{ '/assets/margin-notes.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/assets/sms-chat.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/assets/stop-motion.js' | relative_url }}"></script>
+  <script src="{{ '/assets/annotations.js' | relative_url }}"></script>
+
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .header-thing {
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    font-size: 0.5rem;
+  }
+
+  h1 {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 850;
+    font-style: normal;
+    word-spacing: 0.3em; 
+    display: block;
+    width: 100%;
+    line-height: 1;
+    margin-top: 30px;
+    text-align: center;   
+  }
+
+</style>
+
   <body>
     <div class="annot-wrapper">
+      <h1>ULTIMATE BEACH TOUR</h1>
+      <div class="ubt-grid">
         {{ content }}
+      </div>
     </div>
     {%- include footer.html -%}
   </body>
-
 </html>
+
+
