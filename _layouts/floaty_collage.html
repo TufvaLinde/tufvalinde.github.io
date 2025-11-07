@@ -73,7 +73,7 @@
 
     img {
       display: block;
-      max-width: 280px;
+      max-width: 180px;
       height: auto;
       pointer-events: none;
     }
@@ -146,8 +146,8 @@
   const drift = [];
 
   els.forEach(el => {
-    const x = Math.random() * window.innerWidth * 0.85;
-    const y = Math.random() * window.innerHeight * 0.85;
+    const x = Math.random() * window.innerWidth * 0.95;
+    const y = Math.random() * window.innerHeight * 0.95;
     const baseRot = (Math.random() * 10 - 5);
     el.style.position = 'absolute';
     el.style.left = `${x}px`;
