@@ -10,7 +10,7 @@ person:
   - louise
   - andrea
 folder: /assets/ubt/stockholm
-background: /assets/ubt/bgstockholm.wepb
+background: /assets/ubt/bgstockholm.webp
 title_overlay: true
 ---
 
