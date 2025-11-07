@@ -146,8 +146,8 @@
   const drift = [];
 
   els.forEach(el => {
-    const x = Math.random() * window.innerWidth * 0.95;
-    const y = Math.random() * window.innerHeight * 0.95;
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
     const baseRot = (Math.random() * 10 - 5);
     el.style.position = 'absolute';
     el.style.left = `${x}px`;
