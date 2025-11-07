@@ -1,5 +1,5 @@
 ---
-layout: antdreams
+layout: floaty_collage
 title: london
 lat: 51.5074
 lon: -0.1278
@@ -8,6 +8,9 @@ tags: backpacking, ubt
 person:
   - tuf
   - andrea
+folder: /assets/ubt/london
+background: /assets/ubt/bglondon.wepb
+title_overlay: true
 ---
 
-tuf and andrea is here
+tuf and andrea was here
