@@ -4,6 +4,7 @@ import sharp from "sharp";
 
 const inputRoot = "./assets";
 const skipFolders = ["static-pngs"];
+const convertibleExts = [".png", ".jpg", ".jpeg", ".heic"];
 
 async function walkAndConvert(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -22,12 +23,12 @@ async function walkAndConvert(dir) {
       continue;
     }
 
-    if (
-      entry.isFile() &&
-      entry.name.toLowerCase().endsWith(".png") &&
-      !skipFolders.some(f => fullPath.includes(f))
-    ) {
-      const webpPath = fullPath.replace(/\.png$/i, ".webp");
+    const ext = path.extname(entry.name).toLowerCase();
+
+    if (entry.isFile() && convertibleExts.includes(ext)) {
+      if (skipFolders.some(f => fullPath.includes(f))) continue;
+
+      const webpPath = fullPath.replace(/\.(png|jpe?g|heic)$/i, ".webp");
 
       try {
         console.log("converting", fullPath);
@@ -35,7 +36,7 @@ async function walkAndConvert(dir) {
 
         if (fs.existsSync(webpPath)) {
           fs.unlinkSync(fullPath);
-          console.log("deleted original png:", fullPath);
+          console.log(`deleted original ${ext}:`, fullPath);
         }
 
         webpFrames.push(path.basename(webpPath));
@@ -74,26 +75,24 @@ function updateReferences(baseDir = ".") {
   for (const file of files) {
     let content = fs.readFileSync(file, "utf-8");
     const replaced = content.replace(
-      /(["'(/])([^"'()]+\.png)(['")])/g,
+      /(["'(/])([^"'()]+\.(png|jpe?g|heic))(['")])/gi,
       (match, prefix, pathPart, suffix) => {
-        if (skipFolders.some(f => pathPart.includes(f))) {
-          return match;
-        }
-        return `${prefix}${pathPart.replace(/\.png$/, ".webp")}${suffix}`;
+        if (skipFolders.some(f => pathPart.includes(f))) return match;
+        return `${prefix}${pathPart.replace(/\.(png|jpe?g|heic)$/i, ".webp")}${suffix}`;
       }
     );
 
     if (replaced !== content) {
       fs.writeFileSync(file, replaced);
-      console.log("updated .png → .webp refs in:", file);
+      console.log("updated image refs → .webp in:", file);
     }
   }
 }
 
-console.log("starting global png → webp conversion...");
+console.log("starting global image → webp conversion...");
 await walkAndConvert(inputRoot);
 
-console.log("updating file references (.png → .webp)...");
+console.log("updating file references (.png/.jpg/.jpeg/.heic → .webp)...");
 updateReferences();
 
-console.log("done");
+console.log("done ✅");
