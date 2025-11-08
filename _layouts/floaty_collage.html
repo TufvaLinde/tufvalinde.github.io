@@ -184,7 +184,7 @@
       const rot = d.baseRot + Math.sin(d.orbitPhase * 0.5) * d.rotAmp;
 
       // apply both translate and rotate together
-      d.el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+      d.el.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
     });
 
     requestAnimationFrame(animate);
