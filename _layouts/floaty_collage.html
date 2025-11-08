@@ -50,10 +50,12 @@
     }
 
     .floating {
-      position: absolute;
-      will-change: transform;
-      transition: transform 1s ease-in-out;
-    }
+  position: absolute;
+  will-change: transform;
+  transition: transform 1s ease-in-out;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
 
     .floating:hover {
       transform: scale(1.05);
