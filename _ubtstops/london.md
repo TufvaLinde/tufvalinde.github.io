@@ -9,7 +9,7 @@ person:
   - tuf
   - andrea
 folder: /assets/ubt/london
-background: /assets/ubt/bglondon.wepb
+background: /assets/ubt/bglondon.webp
 title_overlay: true
 ---
 
