@@ -165,20 +165,23 @@ function drawEverything() {
   });
   
   // Add volleyball court markers
-const volleyballIcon = L.icon({
-  iconUrl: '/assets/ubt/volleyball.webp',
-  iconSize: [38, 38],
-  iconAnchor: [19, 38],
-  popupAnchor: [0, -38]
+const volleyballIcon = L.divIcon({
+  html: '<div style="font-size:24px;line-height:24px;">🏐</div>',
+  className: '',
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12]
 });
 
 courts.forEach(court => {
-  const marker = L.marker([court.lat, court.lon], { icon: "🏐" }).addTo(map);
+  if (!court.lat || !court.lon) return; 
+
+  const marker = L.marker([court.lat, court.lon], { icon: volleyballIcon }).addTo(map);
 
   const popupHTML = `
     <div class="court-popup">
       <b>${court.title}</b><br>
-      <i>${court.date ? `visited: ${court.date}` : 'date unknown'}</i><br><br>
+      <i>${court.dateStr ? `visited: ${court.dateStr}` : 'date unknown'}</i><br><br>
       <div>sand: ${court.sand ?? '-'} /10</div>
       <div>court: ${court.court ?? '-'} /10</div>
       <div>player level: ${court.playerlevel ?? '-'} /10</div>
@@ -188,6 +191,7 @@ courts.forEach(court => {
 
   marker.bindPopup(popupHTML);
 });
+
 
   if (firstDraw) {
     const pts = stops.map(s => [s.lat, s.lon]);
