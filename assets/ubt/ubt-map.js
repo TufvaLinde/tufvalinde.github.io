@@ -180,7 +180,7 @@ courts.forEach(court => {
       <b>${court.title}</b><br>
       <i>${court.date ? `visited: ${court.date}` : 'date unknown'}</i><br><br>
       <div>sand: ${court.sand ?? '-'} /10</div>
-      <div>court: ${court.net ?? '-'} /10</div>
+      <div>court: ${court.court ?? '-'} /10</div>
       <div>player level: ${court.playerlevel ?? '-'} /10</div>
       ${court.comment ? `<p class="court-comment">${court.comment}</p>` : ''}
     </div>
