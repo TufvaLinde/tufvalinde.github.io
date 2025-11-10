@@ -5,6 +5,7 @@ lat: 51.5074
 lon: -0.1278
 date: 2025-11-05
 tags: backpacking, ubt
+perma-link: /draft-preview/
 person:
   - tuf
   - andrea
