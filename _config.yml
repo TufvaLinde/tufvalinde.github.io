@@ -48,7 +48,7 @@ collections:
   ubtpeople:
     output: true
   ubtcourts:
-    output true
+    output: true
 
 markdown: kramdown
 
