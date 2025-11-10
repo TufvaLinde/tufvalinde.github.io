@@ -9,6 +9,7 @@ person:
   - tuf
   - louise
 folder: /assets/ubt/cancun
+title_overlay: true
 background: /assets/ubt/bgcancun.webp
 ---
 
