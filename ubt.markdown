@@ -50,9 +50,7 @@ permalink: /ultimate-beach-tour/
       sand: {{ c.sand | default: ‘null’ }},
       net: {{ c.net | default: ‘null’ }},
       playerlevel: {{ c.playerlevel | default: ‘null’ }},
-      comment: {{ c.comment | jsonify }},
-      url: “{{ c.url | relative_url }}”
-    }{% unless forloop.last %},{% endunless %}
+      comment: {{ c.comment | jsonify }}
     {% endif %}
   {% endfor %}
 ];
