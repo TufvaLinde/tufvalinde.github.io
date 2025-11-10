@@ -47,6 +47,8 @@ collections:
     permalink: /ubt/:title/
   ubtpeople:
     output: true
+  ubtcourts:
+    output true
 
 markdown: kramdown
 

@@ -163,6 +163,31 @@ function drawEverything() {
       });
     }
   });
+  
+  // Add volleyball court markers
+const volleyballIcon = L.icon({
+  iconUrl: '/assets/ubt/volleyball.webp',
+  iconSize: [38, 38],
+  iconAnchor: [19, 38],
+  popupAnchor: [0, -38]
+});
+
+courts.forEach(court => {
+  const marker = L.marker([court.lat, court.lon], { icon: volleyballIcon }).addTo(map);
+
+  const popupHTML = `
+    <div class="court-popup">
+      <b>${court.title}</b><br>
+      <i>${court.date ? `visited: ${court.date}` : 'date unknown'}</i><br><br>
+      <div>sand: ${court.sand ?? '-'} /10</div>
+      <div>court: ${court.net ?? '-'} /10</div>
+      <div>player level: ${court.playerlevel ?? '-'} /10</div>
+      ${court.comment ? `<p class="court-comment">${court.comment}</p>` : ''}
+    </div>
+  `;
+
+  marker.bindPopup(popupHTML);
+});
 
   if (firstDraw) {
     const pts = stops.map(s => [s.lat, s.lon]);

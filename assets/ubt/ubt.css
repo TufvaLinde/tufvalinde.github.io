@@ -102,3 +102,20 @@
   text-decoration: none !important;
   transition: linear 0.1s;
 }
+
+.court-popup {
+  font-family: "coral pixels";
+  text-transform: none;
+}
+
+.court-popup b {
+  color: rgb(0,121,130);
+  text-transform: lowercase;
+  font-size: 1rem;
+}
+
+.court-popup .court-comment {
+  margin-top: .6rem;
+  font-style: italic;
+  color: #444;
+}
