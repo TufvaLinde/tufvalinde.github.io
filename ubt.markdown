@@ -89,4 +89,6 @@ permalink: /ultimate-beach-tour/
     "Loaded courts:\n" + JSON.stringify(courts, null, 2);
 </script>
 
+<p>Total courts found: {{ site.ubtcourts | size }}</p>
+
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>

@@ -49,6 +49,7 @@ collections:
     output: true
   ubtcourts:
     output: true
+    permalink: /courts/:name/
     
 markdown: kramdown
 
