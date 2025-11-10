@@ -1,5 +1,5 @@
 —
-title: isla mujeres
+title: “isla mujeres”
 lat: 21.2322
 lon: -86.7341
 date: 2025-11-09

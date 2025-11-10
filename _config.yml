@@ -49,7 +49,7 @@ collections:
     output: true
   ubtcourts:
     output: true
-
+    
 markdown: kramdown
 
 # Exclude from processing.
