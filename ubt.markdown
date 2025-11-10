@@ -64,6 +64,22 @@ permalink: /ultimate-beach-tour/
       {% endif %}
     {% endfor %}
   ];
+  
+const courts = [
+    {% for c in site.ubtcourts %}
+    {
+      title: “{{ c.title | escape }}”,
+      lat: {{ c.lat }},
+      lon: {{ c.lon }},
+      date: “{{ c.date | date: “%Y-%m-%d” }}”,
+      sand: {{ c.sand | default: ‘null’ }},
+      net: {{ c.net | default: ‘null’ }},
+      playerlevel: {{ c.playerlevel | default: ‘null’ }},
+      comment: {{ c.comment | jsonify }},
+      url: “{{ c.url }}”
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
 </script>
 
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>
