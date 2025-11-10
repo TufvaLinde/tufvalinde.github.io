@@ -173,7 +173,7 @@ const volleyballIcon = L.icon({
 });
 
 courts.forEach(court => {
-  const marker = L.marker([court.lat, court.lon], { icon: volleyballIcon }).addTo(map);
+  const marker = L.marker([court.lat, court.lon], { icon: "🏐" }).addTo(map);
 
   const popupHTML = `
     <div class="court-popup">
