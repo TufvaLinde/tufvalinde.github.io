@@ -48,7 +48,7 @@ permalink: /ultimate-beach-tour/
       dateStr: “{{ c.date | date: ‘%b %-d, %Y’ }}”,
       dateNum: {{ c.date | date: ‘%s’ | plus: 0 }},
       sand: {{ c.sand | default: ‘null’ }},
-      net: {{ c.net | default: ‘null’ }},
+      court: {{ c.court | default: ‘null’ }},
       playerlevel: {{ c.playerlevel | default: ‘null’ }},
       comment: {{ c.comment | jsonify }}
     {% endif %}
