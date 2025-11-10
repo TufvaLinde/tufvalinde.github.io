@@ -37,6 +37,22 @@ permalink: /ultimate-beach-tour/
 
 <link rel="stylesheet" href="{{ '/assets/ubt/ubt.css' | relative_url }}">
 <script>
+
+const courts = [
+  {% for c in site.ubtcourts %}
+  {
+    title: “{{ c.title | escape }}”,
+    lat: {{ c.lat }},
+    lon: {{ c.lon }},
+    date: “{{ c.date | date: “%Y-%m-%d” }}”,
+    sand: {{ c.sand | default: ‘null’ }},
+    court: {{ c.net | default: ‘null’ }},
+    playerlevel: {{ c.playerlevel | default: ‘null’ }},
+    comment: {{ c.comment | jsonify }}”
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
   const people = [
     {% for p in site.ubtpeople %}
     {
@@ -65,21 +81,7 @@ permalink: /ultimate-beach-tour/
     {% endfor %}
   ];
   
-const courts = [
-    {% for c in site.ubtcourts %}
-    {
-      title: “{{ c.title | escape }}”,
-      lat: {{ c.lat }},
-      lon: {{ c.lon }},
-      date: “{{ c.date | date: “%Y-%m-%d” }}”,
-      sand: {{ c.sand | default: ‘null’ }},
-      net: {{ c.net | default: ‘null’ }},
-      playerlevel: {{ c.playerlevel | default: ‘null’ }},
-      comment: {{ c.comment | jsonify }},
-      url: “{{ c.url }}”
-    }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ];
+  
 </script>
 
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>
