@@ -1,9 +1,9 @@
 ---
-title: Playa del Carmen Court
-lat: 20.627
-lon: -87.073
-sand: fine
-court: yes
-playerlevel: beginners
-comment: "nope"
+title: isla mujeres
+lat: 21.2326
+lon: -86.7318
+sand: 8
+court: 2
+playerlevel: 2
+comment: "not a good one"
 ---

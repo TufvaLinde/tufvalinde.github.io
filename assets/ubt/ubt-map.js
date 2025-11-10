@@ -164,13 +164,11 @@ function drawEverything() {
     }
   });
   
-  // Add volleyball court markers
-const volleyballIcon = L.divIcon({
-  html: '<div style="font-size:24px;line-height:24px;">🏐</div>',
-  className: '',
-  iconSize: [24, 24],
-  iconAnchor: [12, 12],
-  popupAnchor: [0, -12]
+const volleyballIcon = L.icon({
+  iconUrl: '/assets/ubt/volleyball.webp',
+  iconSize: [12, 12],
+  iconAnchor: [6, 12],
+  popupAnchor: [0, -10]
 });
 
 courts.forEach(court => {
