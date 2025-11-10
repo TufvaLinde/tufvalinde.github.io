@@ -38,18 +38,22 @@ permalink: /ultimate-beach-tour/
 <link rel="stylesheet" href="{{ '/assets/ubt/ubt.css' | relative_url }}">
 <script>
 
-const courts = [
+  const courts = [
   {% for c in site.ubtcourts %}
-  {
-    title: “{{ c.title | escape }}”,
-    lat: {{ c.lat }},
-    lon: {{ c.lon }},
-    date: “{{ c.date | date: “%Y-%m-%d” }}”,
-    sand: {{ c.sand | default: ‘null’ }},
-    court: {{ c.net | default: ‘null’ }},
-    playerlevel: {{ c.playerlevel | default: ‘null’ }},
-    comment: {{ c.comment | jsonify }}”
-  }{% unless forloop.last %},{% endunless %}
+    {% if c.lat and c.lon %}
+    {
+      title: “{{ c.title | escape }}”,
+      lat: {{ c.lat }},
+      lon: {{ c.lon }},
+      dateStr: “{{ c.date | date: ‘%b %-d, %Y’ }}”,
+      dateNum: {{ c.date | date: ‘%s’ | plus: 0 }},
+      sand: {{ c.sand | default: ‘null’ }},
+      net: {{ c.net | default: ‘null’ }},
+      playerlevel: {{ c.playerlevel | default: ‘null’ }},
+      comment: {{ c.comment | jsonify }},
+      url: “{{ c.url | relative_url }}”
+    }{% unless forloop.last %},{% endunless %}
+    {% endif %}
   {% endfor %}
 ];
 
