@@ -82,13 +82,5 @@ permalink: /ultimate-beach-tour/
   ];
 </script>
 
-<div id="debug-courts" style="white-space: pre-wrap; font-family: monospace; background: #f8f8f8; padding: 1em; border: 1px solid #ddd; margin: 1em 0;"></div>
-
-<script>
-  document.getElementById("debug-courts").innerText =
-    "Loaded courts:\n" + JSON.stringify(courts, null, 2);
-</script>
-
-<p>Total courts found: {{ site.ubtcourts | size }}</p>
 
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>
