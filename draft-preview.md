@@ -1,6 +1,7 @@
 ---
 layout: post
 date: 2025-11-07
+permalink: /draft-preview/
 tags: backpacking, ubt
 ---
 
