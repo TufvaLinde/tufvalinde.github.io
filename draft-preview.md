@@ -14,7 +14,6 @@ tags: backpacking, ubt
 
 </style>
 
-
 <p class="centeredtext">Tuf</p>
 
 *Oh, the wonders of travelling light,* I thought to myself as I stretched my legs and reached up to grab my 32L backpack from the overhead compartments. I was seated in 2A — a fancy seat for those who pay for extra legroom (and those who forget to check in until the last second). A minute later, I was the first to exit the aircraft, stepping out into a surprisingly warm November breeze.
@@ -65,7 +64,7 @@ I meant that. And I felt my chest tighten a bit with longing as I uttered the wo
 
 *But did someone say adventure?*
 
-* * *
+<p class="centeredtext">* * *</p>
 
 We got off the bus at Waterloo. The plan was to head to the Airbnb to drop our backpacks off, then go to Coram’s Fields to see a fireworks show (it happened to be Guy Fawkes Night) and then grab a pint with a couple of Andrea’s old friends from his lab. As we were walking towards the next bus, I spotted a tunnel on the street orthogonal to our path.
 
@@ -115,7 +114,7 @@ I got it in theory, but not in practice. I sprayed my usual signature — just a
 
 And I felt it — that small seed of inspiration. *At some point in my life I want to learn this medium,* I thought to myself.
 
-***
+<p class="centeredtext">* * *</p>
 
 We got off the bus at Waterloo. The plan was to head to the Airbnb to drop our backpacks off, then go to Coram’s Fields to see a fireworks show (it happened to be Guy Fawkes Night) and then grab a beer with a couple of Andrea’s old friends from his lab. As we were walking towards the next bus, I spotted a tunnel on the street orthogonal to our path.
 
@@ -165,7 +164,7 @@ I got it in theory, but not in practice. I sprayed my usual signature — just a
 
 And I felt it — that small seed of inspiration. *At some point in my life I want to learn this medium,* I thought to myself.
 
-***
+<p class="centeredtext">* * *</p>
 
 I woke up around 10 a.m. the next morning to Andrea putting on the soft tunes of the *Wingspan* videogame soundtrack on my small red JBL Clip speaker. Through the magic of Spotify Blend, I had somehow managed to get all my friends hooked on this soundtrack as their go-to relaxation music. Hearing it play made my thoughts drift back home as I tossed in bed — eyes refusing to open just yet.
 
@@ -205,7 +204,7 @@ Our eyes locked in agreement. “Amazing plan — I can’t wait!” I squeaked,
 
 “Cool, then I’ll do my makeup.”
 
-***
+<p class="centeredtext">* * *</p>
 
 Hours later we found ourselves in the Moleskine store on Neal Street. It was a small shop, decorated in a dark, luxurious interior and offered fewer options than we had hoped for.  
 
@@ -287,7 +286,7 @@ We decided that since neither of us needed the iPhone 17, it would be more sensi
 
 *yolo mindset intensifies*  
 
-***
+<p class="centeredtext">* * *</p>
 
 The sun came out as we walked among the skyscrapers of the financial district, the rays gently lighting up the tops of the tall buildings. The fact that our precious bombed church was closed off for renovations didn’t bother us at all. We saw it from the outside, along with some cute squirrels climbing up the surrounding wall to greet us. Nothing could destroy the good mood we were in.  
 
