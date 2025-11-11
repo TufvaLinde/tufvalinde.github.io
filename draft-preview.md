@@ -34,7 +34,7 @@ Eventually, I caught sight of him making his way down the back staircase of the 
 
 I was so grateful to have Andrea join me in London. The initial flight I’d booked took the route: Stockholm → London (**10-hour transfer overnight**) → Dallas (2-hour transfer) → Cancún — where I would *finally* be reunited with Louise, who was travelling from Italy. I was *not* looking forward to spending those ten hours curled up alone on the cold Heathrow floor with only beachwear packed in my backpack. Andrea agreeing to go a day earlier and see a Pendulum concert together was a blessing (and a great way to turn something dreadful into something exciting).
 
-After passport control, we walked straight up to the first info desk available and asked for the cheapest way to get to the city. The man at the desk greeted us with a heavy accent and a crooked-toothed smile, which instantly gave off the feeling of *oh, this guy knows how to get around in the UK.* He sold us two tickets for the next departing bus towards London.
+After passport control, we walked straight up to the first info desk available and asked for the cheapest way to get to the city. The man at the desk greeted us with a heavy accent and a crooked-toothed smile, which instantly induced the feeling of *oh, this guy knows how to get around in the UK.* He sold us two tickets for the next departing bus towards London.
 
 “Jus’ head to the right, then turn left towards the lift, go down to the coaches, an’ find stop A26 — yer bus departs in twenty minutes.”
 
@@ -184,7 +184,7 @@ I had decided to let myself buy whichever sketchbook fitted my needs best, at wh
 
 “It’s my departure gift for you!” His accent came out stronger as he spoke passionately. “Here’s my coffee, now shoosh.”  
 
-I stepped outside. *Italians*, I thought to myself (though secretly overjoyed to receive a bright orange, teeny-tiny notebook that fits right into my teeny-tiny Kånken fanny bag). *I suppose he’ll get good karma for being so kind to me though*.  
+I stepped outside. *Italians*, I thought to myself (though secretly overjoyed to receive a bright orange, teeny-tiny notebook that fits right into my teeny-tiny Kånken fanny bag). *I suppose he’ll get good karma for being so kind to me*.  
 
 I scanned Neal Street. It was lined with small cozy stores that all looked distinct from one another. There weren’t many people out that afternoon, presumably because it was a Thursday. I was just thinking how I could see why people make trips to London to do Christmas shopping when a group of three people started walking towards me. Andrea exited the store and reached me at the same moment they did.  
 
@@ -226,9 +226,9 @@ We had to sign a form stating that we agreed to be in their Instagram video and 
 
 “That’s not pasta,” Andrea exclaimed before they left us.  
 
-We giggled our way down the street back to Cass’s Art.  
+We giggled our way down the street back to Cass Art.  
 
-“You know how many people warned me when I said I was going to London?” I said to Andrea. ”oH nO, wHy WoUlD yOu Go tO lOnDoN bEfOrE eVeN sTarTiNg yOuR jOuRnEy?! YoU’lL gEt mUgGeD aNd StAbBeD tO dEaTh” I imitated X colleagues, Y friends and everyone in my family. “So far, the Londoners have been the friendliest people I’ve possibly ever met — given us cookies, taught us to spray-paint and given us free money and the latest iPhone.”  
+“You know how many people warned me when I said I was going to London?” I said to Andrea. ”oH nO, wHy WoUlD yOu Go tO lOnDoN bEfOrE eVeN sTarTiNg yOuR jOuRnEy?! YoU’lL gEt mUgGeD aNd StAbBeD tO dEaTh” I imitated X colleagues, Y friends and everyone in my family. “So far, the Londoners have been the friendliest people I’ve possibly ever met — given us free cookies, taught us to spray-paint and given us free money and the latest iPhone.”  
 
 “I know!” Andrea agreed. “This is the best day ever, and we haven’t even gotten to Pendulum yet.”  
 
@@ -256,7 +256,7 @@ Excitedly leaning over the device, he showed us a point cloud on the screen, dep
 
 “So this little dome on top is the emitter,” he explained, tapping the blue half-sphere. “It fires two hundred thousand laser points per second and stitches them together into a live 3D model. The range is about seventy metres, and it’s accurate down to a centimetre. See those colours? They show the density of the point cloud — every surface you see is made up of thousands of readings.”
 
-“That’s amazing,” I said, remembering I’d  worked with LiDAR data for topographical mapping at my first job.  
+“That’s amazing,” I said, remembering I’d worked with LiDAR data for topographical mapping at my first job.  
 
 “Yeah, and the best part is it does full 360-degree coverage. Normally you’d have to scan each floor or wall separately, but this can do the whole building in one pass. I can capture over two hundred thousand square metres in a few minutes.” His eyes lit up as he spoke faster, clearly in his element. “It’s called the GeoScan S1. I’m testing it for a review on my YouTube channel, so this is all for a video[^5]" 
 
@@ -266,9 +266,9 @@ Excitedly leaning over the device, he showed us a point cloud on the screen, dep
 
 “Oh, can we walk with you as you scan?” I asked. “I would love to get a closer look at how it works in action.”  
 
-“Yes, that’d be amazing actually,” he replied. “I’ve noticed some guards giving me strange looks. No wonder, considering it looks like I’m planning a terror attack.”  
+“Yes, that’d be amazing actually,” he replied. “I’ve noticed some guards giving me strange looks. No wonder, considering it looks like I’m planning a terror attack, but perhaps it looks less suspicious when walking with you two.”  
 
-“Well, it *does* resemble a microphone. If we walk with you perhaps it’ll seem more like an interview than a scan.”  
+“Well, it *does* resemble a microphone. Perhaps it’ll seem more like an interview than a scan.”  
 
 “Yeah, you’re right. How lucky I am to just stumble upon a couple of guardian angels like that!”  
 
@@ -294,7 +294,7 @@ Andrea looked through the images he took as we walked away from Yeong. He shot m
 
 Andrea laughed, “This sure doesn’t happen often in Stockholm.”  
 
-I thought for a second, then looked at him, “You know, I think it *could* happen though. I don’t think Londoners are necessarily more approachable than Stockholmers. We’re just in YOLO-vacation mode and people feel it.”  
+I thought for a second, then looked at him, “You know, I think it *could* happen though. I don’t think Londoners are necessarily more approachable than Stockholmers. We’re just in yolo-vacation mode and people feel it.”  
 
 “What do you mean?”  
 
