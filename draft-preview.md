@@ -66,56 +66,6 @@ I meant that. And I felt my chest tighten a bit with longing as I uttered the wo
 
 <p class="centeredtext">* * *</p>
 
-We got off the bus at Waterloo. The plan was to head to the Airbnb to drop our backpacks off, then go to Coram’s Fields to see a fireworks show (it happened to be Guy Fawkes Night) and then grab a pint with a couple of Andrea’s old friends from his lab. As we were walking towards the next bus, I spotted a tunnel on the street orthogonal to our path.
-
-“I wanna check that out,” I said and criss-crossed over the street. Andrea followed.
-
-The tunnel went below Waterloo Tube station and was half-circular with a radius of maybe ten metres and a hundred metres long. Every single square centimetre was covered in spray paint. We weren’t alone in the tunnel — there were graffiti artists working away on their pieces all around, soft music playing from a bar nearby, and a group of teenagers in grungy outfits running about taking photos of the incredible artwork. It smelled of spray paint and concrete.
-
-There was every colour you could imagine, every art style you could name, and all around the texture of the wall changed with the number of layers that had been sprayed over the years. In some parts the walls were peeling, revealing a crust of paint several centimetres thick. In one corner a small group of fencers were recording videos, trying to capture a slow-motion shot of them slashing a spray can.
-
-“What is this place?” I asked Andrea in wonder, eyes glittering with excitement.
-
-“I think I might know, actually.” Andrea scrambled to get his phone out of his pocket. “Yes! This is *The Vaults* — I pinned it in *The Yolo Itinerary*.”
-
-*The Yolo Itinerary* was the name of our shared Google Maps list where we’d pinned dozens of locations across London that we might want to visit before the concert. Specifically, we’d been looking out for places where we could take cool photos. Andrea’s an amazing photographer and he’d brought his whole camera setup.
-
-We wandered through The Vaults and let the art mesmerise us. *How did they get up there?* I had so many questions. But it’s a pity to carry around unanswered questions when there are people around who can provide answers.
-
-“Excuse me, sirs,” I said as I approached a couple of older men chatting by a small stall covered in artworks. One of them was seated on a high stool behind it and appeared to be the artist. “I don’t want to bother you, but my friend and I just got here and we’re fascinated by this whole place. Would you tell us more about it?”
-
-“Why, of course, young lady,” the seated man replied, flashing me a broad smile. “This ’ere’s an open graffiti gallery; anyone can come spray whatever they like, an’ it’s completely legal,” he explained. “This lad an’ I’ve been sprayin’ ’ere for years. Used ter be no man’s land just a few years back, ye know — homeless folk all over, drenched in piss, not a place you’d wanna be. But back in 2016 they cleared it right up, they did. Put in cameras, opened a few bars. Now it’s a haven for people like us who jus’ wanna express ourselves somewhere free an’ open, ya know?”
-
-The seated man kindly went on to show me some of the walls he’d painted on his phone, while the other man started chatting with Andrea, who asked him to pose in front of his artwork. While they were shooting, I continued talking with the old artist.
-
-“What’s your name?” I asked, stretching out my hand.
-
-“Name’s Tam — yours?”
-
-“I’m Tuf,” I said as we shook hands. “What about these creatures? Do they have a name?”
-
-I tilted my head towards the canvases propped up in his stall. They were all small, colourful paintings of a one‑eyed creature — think Mike Wazowski from *Monsters Inc.*, but more illustrative. Two legs. No mouth. Just one eye, and legs slightly bent to the side, as if it walked bow‑legged. The paintings seemed to be mixed media, using spray paint and acrylic markers.
-
-“Oh, these are *Snamuh*,” he replied.
-
-“Come again?”
-
-“Snaaamuuh,” he repeated slower. “It’s *humans* spelt backwards. Jus’ a little character I came up with durin’ the pandemic, I did. Now I spray ’em all ’round town — they’re my signature, in a sense.”
-
-Gazing at the Snamuh, I was reminded of those strange pandemic years. I could imagine this city being one of the worst to be quarantined in — all locked up in a tiny London flat. His character felt like a nod to the fact that we were all strange humans back then. Mouths covered, reduced to just watchin’ the situation play out in front of us. It was all backwards indeed.[^2]
-
-“They’re brilliant,” I said, and his face shone even brighter.
-
-Andrea was shooting the fencers while I said goodbye to Tam and wandered around for a closer look at the walls. One artist, by the name of Stocky, lent me a spray can and showed me how to use it.
-
-“You go close to the wall, bit o’ speed, an’ let go before pullin’ away,” he instructed. “That’s how you get nice even lines.”
-
-I got it in theory, but not in practice. I sprayed my usual signature — just a T and L that I compress into something that looks like a π. The turquoise paint ran a bit from me goin’ too slow, and my lines were anything but even, but I still liked seein’ my tag on the wall.
-
-And I felt it — that small seed of inspiration. *At some point in my life I want to learn this medium,* I thought to myself.
-
-<p class="centeredtext">* * *</p>
-
 We got off the bus at Waterloo. The plan was to head to the Airbnb to drop our backpacks off, then go to Coram’s Fields to see a fireworks show (it happened to be Guy Fawkes Night) and then grab a beer with a couple of Andrea’s old friends from his lab. As we were walking towards the next bus, I spotted a tunnel on the street orthogonal to our path.
 
 “I wanna check that out,” I said and criss-crossed over the street. Andrea followed.
@@ -354,7 +304,7 @@ I didn’t know if I was right in that claim, but one thing I *did* know was tha
 
 *End of Chapter 1*
 
-**Writers live comment**: This chapter was written on my flight from London to Cancún, using my phone and portable keyboard. It took the whole length of the flight. If the rest of this journey is as eventful I’m not sure how many chapters will need to be written, or if my wrists are capable of keeping up.  My Cancún flight is landing as I am writing. From my seat in the isle I can just see the sun setting over the sea. Somewhere down there is Louise. **Next quest: reunite with her.**
+**Writers live comment**: This chapter was written on my flight from London to Cancún, using my phone and portable keyboard. It took the whole length of the flight. If the rest of this journey is as eventful I’m not sure how many chapters will need to be written, or if my wrists are capable of keeping up.  My Cancún flight is landing as I am writing. From my seat in the aisle I can just see the sun setting over the sea. Somewhere down there is Louise. **Next quest: reunite with her.**
 
 
 [^1]: The question didn’t state whether anyone but yourself would know that you were going to pass, but that’s another interesting intricacy that could influence one’s answer.
