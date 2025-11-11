@@ -28,11 +28,11 @@ Eventually, I caught sight of him making his way down the back staircase of the 
 
 “What?” He looked up, then laughed when he realised my camera was in his face.
 
-“There will be plenty more video opportunities in the next few days,” I said — not actually knowing if I even wanted to make any vlogs. Photoshoots and writing would capture the trip pretty well on their own, and I’d never got good at video editing. But then again, I had promised to make some content for the Instagram account Louise set up for us.
+“There will be plenty more video opportunities in the next few days,” I said — not actually knowing if I even wanted to make any vlogs. Photoshoots and writing would capture the trip pretty well on their own, and I’d never gotten good at video editing. But then again, I had promised to make some content for the Instagram account Louise set up for us.
 
 “We are here!” Andrea exclaimed with excitement as we climbed the stairs to Arrivals. “Let the yoloing begin!”
 
-I was so grateful to have Andrea join me in London. The initial flight I’d booked took the route: Stockholm → London (**10-hour transfer overnight**) → Dallas (2-hour transfer) → Cancún — where I would *finally* be reunited with Louise, who was travelling from Italy. I was *not* looking forward to spending those ten hours curled up alone on the cold Heathrow floor with only beachwear packed in my luggage. Andrea agreeing to go a day earlier and see Pendulum live together was a blessing (and a great way to turn something dreadful into something exciting).
+I was so grateful to have Andrea join me in London. The initial flight I’d booked took the route: Stockholm → London (**10-hour transfer overnight**) → Dallas (2-hour transfer) → Cancún — where I would *finally* be reunited with Louise, who was travelling from Italy. I was *not* looking forward to spending those ten hours curled up alone on the cold Heathrow floor with only beachwear packed in my backpack. Andrea agreeing to go a day earlier and see a Pendulum concert together was a blessing (and a great way to turn something dreadful into something exciting).
 
 After passport control, we walked straight up to the first info desk available and asked for the cheapest way to get to the city. The man at the desk greeted us with a heavy accent and a crooked-toothed smile, which instantly gave off the feeling of *oh, this guy knows how to get around in the UK.* He sold us two tickets for the next departing bus towards London.
 
