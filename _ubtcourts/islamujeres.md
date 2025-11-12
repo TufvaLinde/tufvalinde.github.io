@@ -1,5 +1,6 @@
 ---
 title: isla mujeres
+date: 2025-11-09
 lat: 21.2326
 lon: -86.7318
 sand: 8

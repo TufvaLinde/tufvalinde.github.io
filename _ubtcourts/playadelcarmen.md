@@ -1,5 +1,6 @@
 ---
 title: playa del carmen
+date: 2025-11-11
 lat: 20.6214288
 lon: -87.0743269
 sand: 10
