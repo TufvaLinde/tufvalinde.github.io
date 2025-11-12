@@ -1,5 +1,5 @@
 ---
-title: playadelcarmen
+title: "playa del carmen"
 layout: antdreams
 lat: 20.629
 lon: -87.073
