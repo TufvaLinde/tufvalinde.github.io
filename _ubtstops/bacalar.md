@@ -10,4 +10,5 @@ person:
   - louise
 ---
 
-joined a guy from our hostel to go here. 
+
+joined a guy from our hostel to go here.
