@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {%- include head.html -%}
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <!-- Your scripts -->
+  <script type="module" src="{{ '/assets/margin-notes.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/assets/sms-chat.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/assets/stop-motion.js' | relative_url }}"></script>
+  <script src="{{ '/assets/annotations.js' | relative_url }}"></script>
+
+  <style>
+    /* --- BOOK LAYOUT STYLING ---------------------------------- */
+
+    body {
+      background: #faf9f6;
+      color: #222;
+      font-family: "Georgia", "Times New Roman", serif;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    .chapter-wrapper {
+      max-width: 42rem;             /* ~75 characters per line */
+      margin: 6rem auto;            /* big bookish margins */
+      padding: 0 2rem;
+    }
+
+    /* Center title cleanly */
+    .chapter-title {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 600;
+      margin-bottom: 4rem;
+      font-family: "Georgia", serif;
+    }
+
+    /* First-line indent except after headers / breaks */
+    .chapter-wrapper p {
+      text-indent: 1.5em;
+      margin-top: 1rem;
+    }
+
+    .chapter-wrapper h1,
+    .chapter-wrapper h2,
+    .chapter-wrapper h3,
+    .chapter-wrapper p.centered-text,
+    .chapter-wrapper .scene-break {
+      text-indent: 0;
+    }
+
+    /* Scene break *** */
+    .scene-break {
+      text-align: center;
+      margin: 3rem 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.3em;
+      color: #666;
+    }
+
+    /* Optional: make footnotes bookish */
+    .footnotes {
+      margin-top: 4rem;
+      font-size: 0.95rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1.5rem;
+    }
+
+  </style>
+
+  <body>
+    <main class="page-content" aria-label="Content">
+      <div class="chapter-wrapper">
+
+        <!-- TITLE (auto from front matter) -->
+        <h1 class="chapter-title">{{ page.title }}</h1>
+
+        <!-- CONTENT -->
+        {{ content }}
+
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+  </body>
+</html>
