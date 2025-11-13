@@ -10,6 +10,7 @@ person:
   - louise
 folder: /assets/ubt/playadelcarmen
 title_overlay: true
+background: /assets/ubt/bgplayadelcarmen.webp
 ---
 
 having fun here
