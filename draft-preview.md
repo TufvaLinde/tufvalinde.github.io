@@ -272,9 +272,9 @@ Andrea and I stated our names and we set off towards the next building.
 
 The Lloyd’s Building was an amazing complex of what looked like large metal pipes all surrounding a huge glass box in a sparse grid. Several staircases looked like they were floating between the parts. It looked very futuristic-cyberpunk and I loved it. *Must be hard for the device to pick up on all the intricacies of the exterior, though,* I thought to myself.  
 
-As we kept walking Yeong told me he was an architect by trade. Andrea was following close behind, camera in hand, snapping pictures of our “interview”. He had moved to the UK in ’96 for his studies and had stayed. From the way he talked, one could tell Yeong was excited about the topic and loved answering the questions I threw at him about architecture and structural design.  
+As we kept walking he told me he was an architect by trade. Andrea was following close behind, camera in hand, snapping pictures of our “interview”. He had moved to the UK in ’96 for his studies and had stayed. From the way he talked, one could tell Yeong was excited about the topic and loved answering the questions I threw at him about architecture and structural design.  
 
-*I love people like Yeung,* I thought to myself as we said our goodbyes, *it’s so easy to go about your day and mind your own business. Taking the time to share your experience, knowledge and excitement is truly generous.*  
+*I love people like Yeong,* I thought to myself as we said our goodbyes, *it’s so easy to go about your day and mind your own business. Taking the time to share your experience, knowledge and excitement is truly generous.*  
 
 Andrea looked through the images he took as we walked away from Yeong. He shot me a smile as he looked up, “Oh, these look so good. And what a fun encounter.”  
 
