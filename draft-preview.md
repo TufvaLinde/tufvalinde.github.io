@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 1
+title: "Chapter 1"
 date: 2025-11-07
 permalink: /draft-preview/
 tags: backpacking, ubt
