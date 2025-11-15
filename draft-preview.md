@@ -6,8 +6,6 @@ permalink: /draft-preview/
 tags: backpacking, ubt
 ---
 
-Tuf
-
 *Oh, the wonders of travelling light,* I thought to myself as I stretched my legs and reached up to grab my 32L backpack from the overhead compartments. I was seated in 2A — a fancy seat for those who pay for extra legroom (and those who forget to check in until the last second). A minute later, I was the first to exit the aircraft, stepping out into a surprisingly warm November breeze.
 
 Although being the first to exit didn’t matter much, considering I had to wait for my travel companion, Andrea, to disembark as well. His seat was on the opposite side of the plane, 33E — possibly the worst seat in the aircraft, and the other side of the coin if you decide to play the last-minute-check-in roulette.
