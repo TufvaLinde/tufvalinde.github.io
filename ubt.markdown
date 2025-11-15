@@ -11,8 +11,8 @@ permalink: /ultimate-beach-tour/
 </section>
 
 <section id="posts-widget">
-  <h2>posts</h2>
-  <p class="header-thing">links to blog posts connected to the journey</p>
+  <h2>story</h2>
+  <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
   <ul class="post-list">
     {% for post in site.posts %}
       {% unless post.draft %}
