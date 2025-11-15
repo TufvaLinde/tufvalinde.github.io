@@ -3,7 +3,7 @@ layout: chapters
 title: "Chapter 1"
 date: 2025-11-07
 tags: backpacking, ubt
-ubt: true
+ubt: True
 ---
 
 *Oh, the wonders of travelling light,* I thought to myself as I stretched my legs and reached up to grab my 32L backpack from the overhead compartments. I was seated in 2A — a fancy seat for those who pay for extra legroom (and those who forget to check in until the last second). A minute later, I was the first to exit the aircraft, stepping out into a surprisingly warm November breeze.
