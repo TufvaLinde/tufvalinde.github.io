@@ -1,5 +1,5 @@
 ---
-layout: chapters
+layout: post
 title: "Chapter 1"
 date: 2025-11-07
 ubt: true
