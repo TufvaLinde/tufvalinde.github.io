@@ -294,6 +294,7 @@ I didn’t know if I was right in that claim, but one thing I *did* know was tha
 
 <div class="centered-italic-text">End of Chapter 1</div>
 
+
 **Writers live comment**: This chapter was written on my flight from London to Cancún, using my phone and portable keyboard. It took the whole length of the flight. If the rest of this journey is as eventful I’m not sure how many chapters will need to be written, or if my wrists are capable of keeping up.  My Cancún flight is landing as I am writing. From my seat in the aisle I can just see the sun setting over the sea. Somewhere down there is Louise. **Next quest: reunite with her.**
 
 
