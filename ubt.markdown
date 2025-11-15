@@ -10,6 +10,7 @@ permalink: /ultimate-beach-tour/
   <div id="trip-map"></div>
 </section>
 
+
 <section id="posts-widget">
   <h2>story</h2>
   <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
