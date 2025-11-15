@@ -2,7 +2,6 @@
 layout: chapters
 title: "Chapter 1"
 date: 2025-11-07
-tags: backpacking, ubt
 ubt: True
 ---
 
