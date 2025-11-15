@@ -17,7 +17,8 @@ permalink: /ultimate-beach-tour/
     {% for post in site.posts %}
       {% unless post.draft %}
       {% if post.ubt %}
-        <li>
+        <p>hej</p>
+        <li> 
           <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title }}
             <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
