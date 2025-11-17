@@ -11,7 +11,7 @@ person:
   - louise
 folder: /assets/ubt/bacalar
 title_overlay: true
-background: /assets/ubt/bacalar.webp
+background: /assets/ubt/bgbacalar.webp
 ---
 
 having fun here
