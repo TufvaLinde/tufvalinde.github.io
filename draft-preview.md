@@ -5,6 +5,7 @@ lat: 20.629
 lon: -87.073
 date: 2025-11-10
 tags: backpacking, ubt
+permalink: /draft-preview/
 person:
   - tuf
   - louise
