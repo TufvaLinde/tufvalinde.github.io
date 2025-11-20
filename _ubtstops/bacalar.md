@@ -1,6 +1,6 @@
 ---
 title: bacalar
-layout: antdreams
+layout: floaty_collage
 lat: 18.750
 lon: -88.315
 date: 2025-11-13
