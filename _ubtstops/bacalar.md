@@ -8,6 +8,9 @@ tags: backpacking, ubt
 person:
   - tuf
   - louise
+folder: /assets/ubt/bacalar
+title_overlay: true
+background: /assets/ubt/bgbacalar.webp
 ---
 
 
