@@ -68,8 +68,8 @@
       font-family: 'Times New Roman', Times, serif;
       padding: 0.6rem 1rem;
       border-radius: 2px;
-      font-size: 0.9rem;
-      max-width: 260px;
+      font-size: 0.8rem;
+      max-width: 390px;
       line-height: 1.5;
     }
 
@@ -116,7 +116,7 @@
   </div>
 
   <script>
-  // --- markdown converter (same as before) ---
+  
   function renderMarkdown(md) {
     return md
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
@@ -127,7 +127,7 @@
       .replace(/\n/g, '<br>');
   }
 
-  // --- Load text/markdown/html content dynamically ---
+  
   document.querySelectorAll('.bubble[data-src], .floating-html[data-src], .markdown[data-src]').forEach(el => {
     fetch(el.dataset.src)
       .then(r => r.text())
@@ -143,7 +143,7 @@
       .catch(() => el.textContent = "(couldn't load content)");
   });
 
-  // --- setup drift + rotation sway data ---
+  
   const els = document.querySelectorAll('.floating');
   const drift = [];
 
@@ -176,14 +176,14 @@
       d.t += d.orbitSpeed * dt;
       d.orbitPhase += 0.0005 * dt;
 
-      // small wandering drift
+      
       const dx = Math.cos(d.t) * d.orbitR;
       const dy = Math.sin(d.t * 0.9) * d.orbitR;
 
-      // rotation sway: visibly ±5° or more
+      
       const rot = d.baseRot + Math.sin(d.orbitPhase * 0.5) * d.rotAmp;
 
-      // apply both translate and rotate together
+      
       d.el.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
     });
 
@@ -191,10 +191,10 @@
   }
   requestAnimationFrame(animate);
 
-  // --- pause/resume drift cleanly when tab visibility changes ---
+  
     document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
-        // when tab becomes visible again, reset the animation clock
+        
         last = performance.now();
     }
     });
