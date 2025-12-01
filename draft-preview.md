@@ -286,9 +286,7 @@ Not only had the flights just figured themselves out, but the problem of not hav
     {
       "who":"me",
       "name":"Tuf",
-      "text":"omg that is so incredibly kind of you! i just rebooked my flight for tomorrow morning, and my flight’s pretty early so i’ll sneak out around six-something and try not to disturb you.
-      
-      I’m still at heathrow actually, and according to google maps it takes around an hour and a half to get to your address from here. Is it okay if I go straight to your place or do you want space to do your work during the day and I come around later? i can totally keep myself occupied elsewhere (maybe find a quiet corner or library to nap in 😅), it just means so much just to have a place to rest tonight. and if you happen to feel like doing something chill later, i’m totally up for that too!",
+      "text":"omg that is so incredibly kind of you! i just rebooked my flight for tomorrow morning, and my flight’s pretty early so i’ll sneak out around six-something and try not to disturb you. Is it okay if I go straight to your place or do you want space to do your work during the day and I come around later? i can totally keep myself occupied elsewhere (maybe find a quiet corner or library to nap in 😅), it just means so much just to have a place to rest tonight. and if you happen to feel like doing something chill later, i’m totally up for that too!",
       "time":"2025-11-07T09:09:04"
     },{
       "who":"them",
