@@ -10,7 +10,7 @@ person:
   - louise
 folder: /assets/ubt/atitlan
 title_overlay: true
-background: /assets/ubt/atitlan.webp
+background: /assets/ubt/bgatitlan.webp
 ---
 
 cool lake
