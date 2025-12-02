@@ -1,6 +1,6 @@
 ---
 title: "atitlán"
-layout: antdreams
+layout: floaty_collage
 lat: 14.6907
 lon: -91.2025
 date: 2025-11-24
