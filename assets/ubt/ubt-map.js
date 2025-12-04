@@ -140,7 +140,7 @@ function drawEverything() {
         html: `<div style="font-size:30px;color:${pinColor}">📍</div>`,
         className: '',
         iconSize: [24,24],
-        iconAnchor: [15,15]
+        iconAnchor: [5,5]
       });
     }
 
