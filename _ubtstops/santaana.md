@@ -1,6 +1,6 @@
 ---
 title: "santa ana"
-layout: antdreams
+layout: floaty_collage
 lat: 13.9778
 lon: -89.5639
 date: 2025-11-29

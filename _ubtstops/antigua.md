@@ -1,6 +1,6 @@
 ---
 title: "antigua"
-layout: antdreams
+layout: floaty_collage
 lat: 14.5573
 lon: -90.7332
 date: 2025-11-19

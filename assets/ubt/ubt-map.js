@@ -137,10 +137,10 @@ function drawEverything() {
     } else {
       const pinColor = isFuture ? 'rgba(0,0,0,0.3)' : 'rgb(0,121,130)';
       icon = L.divIcon({
-        html: `<div style="font-size:35px;color:${pinColor}">📍</div>`,
+        html: `<div style="font-size:30px;color:${pinColor}">📍</div>`,
         className: '',
         iconSize: [24,24],
-        iconAnchor: [12,12]
+        iconAnchor: [15,15]
       });
     }
 
