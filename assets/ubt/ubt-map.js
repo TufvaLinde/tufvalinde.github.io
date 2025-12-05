@@ -139,8 +139,7 @@ function drawEverything() {
       icon = L.divIcon({
         html: `<div style="font-size:30px;color:${pinColor}">📍</div>`,
         className: '',
-        iconSize: [30,30],
-        iconAnchor: [0, 25]
+        iconSize: [30,30]
       });
     }
 
