@@ -3,6 +3,15 @@ title: "Chapter 2"
 layout: chapters
 ---
 
+
+{% include textsphere.html
+  id="chapter1-sphere"
+  text_url="assets/textsphere/words.txt"
+  radius=110
+  max_words=500
+%}
+
+
 “What’s your favourite Pendulum song?” I asked as I approached two girls I’d been eyeing from across the venue. We were still in the pre-show lull as people were slowly filling up O2 Academy. There were blue spotlights lighting up the sides of the venue, which were decorated with white stone pillars. There was a faint smell of beer mist in the air and the volume was still low enough that one could make conversation. It was the perfect time to adopt strangers.
 
 They turned towards us at the same time and somehow they were even cooler up close. Both wore dark outfits with elegant, gothy touches: necklaces with crosses, miniskirts, pink eyeshadow and several silver rings. *It looks like they had fun getting ready*, I thought to myself. The one on the left had balayage hair that melted from brown into pink at the ends and the other wore shorter brown hair and had beautiful green eyes.
