@@ -1,0 +1,11 @@
+<div class="text-sphere" id="{{ include.id | default: 'text-sphere' }}"></div>
+
+<script type="module">
+  import { initTextSphere } from "{{ '/assets/textsphere/text-sphere.js' | relative_url }}";
+  initTextSphere({
+    containerId: "{{ include.id | default: 'text-sphere' }}",
+    textUrl: "{{ include.text_url | relative_url }}",
+    radius: {{ include.radius | default: 110 }},
+    maxWords: {{ include.max_words | default: 600 }}
+  });
+</script>
