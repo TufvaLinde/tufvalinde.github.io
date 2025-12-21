@@ -7,6 +7,7 @@ date: 2025-12-31
 tags: backpacking, ubt
 person:
   - andrea
+popup: false 
 ---
 
 andrea has entered the chat.
