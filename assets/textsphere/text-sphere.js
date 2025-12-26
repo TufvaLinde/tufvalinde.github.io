@@ -88,7 +88,7 @@ export async function initTextSphere({
   fontFamily = "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
   fontWeight = "900",
   fontPx = 44,
-  color = "rgba(255,255,255,0.95)",
+  color = "rgba(24, 24, 24, 1)",
   pxToWorld = 0.055,
   verticalPadding = 0.08
 } = {}) {
