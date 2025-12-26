@@ -3,14 +3,19 @@ title: "Chapter 2"
 layout: chapters
 ---
 
-<section id="posts-widget">
-{% include textsphere.html
-  id="chapter1-sphere"
-  text_url="assets/textsphere/words.txt"
-  radius=110
-  max_words=500
-%}
-</section>
+<div id="{{ include.id }}" style="width:100%;height:400px"></div>
+
+<script type="module">
+import { initTextSphere } from "{{ site.baseurl }}/assets/js/textsphere.js";
+
+initTextSphere({
+  containerId: "{{ include.id }}",
+  textUrl: "{{ site.baseurl }}/{{ include.text_url }}",
+  radius: {{ include.radius }},
+  maxWords: {{ include.max_words }}
+});
+</script>
+
 
 “What’s your favourite Pendulum song?” I asked as I approached two girls I’d been eyeing from across the venue. We were still in the pre-show lull as people were slowly filling up O2 Academy. There were blue spotlights lighting up the sides of the venue, which were decorated with white stone pillars. There was a faint smell of beer mist in the air and the volume was still low enough that one could make conversation. It was the perfect time to adopt strangers.
 
