@@ -87,7 +87,7 @@ export async function initTextSphere({
   parse = "sentences",
   fontFamily = "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
   fontWeight = "900",
-  fontPx = 44,
+  fontPx = 100,
   color = "rgba(24, 24, 24, 1)",
   pxToWorld = 0.055,
   verticalPadding = 0.08
@@ -98,7 +98,7 @@ export async function initTextSphere({
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
-  camera.position.set(0, 0,400);
+  camera.position.set(0, 0, 100);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
