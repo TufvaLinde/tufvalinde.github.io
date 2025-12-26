@@ -2,12 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from
   "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
-function makeTextTexture(text, fontPx = 48) {
+function makeTextTexture(text, fontPx = 400) {
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
 
   const pad = Math.ceil(fontPx * 0.6);
-  ctx.font = `${fontPx}px`;
+  ctx.font = `${fontPx}px Pixelify Sans`;
   const metrics = ctx.measureText(text);
   const w = Math.ceil(metrics.width + pad * 2);
   const h = Math.ceil(fontPx + pad * 2);
@@ -80,7 +80,7 @@ export async function initTextSphere({
   textUrl,
   radius = 110,
   maxWords = 10000,
-  fontFamily = "pixelify sans",
+  fontFamily = "Pixelify Sans",
 } = {}) {
   const container = document.getElementById(containerId);
   if (!container) return;
