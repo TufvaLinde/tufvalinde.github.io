@@ -18,7 +18,7 @@ function makeTextTexture(text, fontPx = 48) {
   ctx.font = `${fontPx}px Times New Roman`;
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
-  ctx.fillStyle = "rgba(255,255,255,0.95)";
+  ctx.fillStyle = "rgb(0,0,0)";
   ctx.fillText(text, w / 2, h / 2);
 
   const tex = new THREE.CanvasTexture(c);
@@ -86,17 +86,32 @@ export async function initTextSphere({
   if (!container) return;
 
   const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    1,
+    0.1,
+    2000
+  );
 
-  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
-  camera.position.set(0, 0, 260);
+  camera.position.set(0, 0, radius * 2.4);
+  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  renderer.domElement.style.width = "100%";
+  renderer.domElement.style.height = "100%";
+  renderer.domElement.style.display = "block";
+
   container.appendChild(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.enablePan = false;
+  controls.target.set(0, 0, 0);
+  controls.update();
+
 
   const lightA = new THREE.DirectionalLight(0xffffff, 0.9);
   lightA.position.set(1, 1, 1);
@@ -108,10 +123,15 @@ export async function initTextSphere({
   function resize() {
     const w = container.clientWidth;
     const h = container.clientHeight;
+
+    if (w === 0 || h === 0) return;
+
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, false);
   }
+
+
   window.addEventListener("resize", resize);
   resize();
 
