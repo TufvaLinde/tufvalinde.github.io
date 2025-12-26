@@ -11,8 +11,8 @@ import { initTextSphere } from "{{ site.baseurl }}/assets/js/textsphere.js";
 initTextSphere({
   containerId: "{{ include.id }}",
   textUrl: "{{ site.baseurl }}/{{ include.text_url }}",
-  radius: {{ include.radius }},
-  maxWords: {{ include.max_words }}
+  radius: "{{ include.radius }}",
+  maxWords: "{{ include.max_words }}"
 });
 </script>
 
