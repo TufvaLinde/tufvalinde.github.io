@@ -98,7 +98,7 @@ export async function initTextSphere({
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 2000);
-  camera.position.set(0, 0, 260);
+  camera.position.set(0, 0,400);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
