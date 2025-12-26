@@ -8,7 +8,6 @@ tags: backpacking, ubt
 person:
   - tuf
   - louise
-popup: "false"
 ---
 
 volunteering in the jungle
