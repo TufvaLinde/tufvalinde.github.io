@@ -7,7 +7,7 @@ function makeTextTexture(text, fontPx = 48) {
   const ctx = c.getContext("2d");
 
   const pad = Math.ceil(fontPx * 0.6);
-  ctx.font = `${fontPx}px Times New Roman`;
+  ctx.font = `${fontPx}px`;
   const metrics = ctx.measureText(text);
   const w = Math.ceil(metrics.width + pad * 2);
   const h = Math.ceil(fontPx + pad * 2);
@@ -15,7 +15,7 @@ function makeTextTexture(text, fontPx = 48) {
   c.width = w;
   c.height = h;
 
-  ctx.font = `${fontPx}px Times New Roman`;
+  ctx.font = `${fontPx}px`;
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
   ctx.fillStyle = "rgb(0,0,0)";
@@ -79,8 +79,8 @@ export async function initTextSphere({
   containerId,
   textUrl,
   radius = 110,
-  maxWords = 600,
-  fontFamily = "Times New Roman",
+  maxWords = 10000,
+  fontFamily = "pixelify sans",
 } = {}) {
   const container = document.getElementById(containerId);
   if (!container) return;
