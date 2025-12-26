@@ -1,13 +1,18 @@
-<div id="{{ include.id }}" style="width:100%; height:400px; position:relative;"></div>
-
+<div class="text-sphere" id="{{ include.id | default: 'text-sphere' }}"></div>
 
 <script type="module">
-import { initTextSphere } from "{{ site.baseurl }}/assets/textsphere/text-sphere.js";
-
-initTextSphere({
-  containerId: "{{ include.id }}",
-  textUrl: "{{ site.baseurl }}/{{ include.text_url }}",
-  radius: 110,
-  maxWords: 600
-});
+  import { initTextSphere } from "{{ '/assets/textsphere/text-sphere.js' | relative_url }}";
+  initTextSphere({
+    containerId: "{{ include.id | default: 'text-sphere' }}",
+    textUrl: "{{ include.text_url | relative_url }}",
+    radius: {{ include.radius | default: 110 }},
+    slices: {{ include.slices | default: 14 }},
+    maxLines: {{ include.max_lines | default: 80 }},
+    spin: {{ include.spin | default: 0.002 }},
+    draggable: {{ include.draggable | default: true }},
+    parse: "{{ include.parse | default: 'sentences' }}",
+    fontFamily: "{{ include.font_family | default: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" }}",
+    fontWeight: "{{ include.font_weight | default: '900' }}",
+    fontPx: {{ include.font_px | default: 44 }}
+  });
 </script>

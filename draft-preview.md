@@ -4,10 +4,16 @@ layout: chapters
 ---
 
 {% include textsphere.html
-  id="chapter1-sphere"
+  id="ch2-sphere"
   text_url="assets/textsphere/words.txt"
-  radius=110
-  max_words=500
+  parse="sentences"
+  slices=18
+  max_lines=70
+  font_family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+  font_weight="900"
+  font_px=42
+  spin=0.0018
+  draggable=true
 %}
 
 
