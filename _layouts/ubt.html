@@ -20,77 +20,112 @@
   html, body {
     height: 100%;
     margin: 0;
-    background-image: url("/assets/bgubt.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url("/assets/bgubt.webp") center / cover no-repeat;
   }
 
   h1 {
     font-weight: 850;
     word-spacing: 0.3em;
-    display: block;
     width: 100%;
-    line-height: 1;
     margin-top: 30px;
     text-align: center;
+    line-height: 1.1;
   }
 
   #ubt-title span {
     display: inline-block;
-    animation: wave 2s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.08s);
+    padding: 0.08em 0.14em;
+    margin: 0 0.02em;
+    border-style: solid;
+    border-radius: 0.15em;
+    transition:
+      font-family 0.15s linear,
+      font-size 0.15s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      border-width 0.2s ease;
   }
-
-  @keyframes wave {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
 </style>
 
-  <body>
-    <div class="annot-wrapper">
-      <h1 id="ubt-title">Ultimate Beach Tour</h1>
-      <script>
-        const fonts = [
-          '"DM Serif Display", serif',
-          '"Noto Serif Display", serif',
-          '"EB Garamond", serif',
-          '"Outfit", sans-serif',
-          '"Open Sans", sans-serif',
-          '"Silkscreen", cursive',
-          '"Pixelify Sans", cursive',
-          '"Coral Pixels", cursive'
-        ];
+<body>
+  <div class="annot-wrapper">
+    <h1 id="ubt-title">Ultimate Beach Tour</h1>
 
-        const heading = document.getElementById("ubt-title");
-        const text = heading.textContent;
+    <script>
+      const fonts = [
+        '"DM Serif Display", serif',
+        '"Noto Serif Display", serif',
+        '"EB Garamond", serif',
+        '"Outfit", sans-serif',
+        '"Open Sans", sans-serif',
+        '"Silkscreen", cursive',
+        '"Pixelify Sans", cursive',
+        '"Coral Pixels", cursive',
+        '"Playfair Display", serif',
+        '"Abril Fatface", serif',
+        '"Space Grotesk", sans-serif'
+      ];
 
-        heading.textContent = "";
+      const heading = document.getElementById("ubt-title");
+      const originalText = heading.textContent;
+      heading.textContent = "";
 
-        [...text].forEach((char, index) => {
-          const span = document.createElement("span");
-          span.style.setProperty("--i", index);
-          span.textContent = char;
+      const letters = [];
 
-          if (char !== " ") {
-            span.style.fontFamily = fonts[index % fonts.length];
-          }
-          span.style.color = `hsl(${index * 35 % 360}, 80%, 55%)`;
+      function pastelColor(hOffset = 0) {
+        const h = (200 + hOffset + Math.random() * 80) % 360;
+        const s = 50 + Math.random() * 20;
+        const l = 65 + Math.random() * 10;
+        return `hsl(${h}, ${s}%, ${l}%)`;
+      }
 
-          heading.appendChild(span);
-        });
+      [...originalText].forEach((char, i) => {
+        const span = document.createElement("span");
+        span.textContent = char;
 
+        if (char !== " ") {
+          span.dataset.font = i % fonts.length;
+          span.style.fontFamily = fonts[span.dataset.font];
+          span.style.fontSize = `${0.9 + Math.random() * 0.6}em`;
+          span.style.borderWidth = `${1 + Math.random() * 3}px`;
+          span.style.borderColor = pastelColor(i * 15);
+          span.style.transform = `rotate(${Math.random() * 12 - 6}deg)`;
+          span.style.fontWeight = Math.random() > 0.5 ? 800 : 400;
+          span.style.fontStyle = Math.random() > 0.7 ? "italic" : "normal";
+          span.style.textTransform = Math.random() > 0.8 ? "uppercase" : "none";
+        } else {
+          span.style.border = "none";
+        }
 
-      </script>
+        letters.push(span);
+        heading.appendChild(span);
+      });
 
-      <div class="ubt-grid">
-        {{ content }}
-      </div>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setInterval(() => {
+          letters.forEach((span, i) => {
+            if (!span.dataset.font) return;
+
+            let f = (Number(span.dataset.font) + 1) % fonts.length;
+            span.dataset.font = f;
+            span.style.fontFamily = fonts[f];
+            span.style.fontSize = `${0.85 + Math.random() * 0.7}em`;
+            span.style.borderWidth = `${1 + Math.random() * 4}px`;
+            span.style.borderColor = pastelColor(i * 20);
+            span.style.transform = `rotate(${Math.random() * 14 - 7}deg)`;
+            span.style.fontWeight = [300, 400, 600, 800][Math.floor(Math.random() * 4)];
+            span.style.fontStyle = Math.random() > 0.75 ? "italic" : "normal";
+            span.style.textTransform = Math.random() > 0.85 ? "uppercase" : "none";
+          });
+        }, 200);
+      }
+    </script>
+
+    <div class="ubt-grid">
+      {{ content }}
     </div>
-    {%- include footer.html -%}
-  </body>
+  </div>
+
+  {%- include footer.html -%}
+</body>
 </html>
-
-
