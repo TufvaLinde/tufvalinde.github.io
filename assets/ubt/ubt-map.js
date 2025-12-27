@@ -104,7 +104,7 @@ function makeStopIcon(imgUrl) {
   const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
 
   const size = 36;
-  const border = 3;
+  const border = 5;
 
   return L.divIcon({
     className: "",
@@ -115,7 +115,7 @@ function makeStopIcon(imgUrl) {
       <div style="
         width: ${size}px;
         height: ${size}px;
-        border-radius: 50%;
+        border-radius: 100px;
         background-color: white;
         ${hasImage ? `background-image: url('${imgUrl}');` : ""}
         background-size: cover;
