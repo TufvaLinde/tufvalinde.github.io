@@ -126,7 +126,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 3rem 0 4rem;
 }
 
 .ripped-paper {
@@ -139,7 +138,7 @@
   display: flex;
   flex-direction: column;
   width: min(520px, 90vw);
-  aspect-ratio: 10 / 3;
+  aspect-ratio: 15 / 3;
   padding: 3.5rem 3rem;
   text-align: center;
   filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.25));
