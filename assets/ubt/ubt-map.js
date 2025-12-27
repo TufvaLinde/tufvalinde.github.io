@@ -161,7 +161,6 @@ function makeStopPhotoIcon(imgUrl) {
   });
 
   stops.forEach(stop => {
-    console.log(stop.popup)
     if (stop.popup === false) return;
 
     const currentPeople = people.filter(p => p.currentStop?.title?.toLowerCase() === stop.title.toLowerCase());
