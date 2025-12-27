@@ -1,7 +1,7 @@
 ---
 person_id: tuf
 name: tuf
-color: "rgb(255, 0, 0)"
+color: "rgba(255, 134, 134, 1)"
 icon: "/assets/ubt/tuf-face.webp"
 start: "Stockholm"
 ---

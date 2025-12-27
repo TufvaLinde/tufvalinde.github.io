@@ -1,7 +1,7 @@
 ---
 person_id: louise
 name: louise
-color: "rgb(255, 234, 0)"
+color: "rgba(255, 248, 172, 1)"
 icon: "/assets/ubt/louise-face.webp"
 start: "Stockholm"
 ---

@@ -1,7 +1,7 @@
 ---
 person_id: andrea
 name: andrea
-color: "rgb(1, 115, 90)"
+color: "rgba(30, 217, 177, 1)"
 icon: "/assets/ubt/andrea-face.webp"
 start: "Stockholm"
 ---
