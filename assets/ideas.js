@@ -8,65 +8,103 @@ Safe to delete:
 - ideas.md
 ==================================================
 */
-const API_KEY = "YOUR_GEOAPIFY_KEY";
+// ideas.js
+// Make sure Leaflet is included in your HTML
 
-const DEFAULT_LOCATION = {
-  lat: 11.9344,
-  lon: -85.9560,
-  label: "Granada, Nicaragua"
-};
+// Initialize the map
+const map = L.map('map').setView([51.5074, -0.1278], 13); // Default: London
 
-const WEIRDNESS_CATEGORIES = {
-  1: ["tourism.museum"],
-  2: ["tourism.sights"],
-  3: ["tourism.attraction"],
-  4: ["artwork", "historic.ruins"],
-  5: ["tourism.attraction", "artwork", "abandoned"]
-};
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+  maxZoom: 16,
+  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
 
-async function generateIdea() {
-  const radiusKm = parseFloat(document.getElementById("distance").value) || 5;
-  const weirdness = document.getElementById("weirdness").value;
+// API base
+const API_BASE = 'http://localhost:3000'; // Atlas Obscura API server
+const API_KEY = ''; // optional if you set one
 
-  if (!WEIRDNESS_CATEGORIES[weirdness]) {
-    document.getElementById("result").innerText =
-      "Invalid weirdness level 😕";
+let placesList = [];
+
+// Slider & display
+const distanceSlider = document.getElementById('distanceRange');
+const distanceDisplay = document.getElementById('distanceValue');
+distanceSlider.addEventListener('input', () => {
+  distanceDisplay.textContent = distanceSlider.value;
+});
+
+// Haversine formula to calculate distance in km
+function getDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371; // Earth radius
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng/2) * Math.sin(dLng/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Fetch all places once
+async function fetchPlaces() {
+  try {
+    const response = await fetch(`${API_BASE}/places-all${API_KEY ? '?api_key=' + API_KEY : ''}`);
+    placesList = await response.json();
+  } catch (err) {
+    console.error('Error fetching places:', err);
+  }
+}
+
+// Show a random place within distance
+async function showRandomPlace() {
+  if (!placesList.length) return;
+
+  // Use map center as reference point
+  const center = map.getCenter();
+  const maxDistance = parseFloat(distanceSlider.value);
+
+  // Filter places within distance
+  const nearby = placesList.filter(p => 
+    getDistance(center.lat, center.lng, p.lat, p.lng) <= maxDistance
+  );
+
+  if (!nearby.length) {
+    alert('No places found within this distance!');
     return;
   }
 
-  const categories = WEIRDNESS_CATEGORIES[weirdness].join(",");
-
-  document.getElementById("result").innerText = "Searching… 🔍";
-
-  const url = `https://api.geoapify.com/v2/places?categories=${categories}&filter=circle:${DEFAULT_LOCATION.lon},${DEFAULT_LOCATION.lat},${radiusKm * 1000}&limit=50&apiKey=${API_KEY}`;
+  // Pick a random place
+  const randomIndex = Math.floor(Math.random() * nearby.length);
+  const place = nearby[randomIndex];
 
   try {
-    const res = await fetch(url);
-    const data = await res.json();
+    const response = await fetch(`${API_BASE}/place-full/${place.id}${API_KEY ? '?api_key=' + API_KEY : ''}`);
+    const details = await response.json();
 
-    if (!data.features || !data.features.length) {
-      document.getElementById("result").innerText =
-        "No places found nearby 😕";
-      return;
-    }
+    // Clear previous markers
+    map.eachLayer(layer => {
+      if (layer instanceof L.Marker) map.removeLayer(layer);
+    });
 
-    const random =
-      data.features[Math.floor(Math.random() * data.features.length)];
-
-    const name = random.properties.name || "Unknown place";
-    const placeCategories = random.properties.categories || "No categories available";
-    const lat = random.properties.lat;
-    const lon = random.properties.lon;
-
-    document.getElementById("result").innerHTML = `
-      <h3>${name}</h3>
-      <p>${DEFAULT_LOCATION.label}</p>
-      <p>${placeCategories}</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank">View on map 🗺️</a>
+    // Add marker
+    const marker = L.marker([details.coordinates.lat, details.coordinates.lng]).addTo(map);
+    const popupContent = `
+      <b>${details.title}</b><br>
+      <i>${details.location}</i><br>
+      <img src="${details.thumbnail_url}" alt="${details.title}" style="width:150px;"><br>
+      <a href="https://www.atlasobscura.com${details.url}" target="_blank">Read more</a>
     `;
+    marker.bindPopup(popupContent).openPopup();
+
+    // Center map
+    map.setView([details.coordinates.lat, details.coordinates.lng], 15);
   } catch (err) {
-    console.error(err);
-    document.getElementById("result").innerText =
-      "Something went wrong ❌";
+    console.error('Error fetching place details:', err);
   }
 }
+
+// Button event
+document.getElementById('randomIdeaBtn').addEventListener('click', showRandomPlace);
+
+// Initial fetch
+fetchPlaces();

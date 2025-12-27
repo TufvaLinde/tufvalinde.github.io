@@ -32,53 +32,28 @@ permalink: /ideas/
 
 
 # Let's find ideas for new places to go!
+# Setup
 
-<label for="distance">Distance (km):</label>
-<input id="distance" type="number" value="5" min="1" max="50">
-
-<label for="weirdness">Weirdness level (1-5):</label>
-<select id="weirdness">
-  <option value="1">1 - Mild</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5 - Weirdest</option>
-</select>
-
-<button class="big-red-button" onclick="generateIdea()">Generate</button>
+1. Clone or download the Atlas Obscura API repo:
+   ```bash
+   git clone https://github.com/bartholomej/atlas-obscura-api.git
+   cd atlas-obscura-api
+   yarn install
+   yarn server
 
 
-<div id="result"></div>
+# Find a Random Atlas Obscura Location
+<p>Choose your distance and click the button to get a random location:</p>
 
-<script src="{{ '/assets/ideas.js' | relative_url }}"></script>
+<label for="distanceRange">Distance (km): <span id="distanceValue">5</span> km</label>
+<input type="range" id="distanceRange" min="1" max="50" value="5">
 
+<p>Click the button to get a random interesting location in your area!</p>
 
-<!-- Map container -->
-<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+<button id="randomIdeaBtn">Give me an idea</button>
 
-<!-- Leaflet CSS & JS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<div id="map" style="height: 500px; margin-top: 20px;"></div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<!-- Map initialization -->
-<script>
-  // Set default coordinates (e.g., Granada, Nicaragua)
-  const DEFAULT_LAT = 11.9344;
-  const DEFAULT_LON = -85.9560;
-  const DEFAULT_ZOOM = 13;
-
-  // Initialize map
-  const map = L.map('map').setView([DEFAULT_LAT, DEFAULT_LON], DEFAULT_ZOOM);
-
-  // Add Stamen Watercolor tile layer via Stadia Maps
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.webpjpg, {
-    maxZoom: 16,
-    attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
-  }).addTo(map);
-
-  // Optional: add a marker at default location
-  L.marker([DEFAULT_LAT, DEFAULT_LON])
-    .addTo(map)
-    .bindPopup("Granada, Nicaragua")
-    .openPopup();
-</script>
+<script src="/assets/ideas.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
