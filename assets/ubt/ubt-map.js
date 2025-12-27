@@ -21,7 +21,7 @@ people.forEach(p => {
 
 const map = L.map('trip-map', {
   zoomControl: false
-}).setView([20, 0], 2);
+}).setView([20, 0], 5);
 /*
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.webp', {
   attribution: '&copy; OpenStreetMap & CartoCDN',
