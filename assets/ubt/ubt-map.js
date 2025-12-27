@@ -100,33 +100,34 @@ function drawEverything() {
     });
   });
   
-  function makeStopIcon(imgUrl) {
-    const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
+function makeStopIcon(imgUrl) {
+  const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
 
-    const size = 36;
-    const border = 5;
+  const size = 36;
+  const border = 5;
 
-    return L.divIcon({
-      className: "",
-      iconSize: [size, size],
-      iconAnchor: [size / 2, size / 2],
-      popupAnchor: [0, -size / 2],
-      html: `
-        <div style="
-          width: ${size}px;
-          height: ${size}px;
-          border-radius: 1000px;
-          background-color: red;
-          ${hasImage ? `background-image: url('${imgUrl}');` : ""}
-          background-size: cover;
-          background-position: center;
-          border: ${border}px solid white;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.55);
-        "></div>
-      `
-    });
-  }
+  return L.divIcon({
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+    html: `
+      <div style="
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 1000px;
+        background-color: red;
+        ${hasImage ? `background-image: url('${imgUrl}');` : ""}
+        background-size: cover;
+        background-position: center;
+        border: ${border}px solid white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.55);
+      "></div>
+    `
+  });
+}
 
+  
 
   const shared = getSharedSegments(trails);
   Object.entries(trails).forEach(([pid, coords]) => {
@@ -176,7 +177,7 @@ function drawEverything() {
         popupAnchor: [0, -35]
       });
     } else {
-      const icon = makeStopIcon(stop.background);
+      icon = makeStopIcon(stop.background);
     }
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
