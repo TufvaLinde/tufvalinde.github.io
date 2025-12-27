@@ -36,14 +36,10 @@
     display: inline-block;
     padding: 0.08em 0.14em;
     margin: 0 0.02em;
-    border-style: solid;
-    border-radius: 0.15em;
     transition:
       font-family 0.15s linear,
       font-size 0.15s ease,
       transform 0.2s ease,
-      border-color 0.2s ease,
-      border-width 0.2s ease;
   }
 </style>
 
@@ -109,9 +105,7 @@
             let f = (Number(span.dataset.font) + 1) % fonts.length;
             span.dataset.font = f;
             span.style.fontFamily = fonts[f];
-            span.style.fontSize = `${0.85 + Math.random() * 0.7}em`;
-            span.style.borderWidth = `${1 + Math.random() * 4}px`;
-            span.style.borderColor = pastelColor(i * 20);
+            span.style.fontSize = `${0.5 + Math.random() * 0.3}em`;
             span.style.transform = `rotate(${Math.random() * 14 - 7}deg)`;
             span.style.fontWeight = [300, 400, 600, 800][Math.floor(Math.random() * 4)];
             span.style.fontStyle = Math.random() > 0.75 ? "italic" : "normal";
