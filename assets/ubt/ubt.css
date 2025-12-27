@@ -137,7 +137,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: min(520px, 90vw);
+  width: min(350px, 90vw);
   aspect-ratio: 15 / 3;
   padding: 3.5rem 3rem;
   text-align: center;
