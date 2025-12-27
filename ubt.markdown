@@ -13,25 +13,6 @@ permalink: /ultimate-beach-tour/
   </div>
 </section>
 
-<section id="posts-widget">
-  <h2>story</h2>
-  <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
-  <ul class="post-list">
-    {% for post in site.posts %}
-      {% unless post.draft %}
-      {% if post.ubt %}
-        <li> 
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title }}
-            <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-          </a>
-        </li>
-      {% endif %}
-      {% endunless %}
-    {% endfor %}
-  </ul>
-</section>
-
 <section id="map-widget">
   <h2>minimap</h2>
   <p class="header-thing">follow our adventure! press the pins in the map to see more from each location.</p>
@@ -91,5 +72,23 @@ permalink: /ultimate-beach-tour/
   ];
 </script>
 
-
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>
+
+<section id="posts-widget">
+  <h2>story</h2>
+  <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      {% unless post.draft %}
+      {% if post.ubt %}
+        <li> 
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title }}
+            <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+          </a>
+        </li>
+      {% endif %}
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</section>
