@@ -21,7 +21,7 @@ people.forEach(p => {
 
 const map = L.map('trip-map', {
   zoomControl: false
-}).setView([20, 0], 1);
+}).setView([20, 0], 1.2);
 /*
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.webp', {
   attribution: '&copy; OpenStreetMap & CartoCDN',
@@ -100,10 +100,11 @@ function drawEverything() {
     });
   });
   
-function makeStopIcon(imgUrl) {
-    const size = 36;
-    const border = 3;
+  function makeStopIcon(imgUrl) {
     const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
+
+    const size = 36;
+    const border = 5;
 
     return L.divIcon({
       className: "",
@@ -115,23 +116,17 @@ function makeStopIcon(imgUrl) {
           width: ${size}px;
           height: ${size}px;
           border-radius: 1000px;
-          overflow: hidden;
-          clip-path: circle(50% at 50% 50%);
-
-          background-color: white;
+          background-color: red;
           ${hasImage ? `background-image: url('${imgUrl}');` : ""}
           background-size: cover;
           background-position: center;
-
           border: ${border}px solid white;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.55);
         "></div>
       `
     });
   }
 
-
-  
 
   const shared = getSharedSegments(trails);
   Object.entries(trails).forEach(([pid, coords]) => {
