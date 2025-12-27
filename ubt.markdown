@@ -65,7 +65,8 @@ permalink: /ultimate-beach-tour/
         "dateStr": "{{ n.date | date: '%b %-d, %Y' }}",
         "dateNum": {{ n.date | date: '%s' | plus: 0 }},
         "popup": {{ n.popup | default: true | jsonify }},
-        "people": [{% if n.person %}{% if n.person.first %}{% for id in n.person %}"{{ id }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% else %}"{{ n.person | strip }}" {% endif %}{% endif %}]
+        "people": [{% if n.person %}{% if n.person.first %}{% for id in n.person %}"{{ id }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% else %}"{{ n.person | strip }}" {% endif %}{% endif %}],
+        "background": "{{ n.background | escape }}",
       }{% unless forloop.last %},{% endunless %}
       {% endif %}
     {% endfor %}
