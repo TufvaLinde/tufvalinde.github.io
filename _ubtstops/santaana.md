@@ -10,7 +10,6 @@ person:
   - louise
 folder: /assets/ubt/santaana
 title_overlay: true
-background: /assets/ubt/santaana.webp
 ---
 
 volunteering here

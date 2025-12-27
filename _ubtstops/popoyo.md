@@ -7,7 +7,6 @@ date: 2025-12-21
 tags: backpacking, ubt
 folder: /assets/ubt/popoyo
 title_overlay: true
-background: /assets/ubt/popoyo.webp
 person:
   - tuf
   - louise

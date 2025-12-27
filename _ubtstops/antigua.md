@@ -10,7 +10,6 @@ person:
   - louise
 folder: /assets/ubt/antigua
 title_overlay: true
-background: /assets/ubt/antigua.webp
 ---
 
 lets see some volcanoes

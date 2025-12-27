@@ -10,7 +10,6 @@ person:
   - louise
 folder: /assets/ubt/juayua
 title_overlay: true
-background: /assets/ubt/juayua.webp
 ---
 
 volunteering here
