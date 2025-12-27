@@ -51,3 +51,34 @@ permalink: /ideas/
 <div id="result"></div>
 
 <script src="{{ '/assets/ideas.js' | relative_url }}"></script>
+
+
+<!-- Map container -->
+<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Map initialization -->
+<script>
+  // Set default coordinates (e.g., Granada, Nicaragua)
+  const DEFAULT_LAT = 11.9344;
+  const DEFAULT_LON = -85.9560;
+  const DEFAULT_ZOOM = 13;
+
+  // Initialize map
+  const map = L.map('map').setView([DEFAULT_LAT, DEFAULT_LON], DEFAULT_ZOOM);
+
+  // Add Stamen Watercolor tile layer via Stadia Maps
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+    maxZoom: 16,
+    attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+  }).addTo(map);
+
+  // Optional: add a marker at default location
+  L.marker([DEFAULT_LAT, DEFAULT_LON])
+    .addTo(map)
+    .bindPopup("Granada, Nicaragua")
+    .openPopup();
+</script>
