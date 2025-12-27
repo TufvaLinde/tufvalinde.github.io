@@ -2,13 +2,8 @@
   border-radius: 8px;
   height:400px;
   margin:1rem 0;
-
-  clip-path: polygon(
-    0% 10%, 100% 0%,
-    95% 90%, 50% 100%,
-    5% 85%
-  );
-  /*box-shadow: 0 2px 6px rgba(0,0,0,.1);*/
+  border: 1px solid white;
+  clip-path: shape(from 94.50% 55.55%,curve to 91.27% 66.36% with 91.45% 60.64%,curve to 88.42% 77.19% with 91.10% 72.08%,curve to 79.12% 82.78% with 85.75% 82.29%,curve to 68.74% 86.99% with 72.49% 83.27%,curve to 60.07% 93.44% with 64.99% 90.70%,curve to 49.36% 97.59% with 55.15% 96.18%,curve to 39.51% 93.15% with 43.57% 99.01%,curve to 28.43% 88.92% with 35.45% 87.28%,curve to 18.72% 85.04% with 21.42% 90.57%,curve to 15.73% 73.61% with 16.03% 79.51%,curve to 12.77% 63.57% with 15.43% 67.72%,curve to 8.85% 54.51% with 10.10% 59.43%,curve to 6.80% 44.15% with 7.60% 49.59%,curve to 7.95% 33.58% with 6.00% 38.70%,curve to 14.60% 25.36% with 9.90% 28.46%,curve to 22.32% 17.90% with 19.29% 22.26%,curve to 29.32% 9.08% with 25.36% 13.55%,curve to 39.07% 4.27% with 33.29% 4.61%,curve to 50.19% 5.95% with 44.86% 3.94%,curve to 60.06% 10.28% with 55.52% 7.96%,curve to 68.32% 15.66% with 64.59% 12.61%,curve to 78.26% 19.38% with 72.05% 18.71%,curve to 89.33% 23.70% with 84.47% 20.05%,curve to 92.39% 33.88% with 94.19% 27.35%,curve to 94.07% 45.43% with 90.60% 40.41%,curve to 94.50% 55.55% with 97.55% 50.46%);
 }
 
 /*
