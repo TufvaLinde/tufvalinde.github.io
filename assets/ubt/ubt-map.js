@@ -104,8 +104,8 @@ function drawEverything() {
   className: '',
   html: `
     <div style="
-      width: 10px;
-      height: 10px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: white;
       border: 2px solid white;
@@ -182,10 +182,11 @@ function makeStopPhotoIcon(imgUrl) {
         iconAnchor: [20, 40],
         popupAnchor: [0, -35]
       });
-} else {
-  const bgImage = stop.background || null;
-  icon = bgImage ? makeStopPhotoIcon(bgImage) : stopFallbackIcon;
-}
+    } else {
+      const bgImage = stop.background || null;
+      console.log(stop.background)
+      icon = bgImage ? makeStopPhotoIcon(bgImage) : stopFallbackIcon;
+    }
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
 
