@@ -20,10 +20,16 @@ people.forEach(p => {
 });
 
 const map = L.map('trip-map').setView([20, 0], 2);
+/*
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.webp', {
   attribution: '&copy; OpenStreetMap & CartoCDN',
   maxZoom: 19,
   subdomains: 'abcd'
+}).addTo(map);
+*/
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+    maxZoom: 16,
+    attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>', 
 }).addTo(map);
 
 function makeCombinedFaceHTML(faces) {
