@@ -12,7 +12,7 @@ Safe to delete:
 // Make sure Leaflet is included in your HTML
 
 // Initialize the map
-const map = L.map('map').setView([51.5074, -0.1278], 13); // Default: London
+const map = L.map('map').setView([12.8654, -85.2072], 7); // default nicaragua
 
 L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
   maxZoom: 16,

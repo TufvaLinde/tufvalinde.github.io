@@ -45,8 +45,8 @@ permalink: /ideas/
 # Find a Random Atlas Obscura Location
 <p>Choose your distance and click the button to get a random location:</p>
 
-<label for="distanceRange">Distance (km): <span id="distanceValue">5</span> km</label>
-<input type="range" id="distanceRange" min="1" max="50" value="5">
+<label for="distanceRange">Distance (km): <span id="distanceValue">100</span> km</label>
+<input type="range" id="distanceRange" min="1" max="500" value="100">
 
 <p>Click the button to get a random interesting location in your area!</p>
 
