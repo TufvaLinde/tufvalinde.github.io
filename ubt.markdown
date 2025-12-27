@@ -4,14 +4,14 @@ title: UBT
 permalink: /ultimate-beach-tour/
 ---
 
-<section id="current-status">
+<div id="current-status">
   <div class="ripped-paper">
     <p class="status-label">we are currently:</p>
     <p class="status-text">
       becoming DJs in the nicaraguan jungle.
     </p>
   </div>
-</section>
+</div>
 
 <section id="map-widget">
   <h2>minimap</h2>
