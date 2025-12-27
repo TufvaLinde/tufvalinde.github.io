@@ -4,6 +4,15 @@ title: UBT
 permalink: /ultimate-beach-tour/
 ---
 
+<section id="current-status">
+  <div class="ripped-paper">
+    <p class="status-label">we are currently:</p>
+    <p class="status-text">
+      becoming DJs in the nicaragua jungle.
+    </p>
+  </div>
+</section>
+
 <section id="posts-widget">
   <h2>story</h2>
   <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
@@ -23,14 +32,11 @@ permalink: /ultimate-beach-tour/
   </ul>
 </section>
 
-
 <section id="map-widget">
   <h2>minimap</h2>
   <p class="header-thing">follow our adventure! press the pins in the map to see more from each location.</p>
   <div id="trip-map"></div>
 </section>
-
-
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
