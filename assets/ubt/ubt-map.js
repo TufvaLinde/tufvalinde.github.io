@@ -101,31 +101,37 @@ function drawEverything() {
   });
   
 function makeStopIcon(imgUrl) {
-  const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
+    const size = 36;
+    const border = 3;
+    const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
 
-  const size = 36;
-  const border = 5;
+    return L.divIcon({
+      className: "",
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -size / 2],
+      html: `
+        <div style="
+          width: ${size}px;
+          height: ${size}px;
 
-  return L.divIcon({
-    className: "",
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -size / 2],
-    html: `
-      <div style="
-        width: ${size}px;
-        height: ${size}px;
-        border-radius: 100px;
-        background-color: white;
-        ${hasImage ? `background-image: url('${imgUrl}');` : ""}
-        background-size: cover;
-        background-position: center;
-        border: ${border}px solid white;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-      "></div>
-    `
-  });
-}
+          /* HARD CLIPPING */
+          border-radius: 1000px;
+          overflow: hidden;
+          clip-path: circle(50% at 50% 50%);
+
+          background-color: white;
+          ${hasImage ? `background-image: url('${imgUrl}');` : ""}
+          background-size: cover;
+          background-position: center;
+
+          border: ${border}px solid white;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        "></div>
+      `
+    });
+  }
+
 
   
 
