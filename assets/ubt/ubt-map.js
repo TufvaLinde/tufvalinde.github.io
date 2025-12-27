@@ -97,6 +97,40 @@ function drawEverything() {
       trails[pid].push([stop.lat, stop.lon]);
     });
   });
+  
+  const stopFallbackIcon = L.divIcon({
+  className: '',
+  html: `
+    <div style="
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    "></div>
+  `,
+  iconSize: [10, 10],
+  iconAnchor: [5, 5],
+  popupAnchor: [0, -8]
+});
+
+function makeStopPhotoIcon(imgUrl) {
+  return L.icon({
+    iconUrl: imgUrl,
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -18],
+    errorOverlayUrl:
+      'data:image/svg+xml;charset=UTF-8,' +
+      encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+          <circle cx="18" cy="18" r="6" fill="white"/>
+        </svg>`
+      )
+  });
+}
+  
 
   const shared = getSharedSegments(trails);
   Object.entries(trails).forEach(([pid, coords]) => {
@@ -146,30 +180,10 @@ function drawEverything() {
         iconAnchor: [20, 40],
         popupAnchor: [0, -35]
       });
-    } else {
-      let bgImage = stop.background ? stop.background : null;
-
-      let stopStyle = `
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 2px solid white;
-        background-color: white;
-        background-size: cover;
-        background-position: center;
-        ${bgImage ? `background-image: url('${bgImage}');` : ''}
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      `;
-
-      icon = L.divIcon({
-        html: `<div style="${stopStyle}"></div>`,
-        className: '',
-        iconSize: [36, 36],
-        iconAnchor: [18, 18],
-        popupAnchor: [0, -18]
-      });
-
-    }
+} else {
+  const bgImage = stop.background || null;
+  icon = bgImage ? makeStopPhotoIcon(bgImage) : stopFallbackIcon;
+}
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
 
