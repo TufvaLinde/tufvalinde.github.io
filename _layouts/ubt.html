@@ -70,13 +70,6 @@
 
       const letters = [];
 
-      function pastelColor(hOffset = 0) {
-        const h = (200 + hOffset + Math.random() * 80) % 360;
-        const s = 50 + Math.random() * 20;
-        const l = 65 + Math.random() * 10;
-        return `hsl(${h}, ${s}%, ${l}%)`;
-      }
-
       [...originalText].forEach((char, i) => {
         const span = document.createElement("span");
         span.textContent = char;
@@ -86,7 +79,6 @@
           span.style.fontFamily = fonts[span.dataset.font];
           span.style.fontSize = `${0.9 + Math.random() * 0.6}em`;
           span.style.borderWidth = `${1 + Math.random() * 3}px`;
-          span.style.borderColor = pastelColor(i * 15);
           span.style.transform = `rotate(${Math.random() * 12 - 6}deg)`;
           span.style.fontWeight = Math.random() > 0.5 ? 800 : 400;
           span.style.fontStyle = Math.random() > 0.7 ? "italic" : "normal";
