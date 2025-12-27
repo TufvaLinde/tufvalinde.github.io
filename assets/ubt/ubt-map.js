@@ -147,12 +147,28 @@ function drawEverything() {
         popupAnchor: [0, -35]
       });
     } else {
-      const pinColor = isFuture ? 'rgba(0,0,0,0.3)' : 'rgb(0,121,130)';
+      let bgImage = stop.background ? stop.background : null;
+
+      let stopStyle = `
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2px solid white;
+        background-color: white;
+        background-size: cover;
+        background-position: center;
+        ${bgImage ? `background-image: url('${bgImage}');` : ''}
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      `;
+
       icon = L.divIcon({
-        html: `<div style="font-size:30px;color:${pinColor}">📍</div>`,
+        html: `<div style="${stopStyle}"></div>`,
         className: '',
-        iconSize: [30,30]
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -18]
       });
+
     }
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
