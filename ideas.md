@@ -29,31 +29,19 @@ permalink: /ideas/
   }
 </style>
 
-
-
 # Let's find ideas for new places to go!
-# Setup
 
-1. Clone or download the Atlas Obscura API repo:
-   ```bash
-   git clone https://github.com/bartholomej/atlas-obscura-api.git
-   cd atlas-obscura-api
-   yarn install
-   yarn server
-
-
-# Find a Random Atlas Obscura Location
 <p>Choose your distance and click the button to get a random location:</p>
 
-<label for="distanceRange">Distance (km): <span id="distanceValue">100</span> km</label>
-<input type="range" id="distanceRange" min="1" max="500" value="100">
+<label for="distanceRange">Distance (km): <span id="distanceValue">50</span> km</label>
+<input type="range" id="distanceRange" min="1" max="500" value="50">
 
-<p>Click the button to get a random interesting location in your area!</p>
+<p>Lets get some ideas for s(tuf)f to do!</p>
 
-<button id="randomIdeaBtn">Give me an idea</button>
+<button class="big-red-button" id="randomIdeaBtn">Give me an idea</button>
 
 <div id="map" style="height: 500px; margin-top: 20px;"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="/assets/ideas.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="/assets/ideas.js"></script>
