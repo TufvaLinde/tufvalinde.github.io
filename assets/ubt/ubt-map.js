@@ -100,38 +100,33 @@ function drawEverything() {
     });
   });
   
-  const stopFallbackIcon = L.divIcon({
-  className: '',
-  html: `
-    <div style="
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: white;
-      border: 2px solid white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    "></div>
-  `,
-  iconSize: [10, 10],
-  iconAnchor: [5, 5],
-  popupAnchor: [0, -8]
-});
+function makeStopIcon(imgUrl) {
+  const hasImage = typeof imgUrl === "string" && imgUrl.trim() !== "";
 
-function makeStopPhotoIcon(imgUrl) {
-  return L.icon({
-    iconUrl: imgUrl,
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
-    popupAnchor: [0, -18],
-    errorOverlayUrl:
-      'data:image/svg+xml;charset=UTF-8,' +
-      encodeURIComponent(
-        `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-          <circle cx="18" cy="18" r="6" fill="white"/>
-        </svg>`
-      )
+  const size = 36;
+  const border = 3;
+
+  return L.divIcon({
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+    html: `
+      <div style="
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        background-color: white;
+        ${hasImage ? `background-image: url('${imgUrl}');` : ""}
+        background-size: cover;
+        background-position: center;
+        border: ${border}px solid white;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      "></div>
+    `
   });
 }
+
   
 
   const shared = getSharedSegments(trails);
@@ -182,9 +177,7 @@ function makeStopPhotoIcon(imgUrl) {
         popupAnchor: [0, -35]
       });
     } else {
-      const bgImage = stop.background || null;
-      console.log(stop.background)
-      icon = bgImage ? makeStopPhotoIcon(bgImage) : stopFallbackIcon;
+      const icon = makeStopIcon(stop.background);
     }
 
     const marker = L.marker([stop.lat, stop.lon], { icon, opacity: isFuture ? 0.6 : 1 }).addTo(map);
