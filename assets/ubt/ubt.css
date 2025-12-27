@@ -120,40 +120,37 @@
 
 #current-status {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-
-  width: 370px;
-  height: 250px;
-
+  bottom: 0;
+  right: 0;
+  width: 320px;
+  height: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 9999;
   pointer-events: auto;
 }
 
 
 .ripped-paper {
-  position: relative;
-  background-image: url("/assets/ubt/rippedpaper.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: min(350px, 90vw);
-  aspect-ratio: 15 / 3;
-  padding: 3.5rem 3rem;
-  text-align: center;
-  filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.25));
+    position: relative;
+    background-image: url(/assets/ubt/rippedpaper.webp);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: min(350px, 90vw);
+    aspect-ratio: 15 / 3;
+    padding: 3.5rem 3rem;
+    text-align: center;
+    filter: drop-shadow(4px 6px 10px rgba(0, 0, 0, 0.25));
 }
 
 .status-label {
   font-family: "Open Sans", sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.65;
@@ -162,7 +159,7 @@
 
 .status-text {
   font-family: "EB Garamond", serif;
-  font-size: 1.4rem;
+  font-size: 0.8rem;
   line-height: 1.3;
   font-weight: 600;
   transform: rotate(-1.2deg);
@@ -176,16 +173,5 @@
   @keyframes paper-float {
     0%, 100% { transform: translateY(0) rotate(-0.6deg); }
     50% { transform: translateY(-6px) rotate(0.6deg); }
-  }
-}
-
-@media (max-width: 768px) {
-  .status-text {
-    font-size: 1.15rem;
-  }
-
-  .ripped-paper {
-    padding: 3rem 2.2rem;
-    animation: none;
   }
 }
