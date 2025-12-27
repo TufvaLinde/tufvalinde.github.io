@@ -1,7 +1,6 @@
 #trip-map {
-  border-radius: 8px;
-  height:400px;
-  margin:1rem 0;
+  border-radius: 2px;
+  height:500px;
   clip-path: shape(from 36.94% 92.04%,curve to 24.31% 88.69% with 30.50% 91.44%,curve to 13.33% 80.97% with 18.12% 85.95%,curve to 7.96% 68.98% with 8.53% 75.98%,curve to 5.63% 55.73% with 7.39% 61.98%,curve to 4.01% 42.72% with 3.87% 49.47%,curve to 6.34% 29.32% with 4.16% 35.97%,curve to 14.99% 19.48% with 8.53% 22.67%,curve to 25.65% 10.38% with 21.45% 16.28%,curve to 36.84% 3.90% with 29.84% 4.48%,curve to 50.26% 5.18% with 43.83% 3.32%,curve to 62.87% 8.27% with 56.68% 7.03%,curve to 74.64% 12.71% with 69.05% 9.51%,curve to 85.17% 20.39% with 80.23% 15.91%,curve to 92.86% 31.02% with 90.11% 24.87%,curve to 95.29% 43.84% with 95.62% 37.17%,curve to 94.72% 57.06% with 94.97% 50.51%,curve to 92.71% 70.30% with 94.47% 63.61%,curve to 85.95% 81.76% with 90.96% 76.99%,curve to 74.69% 89.10% with 80.93% 86.53%,curve to 62.13% 92.76% with 68.46% 91.66%,curve to 49.58% 93.26% with 55.80% 93.86%,curve to 36.94% 92.04% with 43.37% 92.65%);
 }
 
