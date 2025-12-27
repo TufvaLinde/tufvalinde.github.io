@@ -21,7 +21,7 @@ people.forEach(p => {
 
 const map = L.map('trip-map', {
   zoomControl: false
-}).setView([20, 0], 5);
+}).setView([20, 0], 1);
 /*
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.webp', {
   attribution: '&copy; OpenStreetMap & CartoCDN',
@@ -114,8 +114,6 @@ function makeStopIcon(imgUrl) {
         <div style="
           width: ${size}px;
           height: ${size}px;
-
-          /* HARD CLIPPING */
           border-radius: 1000px;
           overflow: hidden;
           clip-path: circle(50% at 50% 50%);
