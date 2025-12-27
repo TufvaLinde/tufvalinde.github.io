@@ -1,7 +1,13 @@
 #trip-map {
   border-radius: 8px;
-  height:50vw; 
+  height:400px;
   margin:1rem 0;
+
+  clip-path: polygon(
+    0% 10%, 100% 0%,
+    95% 90%, 50% 100%,
+    5% 85%
+  );
   /*box-shadow: 0 2px 6px rgba(0,0,0,.1);*/
 }
 
