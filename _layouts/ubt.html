@@ -27,23 +27,64 @@
   }
 
   h1 {
-    font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 850;
-    font-style: normal;
-    word-spacing: 0.3em; 
+    word-spacing: 0.3em;
     display: block;
     width: 100%;
     line-height: 1;
     margin-top: 30px;
-    text-align: center;   
+    text-align: center;
+  }
+
+  #ubt-title span {
+    display: inline-block;
+    animation: wave 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.08s);
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
 </style>
 
   <body>
     <div class="annot-wrapper">
-      <h1>ULTIMATE BEACH TOUR</h1>
+      <h1 id="ubt-title">Ultimate Beach Tour</h1>
+      <script>
+        const fonts = [
+          '"DM Serif Display", serif',
+          '"Noto Serif Display", serif',
+          '"EB Garamond", serif',
+          '"Outfit", sans-serif',
+          '"Open Sans", sans-serif',
+          '"Silkscreen", cursive',
+          '"Pixelify Sans", cursive',
+          '"Coral Pixels", cursive'
+        ];
+
+        const heading = document.getElementById("ubt-title");
+        const text = heading.textContent;
+
+        heading.textContent = "";
+
+        [...text].forEach((char, index) => {
+          const span = document.createElement("span");
+          span.style.setProperty("--i", index);
+          span.textContent = char;
+
+          if (char !== " ") {
+            span.style.fontFamily = fonts[index % fonts.length];
+          }
+          span.style.color = `hsl(${index * 35 % 360}, 80%, 55%)`;
+
+          heading.appendChild(span);
+        });
+
+
+      </script>
+
       <div class="ubt-grid">
         {{ content }}
       </div>
