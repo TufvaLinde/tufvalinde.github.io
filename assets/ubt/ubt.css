@@ -21,7 +21,6 @@
   border-radius: 50%;
 }
 
-/* UBT Layout Grid */
 .ubt-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -29,7 +28,6 @@
   margin: 3rem 0;
 }
 
-/* Widget styling */
 .ubt-grid section {
   padding: 1rem;
 }
@@ -121,13 +119,21 @@
 }
 
 #current-status {
-  width: 300px;
-  height: 150px;
-  position: absolute;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+
+  width: 370px;
+  height: 250px;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 9999;
+  pointer-events: auto;
 }
+
 
 .ripped-paper {
   position: relative;
