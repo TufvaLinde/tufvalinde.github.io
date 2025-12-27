@@ -50,4 +50,4 @@ permalink: /ideas/
 
 <div id="result"></div>
 
-<script src="{{ '/assets/js/ideas.js' | relative_url }}"></script>
+<script src="{{ '/assets/ideas.js' | relative_url }}"></script>
