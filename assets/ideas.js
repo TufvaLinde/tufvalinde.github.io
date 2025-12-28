@@ -1,72 +1,109 @@
 /*
 ==================================================
-TEMPORARY FEATURE: Random Travel Ideas Generator
-Author: <David>
-Purpose: Do dumb stuff on the interwebs
-Safe to delete:
-- assets/ideas.js
-- ideas.md
+Random Travel Ideas Generator
+Author: David
+Purpose: Show random Atlas Obscura locations client-side
 ==================================================
 */
-const API_KEY = "YOUR_GEOAPIFY_KEY";
 
-const DEFAULT_LOCATION = {
-  lat: 11.9344,
-  lon: -85.9560,
-  label: "Granada, Nicaragua"
-};
+// Initialize map centered on Nicaragua
+const map = L.map('map').setView([12.8654, -85.2072], 7);
 
-const WEIRDNESS_CATEGORIES = {
-  1: ["tourism.museum"],
-  2: ["tourism.sights"],
-  3: ["tourism.attraction"],
-  4: ["artwork", "historic.ruins"],
-  5: ["tourism.attraction", "artwork", "abandoned"]
-};
+// Map tiles
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+  maxZoom: 16,
+  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com/">Stamen Design</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
 
-async function generateIdea() {
-  const radiusKm = parseFloat(document.getElementById("distance").value) || 5;
-  const weirdness = document.getElementById("weirdness").value;
+// Center icon
+const centerIcon = L.icon({
+  iconUrl: '/assets/ubt/tuf-face.webp',
+  iconSize: [50, 50],
+  iconAnchor: [25, 50]
+});
 
-  if (!WEIRDNESS_CATEGORIES[weirdness]) {
-    document.getElementById("result").innerText =
-      "Invalid weirdness level 😕";
+// Add marker always in the middle
+const centerMarker = L.marker(map.getCenter(), { icon: centerIcon }).addTo(map);
+map.on('move', () => {
+  centerMarker.setLatLng(map.getCenter());
+});
+
+// Distance slider
+const distanceSlider = document.getElementById('distanceRange');
+const distanceDisplay = document.getElementById('distanceValue');
+distanceSlider.addEventListener('input', () => {
+  distanceDisplay.textContent = distanceSlider.value;
+});
+
+// Haversine formula
+function getDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat/2)**2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLng/2)**2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Fetch local JSON
+let placesList = [];
+async function fetchPlaces() {
+  try {
+    const response = await fetch('/assets/places.json');
+    if (!response.ok) throw new Error('Failed to fetch JSON');
+    placesList = await response.json();
+  } catch (err) {
+    alert('Error fetching locations: ' + err.message);
+    console.error(err);
+  }
+}
+
+// Show random place within distance
+function showRandomPlace() {
+  if (!placesList.length) {
+    alert('No locations were fetched from the JSON yet.');
     return;
   }
 
-  const categories = WEIRDNESS_CATEGORIES[weirdness].join(",");
+  const center = map.getCenter();
+  const maxDistance = parseFloat(distanceSlider.value);
 
-  document.getElementById("result").innerText = "Searching… 🔍";
+  const nearby = placesList.filter(p =>
+    getDistance(center.lat, center.lng, p.coordinates_lat, p.coordinates_lng) <= maxDistance
+  );
 
-  const url = `https://api.geoapify.com/v2/places?categories=${categories}&filter=circle:${DEFAULT_LOCATION.lon},${DEFAULT_LOCATION.lat},${radiusKm * 1000}&limit=50&apiKey=${API_KEY}`;
-
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (!data.features || !data.features.length) {
-      document.getElementById("result").innerText =
-        "No places found nearby 😕";
-      return;
-    }
-
-    const random =
-      data.features[Math.floor(Math.random() * data.features.length)];
-
-    const name = random.properties.name || "Unknown place";
-    const placeCategories = random.properties.categories || "No categories available";
-    const lat = random.properties.lat;
-    const lon = random.properties.lon;
-
-    document.getElementById("result").innerHTML = `
-      <h3>${name}</h3>
-      <p>${DEFAULT_LOCATION.label}</p>
-      <p>${placeCategories}</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lon}" target="_blank">View on map 🗺️</a>
-    `;
-  } catch (err) {
-    console.error(err);
-    document.getElementById("result").innerText =
-      "Something went wrong ❌";
+  if (!nearby.length) {
+    alert('No places found within this distance!');
+    return;
   }
+
+  const randomIndex = Math.floor(Math.random() * nearby.length);
+  const place = nearby[randomIndex];
+
+  // Clear old markers except center
+  map.eachLayer(layer => {
+    if (layer instanceof L.Marker && layer !== centerMarker) map.removeLayer(layer);
+  });
+
+  // Add marker for the place
+  const marker = L.marker([place.coordinates_lat, place.coordinates_lng]).addTo(map);
+  const popupContent = `
+    <b>${place.title}</b><br>
+    <i>${place.location}</i><br>
+    ${place.thumbnail_url ? `<img src="${place.thumbnail_url}" style="width:150px;"><br>` : ''}
+    <a href="${place.url}" target="_blank">Read more</a>
+  `;
+  marker.bindPopup(popupContent).openPopup();
+
+  // Center map on location
+  map.setView([place.coordinates_lat, place.coordinates_lng], 13);
 }
+
+// Button
+document.getElementById('randomIdeaBtn').addEventListener('click', showRandomPlace);
+
+// Initial fetch
+fetchPlaces();
