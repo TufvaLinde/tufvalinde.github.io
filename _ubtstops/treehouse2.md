@@ -1,6 +1,6 @@
 ---
 title: treehouse
-layout: antdreams
+layout: floaty_collage
 lat: 11.8552004
 lon: -86.0076556
 date: 2025-12-24
