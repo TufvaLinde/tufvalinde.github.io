@@ -54,6 +54,7 @@ class SmsChat extends HTMLElement {
           border-radius: 14px;
           line-height: 1.25;
           word-wrap: break-word;
+          white-space: pre-line;
           box-shadow: 0 1px 1px rgba(0,0,0,.05);
         }
 
