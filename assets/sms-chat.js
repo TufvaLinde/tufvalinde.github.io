@@ -195,13 +195,8 @@ class SmsChat extends HTMLElement {
           const rowCls = 'row ' + senderClass + (isEnd ? '' : ' tight');
           const row = this._el('div', { class: rowCls });
 
-          const bubble = this._el('div', { class: bubbleCls + (this._bubbleStamps ? ' has-stamp' : ''), role: 'text' });
-m.text.split(/\r?\n/).forEach((line, idx) => {
-  if (idx) bubble.appendChild(document.createElement('br'));
-
-bubble.appendChild(document.createTextNode(line));
-});
-
+          const bubble = this._el('div', { class: bubbleCls + (this._bubbleStamps ? ' has-stamp' : '') , role: 'text' }, m.text);
+          
           if (this._bubbleStamps && m.time) {
             const stamp = this._el('span', { class: 'stamp', 'aria-hidden':'true' }, this._timeFmt.format(m.time));
             bubble.appendChild(stamp);
