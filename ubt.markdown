@@ -15,7 +15,7 @@ permalink: /ultimate-beach-tour/
 
 <section id="sketch-loop">
   <h2>sketches</h2>
-  <img id="skatch" src="assets/ubt/sketch1.webp">
+  <img id="skatch" src="/assets/ubt/sketch1.webp">
 </section>
 
 
