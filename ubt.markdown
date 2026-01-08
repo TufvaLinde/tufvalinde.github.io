@@ -13,11 +13,6 @@ permalink: /ultimate-beach-tour/
   </div>
 </div>
 
-<section id="sketch-loop">
-  <h2>sketches</h2>
-  <img id="skatch" src="/assets/ubt/sketch1.webp">
-</section>
-
 
 <section id="map-widget">
   <h2>minimap</h2>
@@ -99,3 +94,10 @@ permalink: /ultimate-beach-tour/
     {% endfor %}
   </ul>
 </section>
+
+<section id="sketch-loop">
+  <h2>sketching</h2>
+    <p class="header-thing">ink sketches by tuf.</p>
+  <img id="skatch" src="/assets/ubt/sketch1.webp">
+</section>
+
