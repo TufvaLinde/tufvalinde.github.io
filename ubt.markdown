@@ -13,6 +13,12 @@ permalink: /ultimate-beach-tour/
   </div>
 </div>
 
+<section id="sketch-loop">
+  <h2>sketches</h2>
+  <img id="skatch" src="assets/sketch1.webp">
+</section>
+
+
 <section id="map-widget">
   <h2>minimap</h2>
   <p class="header-thing">follow our adventure! press the pins in the map to see more from each location.</p>
