@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from
   "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
-function makeTextTexture(text, fontPx = 48) {
+function makeTextTexture(text, fontPx = 90) {
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
 
@@ -93,7 +93,7 @@ export async function initTextSphere({
     2000
   );
 
-  camera.position.set(0, 0, radius * 2.4);
+  camera.position.set(0, 0, radius * 3);
   camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
