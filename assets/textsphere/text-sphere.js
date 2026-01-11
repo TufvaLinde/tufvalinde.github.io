@@ -29,7 +29,7 @@ function makeTextTexture(text, fontPx = 90) {
 }
 
 function makeWordSprite(word) {
-  const { tex, w, h } = makeTextTexture(word, 44);
+  const { tex, w, h } = makeTextTexture(word, 90);
   const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
   const sprite = new THREE.Sprite(mat);
 
