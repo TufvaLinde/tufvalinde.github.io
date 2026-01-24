@@ -8,7 +8,7 @@ permalink: /ultimate-beach-tour/
   <div class="ripped-paper">
     <p class="status-label">we are currently:</p>
     <p class="status-text">
-      becoming DJs in the nicaraguan jungle.
+      attending spanish school
     </p>
   </div>
 </div>
