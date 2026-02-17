@@ -1,0 +1,14 @@
+---
+permalink: /assets/log/logs.json
+---
+[
+{% assign items = site.logs | sort: "ts" %}
+{% for p in items %}
+  {
+    "ts_iso": {{ p.ts | date_to_xmlschema | jsonify }},
+    "ts_display": {{ p.ts | date: "%Y%m%dT%H:%M" | jsonify }},
+    "title": {{ p.title | jsonify }},
+    "html": {{ p.content | markdownify | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
