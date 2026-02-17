@@ -1,0 +1,26 @@
+#logViewport{
+  min-height: 60vh;
+  padding: 12px;
+}
+
+#logGrid{
+  display: grid;
+  gap: 12px;
+}
+
+.logCard{
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.logCardHeader{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+  margin-bottom: 8px;
+  opacity: .85;
+}
+
+.logCardBody{
+  line-height: 1.45;
+}
