@@ -3,16 +3,18 @@ title: "Chapter 2"
 layout: chapters
 ---
 
+
 <link rel="stylesheet" href="{{ '/assets/log/log.css' | relative_url }}">
 
 <div id="logViewport">
-  <div id="logStage">
-    <div id="logGrid"></div>
+  <div id="logStage"></div>
+  <div id="logOverlay">
+    <div id="logOverlayHeader"></div>
+    <div id="logOverlayBody"></div>
   </div>
 </div>
 
 <script src="{{ '/assets/log/log.js' | relative_url }}"></script>
-
 
 
 {% include textsphere.html
