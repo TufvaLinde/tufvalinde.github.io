@@ -1,22 +1,23 @@
 #logViewport{
-  position: relative;
   height: 100vh;
-  overflow: hidden;
-  touch-action: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   background: #fff;
 }
 
-#logStage{
-  position: absolute;
-  inset: 0;
+#logGrid{
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 0;
 }
 
 .logCell{
-  position: absolute;
   box-sizing: border-box;
   border: 1px solid rgba(0,0,0,.10);
   border-radius: 0;
-  background: #fff;
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   line-height: 1;
@@ -24,50 +25,20 @@
   -webkit-user-select: none;
 }
 
-.logCellInner{
+.logInner{
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  padding: var(--pad);
+  overflow: hidden;
 }
 
-.logCellText{
+.logText{
+  font-size: var(--font);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
 }
 
-.logCellMonth{
+.monthCell{
   background: rgba(0,0,0,.03);
-}
-
-.logCellHas{
-  border-color: rgba(0,0,0,.35);
-}
-
-#logOverlay{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-top: 1px solid rgba(0,0,0,.12);
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 10px 12px;
-  display: none;
-  max-height: 45vh;
-  overflow: auto;
-}
-
-#logOverlay.open{
-  display: block;
-}
-
-#logOverlayHeader{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 13px;
-  opacity: .85;
-  margin-bottom: 8px;
 }
