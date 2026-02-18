@@ -177,7 +177,7 @@
           overlay.classList.add("open");
           overlayHeader.textContent = entry.key;
           overlayBody.innerHTML = arr.map(x => {
-            const head = `${x.ts_display}${x.title ? " -- " + x.title : ""}`;
+            const head = `${x.ts_display}`;
             return `<div style="margin-bottom:10px"><div style="opacity:.75;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;font-size:12px">${head}</div>${x.html}</div>`;
           }).join("");
         });
@@ -275,7 +275,7 @@
           const arr = byDay.get(entry.key);
           if (arr && arr.length) {
             const first = arr[0];
-            text.textContent = first.title ? first.title : first.ts_display;
+            text.textContent = first.ts_display;
           } else {
             text.textContent = String(entry.d);
           }
