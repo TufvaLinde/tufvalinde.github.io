@@ -172,8 +172,8 @@ function makeStopIcon(imgUrl) {
       icon = L.icon({
         iconUrl: currentPeople[0].icon,
         iconSize: [40, 40],
-        iconAnchor: [20, 40],
-        popupAnchor: [0, 0]
+        iconAnchor: [20, 20],
+        popupAnchor: [0, -35]
       });
     } else {
       icon = makeStopIcon(stop.background);
