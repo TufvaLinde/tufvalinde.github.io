@@ -60,8 +60,6 @@ permalink: /notes/
       </template>
     </article>
   {% endfor %}
-{% else %}
-  <p>No notes found. Create some in <code>_notes/</code> 🎯</p>
 {% endif %}
 </div>
 
