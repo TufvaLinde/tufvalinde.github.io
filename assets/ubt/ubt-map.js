@@ -173,7 +173,7 @@ function makeStopIcon(imgUrl) {
         iconUrl: currentPeople[0].icon,
         iconSize: [40, 40],
         iconAnchor: [20, 20],
-        popupAnchor: [0, -35]
+        popupAnchor: [0, -10]
       });
     } else {
       icon = makeStopIcon(stop.background);
