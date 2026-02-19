@@ -127,7 +127,6 @@ function makeStopIcon(imgUrl) {
   });
 }
 
-  
 
   const shared = getSharedSegments(trails);
   Object.entries(trails).forEach(([pid, coords]) => {
@@ -174,7 +173,7 @@ function makeStopIcon(imgUrl) {
         iconUrl: currentPeople[0].icon,
         iconSize: [40, 40],
         iconAnchor: [20, 40],
-        popupAnchor: [0, -35]
+        popupAnchor: [0, 0]
       });
     } else {
       icon = makeStopIcon(stop.background);
