@@ -8,7 +8,7 @@ permalink: /ultimate-beach-tour/
   <div class="ripped-paper">
     <p class="status-label">we are currently:</p>
     <p class="status-text">
-      attending spanish school
+      doing our own thing 8)
     </p>
   </div>
 </div>
