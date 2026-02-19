@@ -75,29 +75,3 @@ permalink: /ultimate-beach-tour/
 </script>
 
 <script src="{{ '/assets/ubt/ubt-map.js' | relative_url }}"></script>
-
-<section id="posts-widget">
-  <h2>story</h2>
-  <p class="header-thing">read excerpts from the adventure in the form of chapters :) written from tufs perspective</p>
-  <ul class="post-list">
-    {% for post in site.posts %}
-      {% unless post.draft %}
-      {% if post.ubt %}
-        <li> 
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title }}
-            <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-          </a>
-        </li>
-      {% endif %}
-      {% endunless %}
-    {% endfor %}
-  </ul>
-</section>
-
-<section id="sketch-loop">
-  <h2>sketching</h2>
-    <p class="header-thing">ink sketches by tuf.</p>
-  <img id="skatch" src="/assets/ubt/sketch1.webp">
-</section>
-
