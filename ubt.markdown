@@ -13,10 +13,9 @@ permalink: /ultimate-beach-tour/
   </div>
 </div>
 
-
 <section id="map-widget">
   <h2>minimap</h2>
-  <p class="header-thing">follow our adventure! press the pins in the map to see more from each location.</p>
+  <p class="header-thing">our adventure! press the pins in the map to see more from each location.</p>
   <div id="trip-map"></div>
 </section>
 
