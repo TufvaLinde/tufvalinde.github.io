@@ -220,6 +220,21 @@
 
 @media (max-width: 640px) {
 
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  text-transform: uppercase;
+  color: black;
+  user-select: none;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  line-height: 1;
+  position: relative;
+}
+
   .home-header {
     min-height: 180px;
   }
