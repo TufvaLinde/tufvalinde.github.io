@@ -7,7 +7,6 @@ sitemap: false
 ---
 
 <style>
-
   .centeringthingy {
       display: flex;
       justify-content: space-evenly;

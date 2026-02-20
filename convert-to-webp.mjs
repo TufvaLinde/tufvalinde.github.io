@@ -95,4 +95,4 @@ await walkAndConvert(inputRoot);
 console.log("updating file references (.png/.jpg/.jpeg/.heic → .webp)...");
 updateReferences();
 
-console.log("done ✅");
+console.log("done")

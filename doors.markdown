@@ -19,7 +19,6 @@ permalink: /doors/
   {% for door in doors %}
     <article class="door-card">
       <div class="door">
-        <!-- Placeholder-wrapper med aspect ratio (justeras i JS efter naturlig storlek) -->
         <div class="door-media" style="--ratio: 3/5">
           <img
             src="{{ door.image | relative_url }}"

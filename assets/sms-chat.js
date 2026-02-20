@@ -11,7 +11,6 @@ class SmsChat extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
-    // config
     this._fmt = this.getAttribute('timestamp-format') || 'YYYY-MM-DD HH:mm';
     this._groupByMinutes = parseInt(this.getAttribute('group-by-minutes') || '0', 10);
     this._locale = this._resolveLocale(this.getAttribute('locale'));
@@ -20,7 +19,6 @@ class SmsChat extends HTMLElement {
     this._bubbleStamps  = this._boolAttr('bubble-timestamps', true);
     this._myBubbleColor = this.getAttribute('my-bubble-color') || 'rgb(0,121,130)';
 
-    // formatters
     this._dayFmt  = new Intl.DateTimeFormat(this._locale, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
     this._timeFmt = new Intl.DateTimeFormat(this._locale, { hour:'2-digit', minute:'2-digit' });
 
@@ -41,11 +39,10 @@ class SmsChat extends HTMLElement {
         .group { display:flex; flex-direction:column; gap:4px; margin: 10px 0 18px; }
         .time { text-align:center; font-size: .75rem; opacity: .6; margin: 6px 0; }
         .row { display:flex; }
-        .row.tight { margin-top: -2px;} /* collapse gap between stacked bubbles */
+        .row.tight { margin-top: -2px;}
         .me   { justify-content: flex-end; }
         .them { justify-content: flex-start; }
 
-        /* Bubble base */
         .bubble {
           position: relative;
           max-width: 80%;
@@ -58,16 +55,13 @@ class SmsChat extends HTMLElement {
           box-shadow: 0 1px 1px rgba(0,0,0,.05);
         }
 
-        /* Colors */
         .bubble.them { background: var(--their-bubble-color); color: var(--their-text-color); }
         .bubble.me   { background: var(--my-bubble-color);   color: var(--my-text-color); }
 
-        /* Stack roles */
         .bubble.stack { border-radius: 14px; }
         .bubble.end.me   { border-top-right-radius:14px; border-bottom-right-radius:3px; }
         .bubble.end.them { border-top-left-radius:14px;  border-bottom-left-radius:3px; }
 
-        /* In-bubble timestamp */
         .stamp {
           position: absolute;
           right: 8px;
@@ -79,7 +73,6 @@ class SmsChat extends HTMLElement {
         }
         .bubble.has-stamp { padding-bottom: 24px; }
 
-        /* Name label */
         .name { font-size: .72rem; opacity: .65; margin: 2px 6px 2px; }
         .name.me { text-align: right; }
       </style>
@@ -132,7 +125,6 @@ class SmsChat extends HTMLElement {
     const root = this.shadowRoot.querySelector('.wrap');
     if (!root) return;
 
-    // apply bubble color variable
     root.style.setProperty('--my-bubble-color', this._myBubbleColor);
 
     root.innerHTML = '';
