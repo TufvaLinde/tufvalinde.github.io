@@ -232,6 +232,8 @@
   line-height: 1;
   position: relative;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
   font-size: clamp(3rem, 12vw, 6rem);
 }
 
