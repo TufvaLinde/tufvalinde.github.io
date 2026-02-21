@@ -221,6 +221,17 @@
 @media (max-width: 640px) {
 
 .name-grid {
+  display: grid;
+  justify-items: center;
+  text-transform: uppercase;
+  color: black;
+  user-select: none;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1;
+  position: relative;
+
   grid-auto-flow: column;
   grid-template-columns: repeat(2, 1fr);
   font-size: clamp(3rem, 12vw, 6rem);
