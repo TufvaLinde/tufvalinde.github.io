@@ -27,6 +27,23 @@
         </div>
       </div>
     </main>
+    
+    <script>
+  const header = document.querySelector('[data-header]')
+
+  function setHeaderState() {
+    const isHome =
+      window.location.pathname === '/' ||
+      window.location.pathname === ''
+
+    if (!header) return
+
+    header.classList.toggle('is-home', isHome)
+    header.classList.toggle('is-subpage', !isHome)
+  }
+
+  setHeaderState()
+</script>
 
     {%- include footer.html -%}
   </body>
