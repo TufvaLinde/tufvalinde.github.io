@@ -4,7 +4,6 @@
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  background: #fff;
 }
 
 #logGrid{
@@ -16,7 +15,7 @@
 
 .logCell{
   box-sizing: border-box;
-  border: 1px solid rgba(0,0,0,.10);
+  border: 1px solid rgba(255,0,0,1);
   border-radius: 0;
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -40,5 +39,5 @@
 }
 
 .monthCell{
-  background: rgba(0,0,0,.03);
+  background: rgba(0,0,255,1);
 }
