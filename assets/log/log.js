@@ -44,6 +44,10 @@
     return x;
   }
 
+  function stripHtml(s) {
+    return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  }
+
   const marginDays = 45;
   const minDate = addDaysUTC(parseDayKeyUTC(minKey), -marginDays);
   const maxDate = addDaysUTC(parseDayKeyUTC(maxKey), marginDays);
@@ -65,58 +69,18 @@
   }
 
   const levels = [
-    { id: "far",  cell: 10, pad: 1, font: 7,  mode: "mark" },
-    { id: "mid",  cell: 22, pad: 2, font: 12, mode: "date" },
-    { id: "near", cell: 44, pad: 3, font: 14, mode: "time" },
-    { id: "one",  cell: 84, pad: 4, font: 16, mode: "text" }
+    { cols: 1, mode: "text", font: 14, pad: 8, square: false },
+    { cols: 2, mode: "text", font: 12, pad: 6, square: false },
+    { cols: 5, mode: "mark", font: 10, pad: 3, square: true },
+    { cols: 7, mode: "mark", font: 10, pad: 2, square: true }
   ];
 
   let committedLevel = 1;
   let previewLevel = 1;
-  let previewCell = levels[committedLevel].cell;
-
-  function clamp(x, a, b) {
-    return Math.max(a, Math.min(b, x));
-  }
-
-  function colsForCell(cellPx) {
-    return Math.max(1, Math.floor(viewport.clientWidth / cellPx));
-  }
-
-  function setVars(cellPx, lvl) {
-    const cols = colsForCell(cellPx);
-    grid.style.setProperty("--cell", `${cellPx}px`);
-    grid.style.setProperty("--cols", `${cols}`);
-    grid.style.setProperty("--pad", `${lvl.pad}px`);
-    grid.style.setProperty("--font", `${lvl.font}px`);
-    return cols;
-  }
-
-  function closestLevelFromCell(cellPx) {
-    let best = 0;
-    let bestDist = Infinity;
-    for (let i = 0; i < levels.length; i++) {
-      const d = Math.abs(levels[i].cell - cellPx);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    }
-    return best;
-  }
-
-  function anchorIndex(cellPxBefore, colsBefore) {
-    const row = Math.floor(viewport.scrollTop / cellPxBefore);
-    const idx = row * colsBefore;
-    return clamp(idx, 0, timeline.length - 1);
-  }
-
-  function scrollToAnchor(idx, cellPxAfter, colsAfter) {
-    const row = Math.floor(idx / colsAfter);
-    viewport.scrollTop = row * cellPxAfter;
-  }
+  let z = committedLevel;
 
   const textNodes = new Array(timeline.length);
+  const cellEls = new Array(timeline.length);
 
   function buildGridOnce() {
     const frag = document.createDocumentFragment();
@@ -126,6 +90,7 @@
 
       const cell = document.createElement("div");
       cell.className = "logCell";
+      if (entry.type === "month") cell.classList.add("monthCell");
 
       const inner = document.createElement("div");
       inner.className = "logInner";
@@ -133,21 +98,16 @@
       const text = document.createElement("div");
       text.className = "logText";
 
-      if (entry.type === "month") cell.classList.add("monthCell");
-
       inner.appendChild(text);
       cell.appendChild(inner);
       frag.appendChild(cell);
 
       textNodes[i] = text;
+      cellEls[i] = cell;
     }
 
     grid.innerHTML = "";
     grid.appendChild(frag);
-  }
-
-  function stripHtml(s) {
-    return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
   }
 
   function applyMode(levelIdx) {
@@ -169,20 +129,11 @@
         continue;
       }
 
-      if (mode === "date") {
-        text.textContent = String(entry.d);
-        continue;
-      }
-
-      if (mode === "time") {
-        text.textContent = arr && arr.length ? arr[0].ts_display.slice(9) : String(entry.d);
-        continue;
-      }
-
       if (mode === "text") {
         if (arr && arr.length) {
-          const t = arr[0].ts_display;
-          const s = stripHtml(arr[0].html);
+          const first = arr[0];
+          const t = first.ts_display;
+          const s = stripHtml(first.html);
           text.textContent = s ? `${t} ${s}` : t;
         } else {
           text.textContent = String(entry.d);
@@ -192,35 +143,83 @@
     }
   }
 
-  function applyPreview(cellPx) {
-    previewCell = cellPx;
+  function applyLayout(levelIdx) {
+    const lvl = levels[levelIdx];
+    grid.style.setProperty("--cols", String(lvl.cols));
+    grid.style.setProperty("--font", `${lvl.font}px`);
+    grid.style.setProperty("--pad", `${lvl.pad}px`);
 
-    const nextPreviewLevel = closestLevelFromCell(previewCell);
-    if (nextPreviewLevel !== previewLevel) {
-      previewLevel = nextPreviewLevel;
-      applyMode(previewLevel);
-    }
+    if (lvl.square) grid.classList.add("is-square");
+    else grid.classList.remove("is-square");
 
-    setVars(previewCell, levels[previewLevel]);
+    applyMode(levelIdx);
   }
 
-  function commitSnap(cellPxBefore, colsBefore, idx) {
-    committedLevel = previewLevel;
-    previewCell = levels[committedLevel].cell;
+  function clamp(x, a, b) {
+    return Math.max(a, Math.min(b, x));
+  }
 
-    const colsAfter = setVars(previewCell, levels[committedLevel]);
-    applyMode(committedLevel);
-    scrollToAnchor(idx, previewCell, colsAfter);
+  function nearestLevelIndexFromZ(zVal) {
+    const allowed = [0, 1, 2, 3];
+    let best = 0;
+    let bestDist = Infinity;
+    for (const i of allowed) {
+      const d = Math.abs(i - zVal);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    }
+    return best;
+  }
+
+  function anchorIndex(cols) {
+    const firstVisible = Math.floor(viewport.scrollTop / 1);
+    const approxRow = Math.floor(firstVisible / 1);
+    const row = Math.floor(viewport.scrollTop / (grid.firstElementChild ? grid.firstElementChild.getBoundingClientRect().height : 1));
+    const idx = row * cols;
+    return clamp(idx, 0, timeline.length - 1);
+  }
+
+  function scrollToAnchor(idx, cols) {
+    const row = Math.floor(idx / cols);
+    const firstCell = grid.querySelector(".logCell");
+    const h = firstCell ? firstCell.getBoundingClientRect().height : 1;
+    viewport.scrollTop = row * h;
+  }
+
+  function setPreviewZ(nextZ, keepAnchor) {
+    z = clamp(nextZ, 0, 3);
+    const nextPreviewLevel = nearestLevelIndexFromZ(z);
+
+    const colsBefore = levels[previewLevel].cols;
+    const idx = keepAnchor ? anchorIndex(colsBefore) : null;
+
+    if (nextPreviewLevel !== previewLevel) {
+      previewLevel = nextPreviewLevel;
+      applyLayout(previewLevel);
+    }
+
+    if (keepAnchor && idx != null) {
+      const colsAfter = levels[previewLevel].cols;
+      scrollToAnchor(idx, colsAfter);
+    }
+  }
+
+  function commitSnap() {
+    committedLevel = previewLevel;
+    z = committedLevel;
+    applyLayout(committedLevel);
   }
 
   function init() {
     buildGridOnce();
-    setVars(previewCell, levels[committedLevel]);
-    applyMode(committedLevel);
+    applyLayout(committedLevel);
 
-    const cols = colsForCell(previewCell);
     const targetIdx = timeline.findIndex(x => x.type === "day" && x.key === maxKey);
-    if (targetIdx >= 0) scrollToAnchor(targetIdx, previewCell, cols);
+    if (targetIdx >= 0) {
+      scrollToAnchor(targetIdx, levels[committedLevel].cols);
+    }
   }
 
   init();
@@ -231,68 +230,40 @@
     if (!e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
 
-    const cellBefore = previewCell;
-    const colsBefore = colsForCell(cellBefore);
-    const idx = anchorIndex(cellBefore, colsBefore);
-
-    const k = Math.exp(-e.deltaY * 0.002);
-    const next = clamp(previewCell * k, levels[0].cell, levels[levels.length - 1].cell);
-    applyPreview(next);
+    const k = Math.exp(-e.deltaY * 0.003);
+    const dz = (k - 1) * 1.25;
+    setPreviewZ(z + dz, true);
 
     clearTimeout(wheelSnapT);
-    wheelSnapT = setTimeout(() => {
-      commitSnap(cellBefore, colsBefore, idx);
-    }, 120);
+    wheelSnapT = setTimeout(commitSnap, 140);
   }, { passive: false });
 
   let gestureStartScale = null;
-  let gestureStartCell = null;
-  let gestureAnchor = null;
+  let gestureStartZ = null;
 
   viewport.addEventListener("gesturestart", (e) => {
     e.preventDefault();
     gestureStartScale = e.scale;
-    gestureStartCell = previewCell;
-
-    const colsBefore = colsForCell(previewCell);
-    gestureAnchor = {
-      cellBefore: previewCell,
-      colsBefore,
-      idx: anchorIndex(previewCell, colsBefore)
-    };
+    gestureStartZ = z;
   }, { passive: false });
 
   viewport.addEventListener("gesturechange", (e) => {
     if (gestureStartScale == null) return;
     e.preventDefault();
-
     const ratio = e.scale / gestureStartScale;
-    const next = clamp(gestureStartCell * ratio, levels[0].cell, levels[levels.length - 1].cell);
-    applyPreview(next);
-
-    const colsAfter = colsForCell(previewCell);
-    scrollToAnchor(gestureAnchor.idx, previewCell, colsAfter);
+    const dz = Math.log2(ratio) * 1.4;
+    setPreviewZ(gestureStartZ + dz, true);
   }, { passive: false });
 
   viewport.addEventListener("gestureend", (e) => {
     if (gestureStartScale == null) return;
     e.preventDefault();
-
-    const a = gestureAnchor;
-
     gestureStartScale = null;
-    gestureStartCell = null;
-    gestureAnchor = null;
-
-    commitSnap(a.cellBefore, a.colsBefore, a.idx);
+    gestureStartZ = null;
+    commitSnap();
   }, { passive: false });
 
   window.addEventListener("resize", () => {
-    const cellBefore = previewCell;
-    const colsBefore = colsForCell(cellBefore);
-    const idx = anchorIndex(cellBefore, colsBefore);
-
-    setVars(previewCell, levels[previewLevel]);
-    scrollToAnchor(idx, previewCell, colsForCell(previewCell));
+    applyLayout(committedLevel);
   });
 })();
