@@ -5,22 +5,20 @@
 }
 
 .site-header.is-home [data-homegrid] {
-  opacity: 1;
   pointer-events: auto;
 }
 
 .site-header.is-home [data-logo] {
-  opacity: 0;
+  display: none;
   pointer-events: none;
 }
 
 .site-header.is-subpage [data-homegrid] {
-  opacity: 0;
+  display: none;
   pointer-events: none;
 }
 
 .site-header.is-subpage [data-logo] {
-  opacity: 1;
   pointer-events: auto;
 }
 
