@@ -3,15 +3,10 @@ title: draft
 layout: default
 ---
 
-
 <link rel="stylesheet" href="{{ '/assets/log/log.css' | relative_url }}">
 
 <div id="logViewport">
-  <div id="logStage"></div>
-  <div id="logOverlay">
-    <div id="logOverlayHeader"></div>
-    <div id="logOverlayBody"></div>
-  </div>
+  <div id="logGrid"></div>
 </div>
 
 <script src="{{ '/assets/log/log.js' | relative_url }}"></script>
