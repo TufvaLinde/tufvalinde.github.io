@@ -1,6 +1,7 @@
 (async () => {
   const viewport = document.getElementById("logViewport");
   const grid = document.getElementById("logGrid");
+  if (!viewport || !grid) return;
 
   const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
@@ -56,7 +57,7 @@
     const m0 = cursor.getUTCMonth();
     const mk = `${y}-${m0}`;
     if (mk !== lastMonth) {
-      timeline.push({ type: "month", label: months[m0], y, m: m0 + 1 });
+      timeline.push({ type: "month", label: months[m0] });
       lastMonth = mk;
     }
     timeline.push({ type: "day", key: dayKeyFromUTC(cursor), d: cursor.getUTCDate() });
@@ -71,6 +72,7 @@
   ];
 
   let committedLevel = 1;
+  let previewLevel = 1;
   let previewCell = levels[committedLevel].cell;
 
   function clamp(x, a, b) {
@@ -78,8 +80,7 @@
   }
 
   function colsForCell(cellPx) {
-    const cols = Math.max(1, Math.floor(viewport.clientWidth / cellPx));
-    return cols;
+    return Math.max(1, Math.floor(viewport.clientWidth / cellPx));
   }
 
   function setVars(cellPx, lvl) {
@@ -115,14 +116,14 @@
     viewport.scrollTop = row * cellPxAfter;
   }
 
-  function render(mode) {
-    const cols = colsForCell(previewCell);
-    const lvl = levels[committedLevel];
+  const textNodes = new Array(timeline.length);
 
+  function buildGridOnce() {
     const frag = document.createDocumentFragment();
 
     for (let i = 0; i < timeline.length; i++) {
       const entry = timeline[i];
+
       const cell = document.createElement("div");
       cell.className = "logCell";
 
@@ -132,66 +133,93 @@
       const text = document.createElement("div");
       text.className = "logText";
 
-      if (entry.type === "month") {
-        cell.classList.add("monthCell");
-        text.textContent = entry.label;
-      } else {
-        const arr = byDay.get(entry.key);
-        if (lvl.mode === "mark") {
-          text.textContent = arr && arr.length ? "•" : "";
-        } else if (lvl.mode === "date") {
-          text.textContent = String(entry.d);
-        } else if (lvl.mode === "time") {
-          if (arr && arr.length) {
-            text.textContent = arr[0].ts_display.slice(9);
-          } else {
-            text.textContent = String(entry.d);
-          }
-        } else {
-          if (arr && arr.length) {
-            const lines = arr.slice(0, 3).map(x => x.html.replace(/<[^>]*>/g, "").trim()).filter(Boolean);
-            const t = arr[0].ts_display;
-            const s = lines[0] ? lines[0] : "";
-            text.textContent = s ? `${t} ${s}` : t;
-          } else {
-            text.textContent = String(entry.d);
-          }
-        }
-      }
+      if (entry.type === "month") cell.classList.add("monthCell");
 
       inner.appendChild(text);
       cell.appendChild(inner);
       frag.appendChild(cell);
+
+      textNodes[i] = text;
     }
 
     grid.innerHTML = "";
     grid.appendChild(frag);
   }
 
+  function stripHtml(s) {
+    return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  }
+
+  function applyMode(levelIdx) {
+    const mode = levels[levelIdx].mode;
+
+    for (let i = 0; i < timeline.length; i++) {
+      const entry = timeline[i];
+      const text = textNodes[i];
+
+      if (entry.type === "month") {
+        text.textContent = entry.label;
+        continue;
+      }
+
+      const arr = byDay.get(entry.key);
+
+      if (mode === "mark") {
+        text.textContent = arr && arr.length ? "•" : "";
+        continue;
+      }
+
+      if (mode === "date") {
+        text.textContent = String(entry.d);
+        continue;
+      }
+
+      if (mode === "time") {
+        text.textContent = arr && arr.length ? arr[0].ts_display.slice(9) : String(entry.d);
+        continue;
+      }
+
+      if (mode === "text") {
+        if (arr && arr.length) {
+          const t = arr[0].ts_display;
+          const s = stripHtml(arr[0].html);
+          text.textContent = s ? `${t} ${s}` : t;
+        } else {
+          text.textContent = String(entry.d);
+        }
+        continue;
+      }
+    }
+  }
+
   function applyPreview(cellPx) {
-    const lvl = levels[committedLevel];
     previewCell = cellPx;
-    setVars(previewCell, lvl);
+
+    const nextPreviewLevel = closestLevelFromCell(previewCell);
+    if (nextPreviewLevel !== previewLevel) {
+      previewLevel = nextPreviewLevel;
+      applyMode(previewLevel);
+    }
+
+    setVars(previewCell, levels[previewLevel]);
   }
 
   function commitSnap(cellPxBefore, colsBefore, idx) {
-    committedLevel = closestLevelFromCell(previewCell);
+    committedLevel = previewLevel;
     previewCell = levels[committedLevel].cell;
 
-    const lvl = levels[committedLevel];
-    const colsAfter = setVars(previewCell, lvl);
-
-    render(lvl.mode);
+    const colsAfter = setVars(previewCell, levels[committedLevel]);
+    applyMode(committedLevel);
     scrollToAnchor(idx, previewCell, colsAfter);
   }
 
   function init() {
-    const lvl = levels[committedLevel];
-    const cols = setVars(previewCell, lvl);
-    render(lvl.mode);
+    buildGridOnce();
+    setVars(previewCell, levels[committedLevel]);
+    applyMode(committedLevel);
 
-    const targetKey = maxKey;
-    const targetIdx = timeline.findIndex(x => x.type === "day" && x.key === targetKey);
+    const cols = colsForCell(previewCell);
+    const targetIdx = timeline.findIndex(x => x.type === "day" && x.key === maxKey);
     if (targetIdx >= 0) scrollToAnchor(targetIdx, previewCell, cols);
   }
 
@@ -203,9 +231,9 @@
     if (!e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
 
-    const lvl = levels[committedLevel];
-    const colsBefore = colsForCell(previewCell);
-    const idx = anchorIndex(previewCell, colsBefore);
+    const cellBefore = previewCell;
+    const colsBefore = colsForCell(cellBefore);
+    const idx = anchorIndex(cellBefore, colsBefore);
 
     const k = Math.exp(-e.deltaY * 0.002);
     const next = clamp(previewCell * k, levels[0].cell, levels[levels.length - 1].cell);
@@ -213,54 +241,58 @@
 
     clearTimeout(wheelSnapT);
     wheelSnapT = setTimeout(() => {
-      commitSnap(previewCell, colsBefore, idx);
+      commitSnap(cellBefore, colsBefore, idx);
     }, 120);
   }, { passive: false });
 
   let gestureStartScale = null;
   let gestureStartCell = null;
+  let gestureAnchor = null;
 
   viewport.addEventListener("gesturestart", (e) => {
     e.preventDefault();
     gestureStartScale = e.scale;
     gestureStartCell = previewCell;
+
+    const colsBefore = colsForCell(previewCell);
+    gestureAnchor = {
+      cellBefore: previewCell,
+      colsBefore,
+      idx: anchorIndex(previewCell, colsBefore)
+    };
   }, { passive: false });
 
   viewport.addEventListener("gesturechange", (e) => {
     if (gestureStartScale == null) return;
     e.preventDefault();
 
-    const colsBefore = colsForCell(previewCell);
-    const idx = anchorIndex(previewCell, colsBefore);
-
     const ratio = e.scale / gestureStartScale;
     const next = clamp(gestureStartCell * ratio, levels[0].cell, levels[levels.length - 1].cell);
     applyPreview(next);
 
-    const lvl = levels[committedLevel];
-    const colsAfter = setVars(previewCell, lvl);
-    scrollToAnchor(idx, previewCell, colsAfter);
+    const colsAfter = colsForCell(previewCell);
+    scrollToAnchor(gestureAnchor.idx, previewCell, colsAfter);
   }, { passive: false });
 
   viewport.addEventListener("gestureend", (e) => {
     if (gestureStartScale == null) return;
     e.preventDefault();
 
-    const colsBefore = colsForCell(previewCell);
-    const idx = anchorIndex(previewCell, colsBefore);
+    const a = gestureAnchor;
 
     gestureStartScale = null;
     gestureStartCell = null;
+    gestureAnchor = null;
 
-    commitSnap(previewCell, colsBefore, idx);
+    commitSnap(a.cellBefore, a.colsBefore, a.idx);
   }, { passive: false });
 
   window.addEventListener("resize", () => {
-    const colsBefore = colsForCell(previewCell);
-    const idx = anchorIndex(previewCell, colsBefore);
-    const lvl = levels[committedLevel];
-    const colsAfter = setVars(previewCell, lvl);
-    render(lvl.mode);
-    scrollToAnchor(idx, previewCell, colsAfter);
+    const cellBefore = previewCell;
+    const colsBefore = colsForCell(cellBefore);
+    const idx = anchorIndex(cellBefore, colsBefore);
+
+    setVars(previewCell, levels[previewLevel]);
+    scrollToAnchor(idx, previewCell, colsForCell(previewCell));
   });
 })();
