@@ -46,3 +46,19 @@
   overflow: hidden;
   text-overflow: clip;
 }
+
+.logCell.is-empty{
+  background: rgba(0,0,0,.01);
+}
+
+.logCell.is-empty .logText{
+  opacity: .25;
+}
+
+.logCell.has-log{
+  background: rgba(0,0,0,.02);
+}
+
+.logCell.multi{
+  background: rgba(0,0,0,.03);
+}
