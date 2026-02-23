@@ -1,6 +1,6 @@
 ---
 title: draft
-layout: default
+layout: emptyslate
 ---
 
 <link rel="stylesheet" href="{{ '/assets/log/log.css' | relative_url }}">
