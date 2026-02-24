@@ -1,8 +1,7 @@
 #logViewport{
   height: 150vh;
-  width: 100vw;
+  width: 95vw;
   margin: 0;
-  overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
