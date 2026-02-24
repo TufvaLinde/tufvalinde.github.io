@@ -1,46 +1,51 @@
 (async () => {
   const viewport = document.getElementById("logViewport");
-  const grid = document.getElementById("logGrid");
-  if (!viewport || !grid) return;
+  const gridA = document.getElementById("logGrid");
+  if (!viewport || !gridA) return;
+
+  const gridB = document.createElement("div");
+  gridB.id = "logGrid2";
+  viewport.appendChild(gridB);
 
   const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
   const res = await fetch("/assets/log/logs.json", { cache: "no-store" });
   if (!res.ok) {
-    grid.textContent = `Could not load logs.json (${res.status})`;
+    gridA.textContent = `Could not load logs.json (${res.status})`;
     return;
   }
   const items = await res.json();
 
+  function dayKeyLocalFromDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${dd}`;
+  }
+
   const byDay = new Map();
   let minKey = null;
-  let maxKey = null;
 
   for (const it of items) {
     const d = new Date(it.ts_iso);
-    const key = d.toISOString().slice(0, 10);
+    const key = dayKeyLocalFromDate(d);
     if (!byDay.has(key)) byDay.set(key, []);
     byDay.get(key).push(it);
     if (!minKey || key < minKey) minKey = key;
-    if (!maxKey || key > maxKey) maxKey = key;
   }
 
   for (const [k, arr] of byDay.entries()) {
     arr.sort((a, b) => (a.ts_iso < b.ts_iso ? -1 : 1));
   }
 
-  function parseDayKeyUTC(key) {
+  function parseDayKeyLocal(key) {
     const [y, m, d] = key.split("-").map(Number);
-    return new Date(Date.UTC(y, m - 1, d));
+    return new Date(y, m - 1, d);
   }
 
-  function dayKeyFromUTC(dt) {
-    return dt.toISOString().slice(0, 10);
-  }
-
-  function addDaysUTC(dt, n) {
+  function addDaysLocal(dt, n) {
     const x = new Date(dt.getTime());
-    x.setUTCDate(x.getUTCDate() + n);
+    x.setDate(x.getDate() + n);
     return x;
   }
 
@@ -48,24 +53,23 @@
     return s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
   }
 
-  const marginDays = 45;
-  const minDate = addDaysUTC(parseDayKeyUTC(minKey), -marginDays);
-  const maxDate = addDaysUTC(parseDayKeyUTC(maxKey), marginDays);
+  const today = new Date();
+  const startDate = parseDayKeyLocal(dayKeyLocalFromDate(today));
+  const endDate = parseDayKeyLocal(minKey);
 
   const timeline = [];
-  let cursor = new Date(minDate.getTime());
+  let cursor = new Date(startDate.getTime());
   let lastMonth = null;
 
-  while (cursor <= maxDate) {
-    const y = cursor.getUTCFullYear();
-    const m0 = cursor.getUTCMonth();
-    const mk = `${y}-${m0}`;
+  while (cursor >= endDate) {
+    const m0 = cursor.getMonth();
+    const mk = `${cursor.getFullYear()}-${m0}`;
     if (mk !== lastMonth) {
       timeline.push({ type: "month", label: months[m0] });
       lastMonth = mk;
     }
-    timeline.push({ type: "day", key: dayKeyFromUTC(cursor), d: cursor.getUTCDate() });
-    cursor = addDaysUTC(cursor, 1);
+    timeline.push({ type: "day", key: dayKeyLocalFromDate(cursor), d: cursor.getDate() });
+    cursor = addDaysLocal(cursor, -1);
   }
 
   const levels = [
@@ -75,14 +79,24 @@
     { cols: 7, mode: "mark", font: 12, pad: 2, square: true }
   ];
 
-  let committedLevel = 1;
-  let previewLevel = 1;
-  let z = committedLevel;
+  function clamp(x, a, b) {
+    return Math.max(a, Math.min(b, x));
+  }
 
-  const textNodes = new Array(timeline.length);
-  const cellEls = new Array(timeline.length);
+  function nearestLevelFromZ(zVal) {
+    return Math.round(clamp(zVal, 0, 3));
+  }
 
-  function buildGridOnce() {
+  function applyLayoutVars(grid, levelIdx) {
+    const lvl = levels[levelIdx];
+    grid.style.setProperty("--cols", String(lvl.cols));
+    grid.style.setProperty("--font", `${lvl.font}px`);
+    grid.style.setProperty("--pad", `${lvl.pad}px`);
+    if (lvl.square) grid.classList.add("is-square");
+    else grid.classList.remove("is-square");
+  }
+
+  function buildGridDOM(grid) {
     const frag = document.createDocumentFragment();
 
     for (let i = 0; i < timeline.length; i++) {
@@ -90,9 +104,7 @@
 
       const cell = document.createElement("div");
       cell.className = "logCell";
-      if (entry.type === "month") {
-        cell.classList.add("monthCell", "is-month");
-      }
+      if (entry.type === "month") cell.classList.add("monthCell", "is-month");
 
       const inner = document.createElement("div");
       inner.className = "logInner";
@@ -103,22 +115,20 @@
       inner.appendChild(text);
       cell.appendChild(inner);
       frag.appendChild(cell);
-
-      textNodes[i] = text;
-      cellEls[i] = cell;
     }
 
     grid.innerHTML = "";
     grid.appendChild(frag);
   }
 
-  function applyMode(levelIdx) {
+  function fillGridText(grid, levelIdx) {
     const mode = levels[levelIdx].mode;
+    const cells = grid.children;
 
     for (let i = 0; i < timeline.length; i++) {
       const entry = timeline[i];
-      const text = textNodes[i];
-      const cell = cellEls[i];
+      const cell = cells[i];
+      const text = cell.firstChild.firstChild;
 
       cell.classList.remove("has-log", "is-empty", "is-dayno", "multi");
 
@@ -135,11 +145,8 @@
       if (has && arr.length > 1) cell.classList.add("multi");
 
       if (mode === "mark") {
-        if (!has) {
-          text.textContent = "";
-        } else {
-          text.textContent = arr.length === 1 ? "•" : String(arr.length);
-        }
+        if (!has) text.textContent = "";
+        else text.textContent = arr.length === 1 ? "•" : String(arr.length);
         continue;
       }
 
@@ -163,138 +170,81 @@
     }
   }
 
-  function applyLayout(levelIdx) {
-    const lvl = levels[levelIdx];
-
-    grid.style.setProperty("--cols", String(lvl.cols));
-    grid.style.setProperty("--font", `${lvl.font}px`);
-    grid.style.setProperty("--pad", `${lvl.pad}px`);
-
-    if (lvl.square) grid.classList.add("is-square");
-    else grid.classList.remove("is-square");
-
-    applyMode(levelIdx);
+  function renderGrid(grid, levelIdx) {
+    applyLayoutVars(grid, levelIdx);
+    if (!grid.children.length) buildGridDOM(grid);
+    fillGridText(grid, levelIdx);
   }
 
-  function clamp(x, a, b) {
-    return Math.max(a, Math.min(b, x));
+  let activeGrid = gridA;
+  let inactiveGrid = gridB;
+
+  let committedLevel = 1;
+  let previewZ = committedLevel;
+  let previewLevel = committedLevel;
+
+  renderGrid(activeGrid, committedLevel);
+  renderGrid(inactiveGrid, committedLevel);
+
+  viewport.scrollTop = 0;
+
+  function swapGrids() {
+    const tmp = activeGrid;
+    activeGrid = inactiveGrid;
+    inactiveGrid = tmp;
   }
 
-  function nearestLevelIndexFromZ(zVal) {
-    const t = clamp(zVal, 0, 3);
-    return Math.round(t);
+  function setGestureTransform(scale) {
+    activeGrid.style.transformOrigin = "50% 25%";
+    activeGrid.style.transform = `scale(${scale})`;
+    activeGrid.style.filter = "none";
   }
 
-  function cellHeightEstimate() {
-    const first = grid.querySelector(".logCell");
-    return first ? first.getBoundingClientRect().height : 1;
+  function clearGestureTransform() {
+    activeGrid.style.transform = "none";
+    activeGrid.style.filter = "none";
   }
 
-  function anchorIndex(cols) {
-    const h = cellHeightEstimate();
-    const row = Math.floor(viewport.scrollTop / Math.max(1, h));
-    const idx = row * cols;
-    return clamp(idx, 0, timeline.length - 1);
+  function crossfadeToLevel(targetLevel, direction) {
+    viewport.classList.add("is-layer-animating");
+
+    renderGrid(inactiveGrid, targetLevel);
+
+    inactiveGrid.style.opacity = "0";
+    inactiveGrid.style.transformOrigin = "50% 25%";
+    inactiveGrid.style.filter = "blur(2px)";
+
+    const outScale = direction > 0 ? 0.92 : 1.08;
+    const inScale = direction > 0 ? 1.06 : 0.96;
+
+    activeGrid.style.opacity = "1";
+    activeGrid.style.transform = `scale(${outScale})`;
+    activeGrid.style.filter = "blur(2px)";
+
+    inactiveGrid.style.transform = `scale(${inScale})`;
+
+    requestAnimationFrame(() => {
+      inactiveGrid.style.opacity = "1";
+      inactiveGrid.style.transform = "scale(1)";
+      inactiveGrid.style.filter = "none";
+
+      activeGrid.style.opacity = "0";
+    });
+
+    setTimeout(() => {
+      swapGrids();
+
+      inactiveGrid.style.opacity = "0";
+      inactiveGrid.style.transform = "none";
+      inactiveGrid.style.filter = "none";
+
+      activeGrid.style.opacity = "1";
+      activeGrid.style.transform = "none";
+      activeGrid.style.filter = "none";
+
+      viewport.classList.remove("is-layer-animating");
+    }, 240);
   }
-
-  function scrollToAnchor(idx, cols) {
-    const h = cellHeightEstimate();
-    const row = Math.floor(idx / cols);
-    viewport.scrollTop = row * h;
-  }
-
-  function setPreviewLevelFromZ(keepAnchor) {
-    const next = nearestLevelIndexFromZ(z);
-
-    const colsBefore = levels[previewLevel].cols;
-    const idx = keepAnchor ? anchorIndex(colsBefore) : null;
-
-    if (next !== previewLevel) {
-      previewLevel = next;
-      applyLayout(previewLevel);
-    }
-
-    if (keepAnchor && idx != null) {
-      const colsAfter = levels[previewLevel].cols;
-      scrollToAnchor(idx, colsAfter);
-    }
-  }
-
-  function easeOutBack(t) {
-    const c1 = 1.70158;
-    const c3 = c1 + 1;
-    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-  }
-
-  let snapAnim = null;
-
-  function startSnapAnimation() {
-    const target = previewLevel;
-    const start = z;
-    const end = target;
-
-    const colsBefore = levels[previewLevel].cols;
-    const idx = anchorIndex(colsBefore);
-
-    snapAnim = {
-      t0: performance.now(),
-      dur: 220,
-      start,
-      end,
-      idx
-    };
-
-    const step = (now) => {
-      if (!snapAnim) return;
-      const t = clamp((now - snapAnim.t0) / snapAnim.dur, 0, 1);
-      const e = easeOutBack(t);
-      z = snapAnim.start + (snapAnim.end - snapAnim.start) * e;
-      setPreviewLevelFromZ(true);
-
-      if (t < 1) {
-        requestAnimationFrame(step);
-      } else {
-        z = end;
-        committedLevel = target;
-        previewLevel = target;
-        applyLayout(committedLevel);
-        scrollToAnchor(snapAnim.idx, levels[committedLevel].cols);
-        snapAnim = null;
-      }
-    };
-
-    requestAnimationFrame(step);
-  }
-
-  function init() {
-    buildGridOnce();
-    applyLayout(committedLevel);
-
-    const targetIdx = timeline.findIndex(x => x.type === "day" && x.key === maxKey);
-    if (targetIdx >= 0) {
-      scrollToAnchor(targetIdx, levels[committedLevel].cols);
-    }
-  }
-
-  init();
-
-  let wheelSnapT = null;
-
-  viewport.addEventListener("wheel", (e) => {
-    if (!e.ctrlKey && !e.metaKey) return;
-    e.preventDefault();
-
-    const factor = Math.exp(-e.deltaY * 0.003);
-    const dz = -Math.log2(factor) * 1.1;
-    z = clamp(z + dz, 0, 3);
-    setPreviewLevelFromZ(true);
-
-    clearTimeout(wheelSnapT);
-    wheelSnapT = setTimeout(() => {
-      if (snapAnim) snapAnim = null;
-      startSnapAnimation();
-    }, 120);
-  }, { passive: false });
 
   let gestureStartScale = null;
   let gestureStartZ = null;
@@ -302,8 +252,8 @@
   viewport.addEventListener("gesturestart", (e) => {
     e.preventDefault();
     gestureStartScale = e.scale;
-    gestureStartZ = z;
-    if (snapAnim) snapAnim = null;
+    gestureStartZ = previewZ;
+    clearGestureTransform();
   }, { passive: false });
 
   viewport.addEventListener("gesturechange", (e) => {
@@ -311,22 +261,74 @@
     e.preventDefault();
 
     const ratio = e.scale / gestureStartScale;
+
     const dz = -Math.log2(ratio) * 1.6;
-    z = clamp(gestureStartZ + dz, 0, 3);
-    setPreviewLevelFromZ(true);
+    previewZ = clamp(gestureStartZ + dz, 0, 3);
+
+    const nextPreviewLevel = nearestLevelFromZ(previewZ);
+    if (nextPreviewLevel !== previewLevel) {
+      previewLevel = nextPreviewLevel;
+      renderGrid(activeGrid, previewLevel);
+    }
+
+    const visualScale = clamp(ratio, 0.85, 1.15);
+    setGestureTransform(visualScale);
   }, { passive: false });
 
   viewport.addEventListener("gestureend", (e) => {
     if (gestureStartScale == null) return;
     e.preventDefault();
 
+    const startLevel = committedLevel;
+    const targetLevel = previewLevel;
+    const direction = targetLevel > startLevel ? 1 : -1;
+
+    clearGestureTransform();
+    committedLevel = targetLevel;
+    previewZ = committedLevel;
+
+    crossfadeToLevel(committedLevel, direction);
+
     gestureStartScale = null;
     gestureStartZ = null;
+  }, { passive: false });
 
-    startSnapAnimation();
+  let wheelSnapT = null;
+  let wheelLastZ = previewZ;
+
+  viewport.addEventListener("wheel", (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+
+    const factor = Math.exp(-e.deltaY * 0.003);
+    const dz = -Math.log2(factor) * 1.1;
+
+    wheelLastZ = previewZ;
+    previewZ = clamp(previewZ + dz, 0, 3);
+
+    const nextPreviewLevel = nearestLevelFromZ(previewZ);
+    if (nextPreviewLevel !== previewLevel) {
+      previewLevel = nextPreviewLevel;
+      renderGrid(activeGrid, previewLevel);
+    }
+
+    const scale = dz > 0 ? 0.96 : 1.04;
+    setGestureTransform(scale);
+    clearTimeout(wheelSnapT);
+    wheelSnapT = setTimeout(() => {
+      const startLevel = committedLevel;
+      const targetLevel = previewLevel;
+      const direction = targetLevel > startLevel ? 1 : -1;
+
+      clearGestureTransform();
+      committedLevel = targetLevel;
+      previewZ = committedLevel;
+
+      crossfadeToLevel(committedLevel, direction);
+    }, 140);
   }, { passive: false });
 
   window.addEventListener("resize", () => {
-    applyLayout(committedLevel);
+    renderGrid(activeGrid, committedLevel);
   });
 })();

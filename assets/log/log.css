@@ -1,4 +1,32 @@
 #logViewport{
+  position: relative;
+}
+
+#logGrid, #logGrid2{
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  will-change: transform, opacity, filter;
+}
+
+#logGrid2{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.is-layer-animating #logGrid,
+.is-layer-animating #logGrid2{
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1), filter 220ms ease;
+}
+
+
+
+
+
+
+
+
+#logViewport{
   height: 150vh;
   width: 95vw;
   margin: 0;
