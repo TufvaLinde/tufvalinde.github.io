@@ -1,13 +1,13 @@
 #logViewport{
-  height: 100vh;
+  height: 150vh;
   width: 100vw;
-  background-color: blue;
-  background: blue;
   margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
+  border: 1px solid red;
+  border-radius: 0;
 }
 
 #logGrid{
@@ -17,7 +17,7 @@
 }
 
 .logCell{
-  border: 1px solid rgb(1,0,0);
+  border: 1px solid red;
   border-radius: 0;
   overflow: hidden;
 }
@@ -33,7 +33,7 @@
 }
 
 .monthCell{
-  font-size: 20rem;
+  font-size: 3rem;
 }
 
 .is-square .logCell{
