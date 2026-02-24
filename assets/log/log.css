@@ -29,11 +29,11 @@
 #logViewport{
   height: 150vh;
   width: 95vw;
-  margin: 0;
+  margin: 2.5vw;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  border: 1px solid red;
+  border: 2px solid red;
   border-radius: 0;
 }
 
