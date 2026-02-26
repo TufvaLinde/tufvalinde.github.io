@@ -16,6 +16,9 @@
 }
 
 .month{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
@@ -50,6 +53,7 @@
 }
 
 .grid{
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
