@@ -12,6 +12,27 @@
 
   const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
+function warpMonthLabel(monthEl){
+  const span = monthEl.querySelector(".monthLabelInGrid span");
+  if (!span) return;
+
+  const box = span.parentElement;
+  const boxW = box.clientWidth;
+  const boxH = box.clientHeight;
+
+  span.style.transform = "none";
+  span.style.fontSize = "32px";
+
+  const r = span.getBoundingClientRect();
+  const textW = Math.max(1, r.width);
+  const textH = Math.max(1, r.height);
+
+  const sx = boxW / textW;
+  const sy = boxH / textH;
+
+  span.style.transform = `scale(${sx}, ${sy})`;
+}
+
   function updateDiagAngle(monthEl){
   const sample = monthEl.querySelector(".cell:not(.is-outside)");
   if (!sample) return;
@@ -53,36 +74,6 @@
   }
 }
 
-
-  function fitMonthLabel(monthEl){
-  const label = monthEl.querySelector(".monthLabelInGrid span");
-  if (!label) return;
-
-  const box = label.parentElement;
-  const boxW = box.clientWidth;
-  const boxH = box.clientHeight;
-
-  if (!boxW || !boxH) return;
-
-  let lo = 8;
-  let hi = Math.max(8, Math.floor(boxH * 1.1));
-  let best = lo;
-
-  while (lo <= hi) {
-    const mid = (lo + hi) >> 1;
-    label.style.fontSize = mid + "px";
-    const ok = label.scrollWidth <= boxW && label.scrollHeight <= boxH;
-    if (ok) {
-      best = mid;
-      lo = mid + 1;
-    } else {
-      hi = mid - 1;
-    }
-  }
-
-  label.style.fontSize = best + "px";
-  monthEl.style.setProperty("--month-font", best + "px");
-}
 
   function setCellHeightForMonth(monthEl){
     const header = monthEl.querySelector(".monthHeader");
@@ -256,7 +247,7 @@
     stream.appendChild(monthEl);
     setCellHeightForMonth(monthEl);
     updateDiagAngle(monthEl);
-    fitMonthLabel(monthEl);
+    warpMonthLabel(monthEl);
     fitLogsInMonth(monthEl);
 
     const prev = addMonths(y, m0, -1);
@@ -270,7 +261,7 @@
   document.querySelectorAll(".month").forEach(m => {
     setCellHeightForMonth(m);
     updateDiagAngle(m);
-    fitMonthLabel(m);
+    warpMonthLabel(m);
     fitLogsInMonth(m);
   });
 });

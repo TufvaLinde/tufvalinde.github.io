@@ -30,11 +30,6 @@
   letter-spacing: .08em;
 }
 
-.monthTitle{
-  font-size: 50px;
-  color: red;
-}
-
 .weekdays{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -80,10 +75,10 @@
 .cell.is-empty{
   background:
     linear-gradient(var(--diag-angle, 45deg),
-      transparent 48.5%,
-      red 49.5%,
-      red 50.5%,
-      transparent 51.5%);
+      transparent 49.85%,
+      red 49.95%,
+      red 50.05%,
+      transparent 50.15%);
 }
 
 .cellInner{
@@ -113,16 +108,13 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 10px;
-  border-right: 1px solid red;
-  border-bottom: 1px solid red;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  letter-spacing: .08em;
   overflow: hidden;
+  color: red;
 }
 
 .monthLabelInGrid span{
-  font-size: var(--month-font, 28px);
-  line-height: 1;
+  display: inline-block;
+  transform-origin: 0 0;
+  letter-spacing: .08em;
   white-space: nowrap;
-}
 }
