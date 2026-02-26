@@ -20,7 +20,7 @@
   const w = Math.max(1, r.width);
   const h = Math.max(1, r.height);
 
-  const angleRad = Math.atan(h / w);
+  const angleRad = Math.atan(w/h);
   const angleDeg = angleRad * 180 / Math.PI;
 
   monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
