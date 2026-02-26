@@ -67,10 +67,6 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.cell:nth-child(7n){
-  border-right: 0;
-}
-
 .cell.is-outside{
   opacity: 0;
   border-color: transparent;
@@ -85,8 +81,8 @@
   background:
     linear-gradient(var(--diag-angle, 45deg),
       transparent 48.5%,
-      rgba(0,0,0,.14) 49.5%,
-      rgba(0,0,0,.14) 50.5%,
+      red 49.5%,
+      red 50.5%,
       transparent 51.5%);
 }
 
@@ -107,7 +103,6 @@
 .logs{
   display: inline;
   font-size: var(--log-font, 10px);
-  line-height: 1.1;
   white-space: pre-wrap;
   overflow: hidden;
 }
