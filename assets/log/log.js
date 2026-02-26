@@ -12,6 +12,64 @@
 
   const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
+  function fitLogsInMonth(monthEl){
+  const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
+  for (const cell of cells) {
+    const inner = cell.querySelector(".cellInner");
+    const logs = cell.querySelector(".logs");
+    if (!inner || !logs) continue;
+
+    let lo = 6;
+    let hi = 11;
+    let best = lo;
+
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      cell.style.setProperty("--log-font", mid + "px");
+      const ok = inner.scrollHeight <= inner.clientHeight;
+      if (ok) {
+        best = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+
+    cell.style.setProperty("--log-font", best + "px");
+  }
+}
+
+
+  function fitMonthLabel(monthEl){
+  const label = monthEl.querySelector(".monthLabelInGrid span");
+  if (!label) return;
+
+  const box = label.parentElement;
+  const boxW = box.clientWidth;
+  const boxH = box.clientHeight;
+
+  if (!boxW || !boxH) return;
+
+  let lo = 8;
+  let hi = Math.max(8, Math.floor(boxH * 1.1));
+  let best = lo;
+
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    label.style.fontSize = mid + "px";
+    const ok = label.scrollWidth <= boxW && label.scrollHeight <= boxH;
+    if (ok) {
+      best = mid;
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+
+  label.style.fontSize = best + "px";
+  monthEl.style.setProperty("--month-font", best + "px");
+}
+
   function setCellHeightForMonth(monthEl){
     const header = monthEl.querySelector(".monthHeader");
     const headerH = header && header.style.display !== "none" ? header.offsetHeight : 0;
@@ -183,6 +241,8 @@
 
     stream.appendChild(monthEl);
     setCellHeightForMonth(monthEl);
+    fitMonthLabel(monthEl);
+    fitLogsInMonth(monthEl);
 
     const prev = addMonths(y, m0, -1);
     y = prev.y;

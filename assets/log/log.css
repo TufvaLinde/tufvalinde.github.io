@@ -77,53 +77,57 @@
   pointer-events: none;
 }
 
-.cell.is-empty{
-  font-size: 3rem;
-  background:
-    linear-gradient(135deg,
-      transparent 49%,
-      rgba(0,0,0,.12) 50%,
-      rgba(0,0,0,.12) 51%,
-      transparent 52%); 
-}
-
 .cell.is-empty .logs{
   display: none;
+}
+
+.cell.is-empty{
+  background:
+    linear-gradient(135deg,
+      transparent 48.5%,
+      red,
+      red,
+      transparent 51.5%);
 }
 
 .cellInner{
   padding: 4px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  display: block;
 }
 
 .dayNum{
-  font-size: 20px;
+  display: inline;
+  font-size: 11px;
   opacity: .75;
-  line-height: 1;
+  line-height: 1.1;
+  margin-right: 6px;
 }
 
 .logs{
-  font-size: 10px;
-  line-height: 1.15;
+  display: inline;
+  font-size: var(--log-font, 10px);
+  line-height: 1.1;
   white-space: pre-wrap;
   overflow: hidden;
 }
 
 .monthLabelInGrid{
+  height: var(--cell-h);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 6px 8px;
+  padding: 0 10px;
   border-right: 1px solid red;
   border-bottom: 1px solid red;
-  letter-spacing: .08em;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: .08em;
+  overflow: hidden;
 }
 
 .monthLabelInGrid span{
-  font-size: clamp(16px, 6vw, 44px);
+  font-size: var(--month-font, 28px);
   line-height: 1;
+  white-space: nowrap;
+}
 }
