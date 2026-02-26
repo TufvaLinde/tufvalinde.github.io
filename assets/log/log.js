@@ -102,61 +102,79 @@
     grid.className = "grid";
 
     const first = new Date(y, m0, 1);
-    const startOffset = weekdayIndex(first);
-    const nDays = daysInMonth(y, m0);
+const startOffset = weekdayIndex(first);
+const nDays = daysInMonth(y, m0);
+header.style.display = startOffset >= 2 ? "none" : "block";
 
-    const totalCells = Math.ceil((startOffset + nDays) / 7) * 7;
+const isCurrentMonth = (y === today.getFullYear() && m0 === today.getMonth());
+const limitDay = isCurrentMonth ? today.getDate() : nDays;
 
-    for (let i = 0; i < totalCells; i++) {
-      const cell = document.createElement("div");
-      cell.className = "cell";
+const visibleDaysCount = startOffset + limitDay;
+const totalCells = Math.ceil(visibleDaysCount / 7) * 7;
 
-      const inner = document.createElement("div");
-      inner.className = "cellInner";
+grid.innerHTML = "";
 
-      const dayNum = document.createElement("div");
-      dayNum.className = "dayNum";
+if (startOffset >= 2) {
+  const label = document.createElement("div");
+  label.className = "monthLabelInGrid";
+  label.style.gridColumn = `1 / span ${startOffset}`;
+  label.style.gridRow = "1";
+  const t = document.createElement("span");
+  t.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
+  label.appendChild(t);
+  grid.appendChild(label);
+}
 
-      const logs = document.createElement("div");
-      logs.className = "logs";
+for (let i = 0; i < totalCells; i++) {
+  const cell = document.createElement("div");
+  cell.className = "cell";
 
-      const dayIndex = i - startOffset + 1;
+  const inner = document.createElement("div");
+  inner.className = "cellInner";
 
-      if (dayIndex < 1 || dayIndex > nDays) {
-        cell.classList.add("is-outside");
-        dayNum.textContent = "";
-        logs.textContent = "";
-        cell.classList.add("is-empty");
-      } else {
-        const d = new Date(y, m0, dayIndex);
-        const k = dayKeyLocal(d);
+  const dayNum = document.createElement("div");
+  dayNum.className = "dayNum";
 
-        dayNum.textContent = String(dayIndex);
+  const logs = document.createElement("div");
+  logs.className = "logs";
 
-        if (k === todayKey) cell.classList.add("is-today");
+  const dayIndex = i - startOffset + 1;
 
-        const arr = byDay.get(k);
-        if (!arr || !arr.length) {
-          cell.classList.add("is-empty");
-          logs.textContent = "";
-        } else {
-          const lines = [];
-          const n = Math.min(arr.length, 20);
-          for (let j = 0; j < n; j++) {
-            const t = arr[j].ts_display;
-            const s = stripHtml(arr[j].html);
-            lines.push(s ? `${t} ${s}` : t);
-          }
-          if (arr.length > n) lines.push("…");
-          logs.textContent = lines.join("\n");
-        }
+  const isOutsideMonth = (dayIndex < 1 || dayIndex > nDays);
+  const isFutureInCurrentMonth = isCurrentMonth && dayIndex > limitDay;
+
+  if (isOutsideMonth || isFutureInCurrentMonth) {
+    cell.classList.add("is-outside");
+    dayNum.textContent = "";
+    logs.textContent = "";
+  } else {
+    const d = new Date(y, m0, dayIndex);
+    const k = dayKeyLocal(d);
+
+    dayNum.textContent = String(dayIndex);
+
+    const arr = byDay.get(k);
+    if (!arr || !arr.length) {
+      cell.classList.add("is-empty");
+      logs.textContent = "";
+    } else {
+      const lines = [];
+      const n = Math.min(arr.length, 20);
+      for (let j = 0; j < n; j++) {
+        const t = arr[j].ts_display;
+        const s = stripHtml(arr[j].html);
+        lines.push(s ? `${t} ${s}` : t);
       }
-
-      inner.appendChild(dayNum);
-      inner.appendChild(logs);
-      cell.appendChild(inner);
-      grid.appendChild(cell);
+      if (arr.length > n) lines.push("…");
+      logs.textContent = lines.join("\n");
     }
+  }
+
+  inner.appendChild(dayNum);
+  inner.appendChild(logs);
+  cell.appendChild(inner);
+  grid.appendChild(cell);
+}
 
     monthEl.appendChild(header);
     monthEl.appendChild(weekdays);
