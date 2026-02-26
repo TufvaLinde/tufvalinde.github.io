@@ -86,15 +86,6 @@
     title.textContent = `${monthNames[m0]} ${y}`;
     header.appendChild(title);
 
-    const weekdays = document.createElement("div");
-    weekdays.className = "weekdays";
-    for (const w of weekdayLabels) {
-      const el = document.createElement("div");
-      el.className = "weekday";
-      el.textContent = w;
-      weekdays.appendChild(el);
-    }
-
     const grid = document.createElement("div");
     grid.className = "grid";
 
@@ -178,12 +169,11 @@
     }
 
     monthEl.appendChild(header);
-    monthEl.appendChild(weekdays);
     monthEl.appendChild(grid);
 
     stream.appendChild(monthEl);
 
-    const prev = addMonths(y, m0, -1);
+    const prev = addMonths(y, m0, 1);
     y = prev.y;
     m0 = prev.m0;
   }
