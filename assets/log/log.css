@@ -83,10 +83,10 @@
 
 .cell.is-empty{
   background:
-    linear-gradient(135deg,
+    linear-gradient(var(--diag-angle, 45deg),
       transparent 48.5%,
-      red,
-      red,
+      rgba(0,0,0,.14) 49.5%,
+      rgba(0,0,0,.14) 50.5%,
       transparent 51.5%);
 }
 

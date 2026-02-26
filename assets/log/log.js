@@ -12,6 +12,20 @@
 
   const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
+  function updateDiagAngle(monthEl){
+  const sample = monthEl.querySelector(".cell:not(.is-outside)");
+  if (!sample) return;
+
+  const r = sample.getBoundingClientRect();
+  const w = Math.max(1, r.width);
+  const h = Math.max(1, r.height);
+
+  const angleRad = Math.atan(h / w);
+  const angleDeg = angleRad * 180 / Math.PI;
+
+  monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
+}
+  
   function fitLogsInMonth(monthEl){
   const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
   for (const cell of cells) {
@@ -241,6 +255,7 @@
 
     stream.appendChild(monthEl);
     setCellHeightForMonth(monthEl);
+    updateDiagAngle(monthEl);
     fitMonthLabel(monthEl);
     fitLogsInMonth(monthEl);
 
@@ -250,4 +265,16 @@
   }
 
   viewport.scrollTop = 0;
+  
+  window.addEventListener("resize", () => {
+  document.querySelectorAll(".month").forEach(m => {
+    setCellHeightForMonth(m);
+    updateDiagAngle(m);
+    fitMonthLabel(m);
+    fitLogsInMonth(m);
+  });
+});
+  
+  
 })();
+
