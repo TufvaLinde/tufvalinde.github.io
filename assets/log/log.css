@@ -1,78 +1,95 @@
 #logViewport{
-  position: relative;
-}
-
-#logGrid, #logGrid2{
-  position: absolute;
-  inset: 0;
-  overflow: visible;
-  will-change: transform, opacity, filter;
-}
-
-#logGrid2{
-  opacity: 0;
-  pointer-events: none;
-}
-
-.is-layer-animating #logGrid,
-.is-layer-animating #logGrid2{
-  transition: opacity 220ms ease, transform 220ms cubic-bezier(.2,.8,.2,1), filter 220ms ease;
-}
-
-
-
-
-
-
-
-
-#logViewport{
-  height: 150vh;
-  width: 95vw;
-  margin: 2.5vw;
+  height: 100vh;
+  overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  border: 2px solid red;
-  border-radius: 0;
+  background: #fff;
+  scroll-snap-type: y mandatory;
 }
 
-#logGrid{
+#logStream{
+  display: block;
+}
+
+.month{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.monthHeader{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: .08em;
+}
+
+.monthTitle{
+  font-size: 14px;
+  opacity: .85;
+}
+
+.weekdays{
   display: grid;
-  grid-template-columns: repeat(var(--cols), 1fr);
-  gap: 0;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid rgba(0,0,0,.10);
 }
 
-.logCell{
-  border: 1px solid red;
-  border-radius: 0;
-  overflow: hidden;
+.weekday{
+  padding: 6px 0;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+  opacity: .6;
+  border-right: 1px solid rgba(0,0,0,.08);
+}
+.weekday:last-child{ border-right: 0; }
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
-.logInner{
-  padding: var(--pad);
-}
-
-.logText{
-  font-size: var(--font);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.monthCell{
-  font-size: 3rem;
-}
-
-.is-square .logCell{
+.cell{
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(0,0,0,.08);
   aspect-ratio: 1 / 1;
-}
-
-.is-square .logText{
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: clip;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.logCell.is-empty .logText{
-  opacity: .25;
+.cell:nth-child(7n){ border-right: 0; }
+
+.cellInner{
+  padding: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dayNum{
+  font-size: 11px;
+  opacity: .75;
+  line-height: 1;
+}
+
+.logs{
+  font-size: 10px;
+  line-height: 1.15;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.cell.is-empty .logs{ display: none; }
+.cell.is-outside{
+  background: rgba(0,0,0,.02);
+}
+.cell.is-today{
+  background: rgba(0,0,0,.03);
 }
