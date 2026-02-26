@@ -11,7 +11,18 @@
   const items = await res.json();
 
   const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const weekdayLabels = ["MON","TUE","WED","THU","FRI","SAT","SUN"];
+
+  function setCellHeightForMonth(monthEl){
+    const header = monthEl.querySelector(".monthHeader");
+    const headerH = header && header.style.display !== "none" ? header.offsetHeight : 0;
+
+    const available = window.innerHeight - headerH;
+
+    const rows = 6;
+    const cellH = available / rows;
+
+    monthEl.style.setProperty("--cell-h", `${cellH}px`);
+  }
 
   function dayKeyLocal(d) {
     const y = d.getFullYear();
@@ -58,7 +69,6 @@
   }
 
   const today = new Date();
-  const todayKey = dayKeyLocal(today);
 
   if (!minDayKey) {
     stream.textContent = "No logs yet.";
@@ -172,8 +182,9 @@
     monthEl.appendChild(grid);
 
     stream.appendChild(monthEl);
+    setCellHeightForMonth(monthEl);
 
-    const prev = addMonths(y, m0, 1);
+    const prev = addMonths(y, m0, -1);
     y = prev.y;
     m0 = prev.m0;
   }

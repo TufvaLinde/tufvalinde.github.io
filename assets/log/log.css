@@ -1,5 +1,5 @@
-:root{
-  --cell-ar: 5 / 15;
+.cell{
+  height: var(--cell-h);
 }
 
 #logViewport{
@@ -63,7 +63,6 @@
   box-sizing: border-box;
   border-right: 1px solid red;
   border-bottom: 1px solid red;
-  aspect-ratio: var(--cell-ar);
   overflow: hidden;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
