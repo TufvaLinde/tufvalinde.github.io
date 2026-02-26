@@ -3,6 +3,7 @@ title: draft
 layout: emptyslate
 ---
 
+
 <link rel="stylesheet" href="{{ '/assets/log/log.css' | relative_url }}">
 
 <div id="logViewport">

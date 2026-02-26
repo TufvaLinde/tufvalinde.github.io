@@ -2,6 +2,65 @@
   --cell-ar: 6 / 5;
 }
 
+#logViewport{
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  background: #fff;
+  scroll-snap-type: y mandatory;
+}
+
+#logStream{
+  display: block;
+}
+
+.month{
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.monthHeader{
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  letter-spacing: .08em;
+}
+
+.monthTitle{
+  font-size: 14px;
+  opacity: .85;
+}
+
+.weekdays{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid rgba(0,0,0,.10);
+}
+
+.weekday{
+  padding: 6px 0;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+  opacity: .6;
+  border-right: 1px solid rgba(0,0,0,.08);
+}
+
+.weekday:last-child{
+  border-right: 0;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
 .cell{
   box-sizing: border-box;
   border-right: 1px solid rgba(0,0,0,.08);
@@ -12,7 +71,9 @@
   background: #fff;
 }
 
-.cell:nth-child(7n){ border-right: 0; }
+.cell:nth-child(7n){
+  border-right: 0;
+}
 
 .cell.is-outside{
   opacity: 0;
@@ -29,7 +90,9 @@
       transparent 52%);
 }
 
-.cell.is-empty .logs{ display: none; }
+.cell.is-empty .logs{
+  display: none;
+}
 
 .cellInner{
   padding: 4px;
@@ -62,6 +125,7 @@
   letter-spacing: .08em;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   opacity: .85;
+  background: #fff;
 }
 
 .monthLabelInGrid span{
