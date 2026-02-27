@@ -10,7 +10,7 @@
   }
   const items = await res.json();
 
-  const monthNames = ["JANUARY","FEBURARY","MARCH","APRIL","MAY","JUNE","JUYL","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+  const monthNames = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
 
 function warpMonthLabel(monthEl){
   const span = monthEl.querySelector(".monthLabelInGrid span");
@@ -193,6 +193,16 @@ function warpMonthLabel(monthEl){
     for (let slot = loopStart; slot < totalCells; slot++) {
       const cell = document.createElement("div");
       cell.className = "cell";
+      const row = Math.floor(slot / 7);
+const col = slot % 7;
+
+if (row === 0) cell.classList.add("is-topweek");
+if (col === 0) cell.classList.add("is-monday");
+if (col === 6) cell.classList.add("is-sunday");
+
+if (useInlineMonthLabel && row === 0 && col === startOffset) {
+  cell.classList.add("is-monday");
+}
 
       const inner = document.createElement("div");
       inner.className = "cellInner";

@@ -68,6 +68,18 @@
   color: red;
 }
 
+.cell.is-topweek{
+  border-top: 1px solid red;
+}
+
+.cell.is-monday{
+  border-left: 1px solid red;
+}
+
+.cell.is-sunday{
+  border-right: 1px solid red;
+}
+
 .cell.is-outside{
   opacity: 0;
   border-color: transparent;
