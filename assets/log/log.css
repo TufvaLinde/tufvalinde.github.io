@@ -125,8 +125,8 @@
   z-index: 5;
   height: var(--cell-h);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   padding: 2px;
   overflow: hidden;
   color: white;
