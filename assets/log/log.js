@@ -17,19 +17,27 @@ function warpMonthLabel(monthEl){
   if (!span) return;
 
   const box = span.parentElement;
-  const boxW = box.clientWidth;
-  const boxH = box.clientHeight;
+
+  const boxRect = box.getBoundingClientRect();
+  const boxW = Math.max(1, boxRect.width);
+  const boxH = Math.max(1, boxRect.height);
 
   span.style.transform = "none";
-  span.style.fontSize = "32px";
+  span.style.fontSize = "64px";
+  span.style.lineHeight = "1";
+  span.style.whiteSpace = "nowrap";
 
   const r = span.getBoundingClientRect();
   const textW = Math.max(1, r.width);
   const textH = Math.max(1, r.height);
 
-  const sx = boxW / textW;
-  const sy = boxH / textH;
+  let sx = boxW / textW;
+  let sy = boxH / textH;
 
+  const verticalOvershoot = 1.12;
+  sy *= verticalOvershoot;
+
+  span.style.transformOrigin = "0 0";
   span.style.transform = `scale(${sx}, ${sy})`;
 }
 
