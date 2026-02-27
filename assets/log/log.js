@@ -156,7 +156,7 @@ function warpMonthLabel(monthEl){
 
     const title = document.createElement("div");
     title.className = "monthTitle";
-    title.textContent = `${monthNames[m0]} ${y}`;
+    title.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
     header.appendChild(title);
 
     const grid = document.createElement("div");
