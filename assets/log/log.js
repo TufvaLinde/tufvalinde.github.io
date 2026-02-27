@@ -17,27 +17,19 @@ function warpMonthLabel(monthEl){
   if (!span) return;
 
   const box = span.parentElement;
-
-  const boxRect = box.getBoundingClientRect();
-  const boxW = Math.max(1, boxRect.width);
-  const boxH = Math.max(1, boxRect.height);
+  const boxW = Math.max(1, box.clientWidth);
+  const boxH = Math.max(1, box.clientHeight);
 
   span.style.transform = "none";
-  span.style.fontSize = "64px";
+  span.style.fontSize = "200px";
   span.style.lineHeight = "1";
-  span.style.whiteSpace = "nowrap";
 
-  const r = span.getBoundingClientRect();
-  const textW = Math.max(1, r.width);
-  const textH = Math.max(1, r.height);
+  const textW = Math.max(1, span.scrollWidth);
+  const textH = Math.max(1, span.scrollHeight);
 
-  let sx = boxW / textW;
-  let sy = boxH / textH;
+  const sx = boxW / textW;
+  const sy = (boxH / textH) * 1.12;
 
-  const verticalOvershoot = 1.12;
-  sy *= verticalOvershoot;
-
-  span.style.transformOrigin = "0 0";
   span.style.transform = `scale(${sx}, ${sy})`;
 }
 
@@ -265,7 +257,7 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
     stream.appendChild(monthEl);
     setCellHeightForMonth(monthEl);
     updateDiagAngle(monthEl);
-    warpMonthLabel(monthEl);
+    requestAnimationFrame(() => warpMonthLabel(monthEl));
     fitLogsInMonth(monthEl);
 
     const prev = addMonths(y, m0, -1);
@@ -279,7 +271,7 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
   document.querySelectorAll(".month").forEach(m => {
     setCellHeightForMonth(m);
     updateDiagAngle(m);
-    warpMonthLabel(m);
+    requestAnimationFrame(() => warpMonthLabel(monthEl));
     fitLogsInMonth(m);
   });
 });
