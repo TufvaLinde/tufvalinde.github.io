@@ -82,7 +82,6 @@
 
 .cell.is-outside{
   opacity: 0;
-  border-color: transparent;
   pointer-events: none;
 }
 
