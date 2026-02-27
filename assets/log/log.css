@@ -82,8 +82,8 @@
   background:
     linear-gradient(var(--diag-angle, 45deg),
       transparent 49.85%,
-      red 49.95%,
-      red 50.05%,
+      red 49%,
+      red 51%,
       transparent 50.15%);
 }
 
