@@ -267,14 +267,14 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
 
   viewport.scrollTop = 0;
   
-  window.addEventListener("resize", () => {
-  document.querySelectorAll(".month").forEach(m => {
-    setCellHeightForMonth(m);
-    updateDiagAngle(m);
-    requestAnimationFrame(() => warpMonthLabel(monthEl));
-    fitLogsInMonth(m);
-  });
-});
+  // window.addEventListener("resize", () => {
+  // document.querySelectorAll(".month").forEach(m => {
+    // setCellHeightForMonth(m);
+    // updateDiagAngle(m);
+    // requestAnimationFrame(() => warpMonthLabel(monthEl));
+    // fitLogsInMonth(m);
+  // });
+// });
   
   
 })();
