@@ -17,28 +17,61 @@ function warpMonthLabel(monthEl){
   if (!span) return;
 
   const box = span.parentElement;
-
-  const boxRect = box.getBoundingClientRect();
-  const boxW = Math.max(1, boxRect.width);
-  const boxH = Math.max(1, boxRect.height);
+  const boxW = box.clientWidth;
+  const boxH = box.clientHeight;
 
   span.style.transform = "none";
-  span.style.fontSize = "64px";
-  span.style.lineHeight = "1";
-  span.style.whiteSpace = "nowrap";
+  span.style.fontSize = "32px";
 
   const r = span.getBoundingClientRect();
   const textW = Math.max(1, r.width);
   const textH = Math.max(1, r.height);
 
-  let sx = boxW / textW;
-  let sy = boxH / textH;
+  const sx = boxW / textW;
+  const sy = boxH / textH;
 
-  const verticalOvershoot = 1.12;
-  sy *= verticalOvershoot;
-
-  span.style.transformOrigin = "0 0";
   span.style.transform = `scale(${sx}, ${sy})`;
+}
+
+  function updateDiagAngle(monthEl){
+  const sample = monthEl.querySelector(".cell:not(.is-outside)");
+  if (!sample) return;
+
+  const r = sample.getBoundingClientRect();
+  const w = Math.max(1, r.width);
+  const h = Math.max(1, r.height);
+
+  const angleRad = -Math.atan(h/w);
+  const angleDeg = angleRad * 180 / Math.PI;
+
+  monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
+}
+  
+  function fitLogsInMonth(monthEl){
+  const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
+  for (const cell of cells) {
+    const inner = cell.querySelector(".cellInner");
+    const logs = cell.querySelector(".logs");
+    if (!inner || !logs) continue;
+
+    let lo = 6;
+    let hi = 11;
+    let best = lo;
+
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      cell.style.setProperty("--log-font", mid + "px");
+      const ok = inner.scrollHeight <= inner.clientHeight;
+      if (ok) {
+        best = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+
+    cell.style.setProperty("--log-font", best + "px");
+  }
 }
 
 
