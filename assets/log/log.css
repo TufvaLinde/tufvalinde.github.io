@@ -114,12 +114,13 @@
 
 .logs{
   display: inline;
-  font-size: var(--log-font, 10px);
+  font-size: var(--log-font, 5rem);
   white-space: pre-wrap;
   overflow: hidden;
 }
 
 .monthLabelInGrid{
+  background: red;
   position: sticky;
   z-index: 5;
   height: var(--cell-h);
@@ -128,7 +129,7 @@
   justify-content: center;
   padding: 2px;
   overflow: hidden;
-  color: red;
+  color: white;
 }
 
 .monthLabelInGrid span{
