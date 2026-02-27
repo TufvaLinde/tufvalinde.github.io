@@ -121,12 +121,11 @@
 
 .monthLabelInGrid{
   position: sticky;
-  top: 0;
   z-index: 5;
   height: var(--cell-h);
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 2px;
   overflow: hidden;
   color: red;
