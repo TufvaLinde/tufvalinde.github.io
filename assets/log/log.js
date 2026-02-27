@@ -10,7 +10,7 @@
   }
   const items = await res.json();
 
-  const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const monthNames = ["JANUARY","FEBURARY","MARCH","APRIL","MAY","JUNE","JUYL","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
 
 function warpMonthLabel(monthEl){
   const span = monthEl.querySelector(".monthLabelInGrid span");

@@ -24,7 +24,6 @@
   position: sticky;
   top: 0;
   z-index: 5;
-  border-bottom: 1px solid red;
   padding: 10px 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   letter-spacing: .08em;
@@ -109,6 +108,9 @@
 }
 
 .monthLabelInGrid{
+  position: sticky;
+  top: 0;
+  z-index: 5;
   height: var(--cell-h);
   display: flex;
   align-items: flex-start;
