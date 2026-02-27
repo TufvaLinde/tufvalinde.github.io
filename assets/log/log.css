@@ -1,5 +1,5 @@
 .cell{
-  height: var(--cell-h);
+  height: calc(100% / 6);
 }
 
 #logViewport{
