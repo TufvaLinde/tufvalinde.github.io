@@ -257,8 +257,13 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
     stream.appendChild(monthEl);
     setCellHeightForMonth(monthEl);
     updateDiagAngle(monthEl);
-    requestAnimationFrame(() => warpMonthLabel(monthEl));
     fitLogsInMonth(monthEl);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        warpMonthLabel(monthEl);
+      });
+    });
 
     const prev = addMonths(y, m0, -1);
     y = prev.y;
