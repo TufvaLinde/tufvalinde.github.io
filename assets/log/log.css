@@ -123,7 +123,8 @@
   background: red;
   position: sticky;
   z-index: 5;
-  height: var(--cell-h);
+  top: 0;
+  height: auto;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
