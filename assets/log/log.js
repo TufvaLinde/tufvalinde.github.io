@@ -209,21 +209,21 @@ function warpMonthLabel(monthEl){
 
     grid.innerHTML = "";
 
-    const useInlineMonthLabel = startOffset >= 2;
-    header.style.display = useInlineMonthLabel ? "none" : "block";
+    header.style.display = "none";
 
-    if (useInlineMonthLabel) {
-      const label = document.createElement("div");
-      label.className = "monthLabelInGrid";
-      label.style.gridColumn = `1 / span ${startOffset}`;
-      label.style.gridRow = "1";
-      const t = document.createElement("span");
-      t.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
-      label.appendChild(t);
-      grid.appendChild(label);
-    }
+const label = document.createElement("div");
+label.className = "monthLabelInGrid";
+label.style.gridRow = "1";
 
-    const loopStart = useInlineMonthLabel ? startOffset : 0;
+const spanCols = startOffset === 0 ? 7 : startOffset;
+label.style.gridColumn = `1 / span ${spanCols}`;
+
+const t = document.createElement("span");
+t.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
+label.appendChild(t);
+grid.appendChild(label);
+
+const loopStart = startOffset === 0 ? 7 : startOffset;
 
     for (let slot = loopStart; slot < totalCells; slot++) {
       const cell = document.createElement("div");
@@ -235,7 +235,7 @@ if (slot < loopStart + 7) cell.classList.add("is-topweek");
 if (col === 0) cell.classList.add("is-monday");
 if (col === 6) cell.classList.add("is-sunday");
 
-if (useInlineMonthLabel && row === 0 && col === startOffset) {
+if (startOffset !== 0 && row === 0 && col === startOffset) {
   cell.classList.add("is-monday");
 }
 
