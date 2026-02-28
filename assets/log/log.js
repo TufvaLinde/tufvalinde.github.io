@@ -12,146 +12,147 @@
 
   const monthNames = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
 
-function warpMonthLabel(monthEl){
-  const span = monthEl.querySelector(".monthLabelInGrid span");
-  if (!span) return;
+  function parseTs(s){
+    if (!s) return null;
 
-  const box = span.parentElement;
-  const boxW = Math.max(1, box.clientWidth);
-  const boxH = Math.max(1, box.clientHeight);
+    let m = s.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/);
+    if (m) return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +(m[6]||0));
 
-  span.style.transform = "none";
-  span.style.fontSize = "200px";
-  span.style.lineHeight = "1";
-  span.style.whiteSpace = "nowrap";
-  span.style.display = "block";
+    m = s.match(/^(\d{4})(\d{2})(\d{2})T(\d{2}):(\d{2})$/);
+    if (m) return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5]);
 
-  const probe = document.createElement("span");
-  probe.textContent = span.textContent;
-  probe.style.position = "absolute";
-  probe.style.visibility = "hidden";
-  probe.style.left = "-99999px";
-  probe.style.top = "0";
-  probe.style.fontFamily = getComputedStyle(span).fontFamily;
-  probe.style.fontWeight = getComputedStyle(span).fontWeight;
-  probe.style.letterSpacing = getComputedStyle(span).letterSpacing;
-  probe.style.fontSize = span.style.fontSize;
-  probe.style.lineHeight = "1";
-  probe.style.whiteSpace = "nowrap";
-  document.body.appendChild(probe);
+    const d = new Date(s);
+    return isNaN(d) ? null : d;
+  }
 
-  const textW = Math.max(1, probe.getBoundingClientRect().width);
+  function warpMonthLabel(monthEl){
+    const span = monthEl.querySelector(".monthLabelInGrid span");
+    if (!span) return;
 
-  const capProbe = document.createElement("span");
-  capProbe.textContent = "H";
-  capProbe.style.position = "absolute";
-  capProbe.style.visibility = "hidden";
-  capProbe.style.left = "-99999px";
-  capProbe.style.top = "0";
-  capProbe.style.fontFamily = probe.style.fontFamily;
-  capProbe.style.fontWeight = probe.style.fontWeight;
-  capProbe.style.letterSpacing = probe.style.letterSpacing;
-  capProbe.style.fontSize = probe.style.fontSize;
-  capProbe.style.lineHeight = "1";
-  capProbe.style.whiteSpace = "nowrap";
-  document.body.appendChild(capProbe);
+    const box = span.parentElement;
+    const boxW = Math.max(1, box.clientWidth);
+    const boxH = Math.max(1, box.clientHeight);
 
-  const capH = Math.max(1, capProbe.getBoundingClientRect().height);
+    span.style.transform = "none";
+    span.style.fontSize = "200px";
+    span.style.lineHeight = "1";
+    span.style.whiteSpace = "nowrap";
+    span.style.display = "block";
 
-  document.body.removeChild(probe);
-  document.body.removeChild(capProbe);
+    const probe = document.createElement("span");
+    probe.textContent = span.textContent;
+    probe.style.position = "absolute";
+    probe.style.visibility = "hidden";
+    probe.style.left = "-99999px";
+    probe.style.top = "0";
+    probe.style.fontFamily = getComputedStyle(span).fontFamily;
+    probe.style.fontWeight = getComputedStyle(span).fontWeight;
+    probe.style.letterSpacing = getComputedStyle(span).letterSpacing;
+    probe.style.fontSize = span.style.fontSize;
+    probe.style.lineHeight = "1";
+    probe.style.whiteSpace = "nowrap";
+    document.body.appendChild(probe);
 
-  const sx = boxW / textW;
-  const sy = (boxH / capH);
+    const textW = Math.max(1, probe.getBoundingClientRect().width);
 
-  span.style.transformOrigin = "0 0";
-  span.style.transform = `scale(${sx}, ${sy})`;
-}
+    const capProbe = document.createElement("span");
+    capProbe.textContent = "H";
+    capProbe.style.position = "absolute";
+    capProbe.style.visibility = "hidden";
+    capProbe.style.left = "-99999px";
+    capProbe.style.top = "0";
+    capProbe.style.fontFamily = probe.style.fontFamily;
+    capProbe.style.fontWeight = probe.style.fontWeight;
+    capProbe.style.letterSpacing = probe.style.letterSpacing;
+    capProbe.style.fontSize = probe.style.fontSize;
+    capProbe.style.lineHeight = "1";
+    capProbe.style.whiteSpace = "nowrap";
+    document.body.appendChild(capProbe);
+
+    const capH = Math.max(1, capProbe.getBoundingClientRect().height);
+
+    document.body.removeChild(probe);
+    document.body.removeChild(capProbe);
+
+    const sx = boxW / textW;
+    const sy = boxH / capH;
+
+    span.style.transformOrigin = "0 0";
+    span.style.transform = `scale(${sx}, ${sy})`;
+  }
 
   function updateDiagAngle(monthEl){
-  const sample = monthEl.querySelector(".cell:not(.is-outside)");
-  if (!sample) return;
+    const sample = monthEl.querySelector(".cell:not(.is-outside)");
+    if (!sample) return;
 
-  const r = sample.getBoundingClientRect();
-  const w = Math.max(1, r.width);
-  const h = Math.max(1, r.height);
+    const r = sample.getBoundingClientRect();
+    const w = Math.max(1, r.width);
+    const h = Math.max(1, r.height);
 
-  const angleRad = -Math.atan(h/w);
-  const angleDeg = angleRad * 180 / Math.PI;
+    const angleRad = -Math.atan(h / w);
+    const angleDeg = angleRad * 180 / Math.PI;
 
-  monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
-}
-  
-function fitLogsInMonth(monthEl){
-  const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
-  for (const cell of cells) {
-    const inner = cell.querySelector(".cellInner");
-    const logs = cell.querySelector(".logs");
-    if (!inner || !logs) continue;
+    monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
+  }
 
-    const text = (logs.textContent || "").trim();
-    if (!text) continue;
+  function fitLogsInMonth(monthEl){
+    const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
+    for (const cell of cells) {
+      const inner = cell.querySelector(".cellInner");
+      const logs = cell.querySelector(".logs");
+      if (!inner || !logs) continue;
 
-    const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : 28);
-    const minFont = 6;
+      const text = (logs.textContent || "").trim();
+      if (!text) continue;
 
-    const lhMin = 0.80;
-    const lhMax = 1.15;
+      const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : 28);
+      const minFont = 6;
 
-    function apply(fontPx, lh){
-  logs.style.fontSize = fontPx + "px";
-  logs.style.lineHeight = String(lh);
-}
+      const lhMin = 0.80;
+      const lhMax = 1.15;
 
-    function fits(){
-      return inner.scrollHeight <= inner.clientHeight && inner.scrollWidth <= inner.clientWidth;
-    }
+      function apply(fontPx, lh){
+        logs.style.fontSize = fontPx + "px";
+        logs.style.lineHeight = String(lh);
+      }
 
-    let bestFont = minFont;
-    let bestLh = 1.05;
+      function fits(){
+        return inner.scrollHeight <= inner.clientHeight && inner.scrollWidth <= inner.clientWidth;
+      }
 
-    let lo = minFont;
-    let hi = maxFont;
+      let bestFont = minFont;
+      let bestLh = 1.05;
 
-    while (lo <= hi) {
-      const mid = (lo + hi) >> 1;
+      let lo = minFont;
+      let hi = maxFont;
 
-      let ok = false;
-      let chosenLh = bestLh;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
 
-      for (let t = 0; t < 9; t++) {
-        const lh = lhMax - (t * (lhMax - lhMin) / 8);
-        apply(mid, lh);
-        if (fits()) {
-          ok = true;
-          chosenLh = lh;
-          break;
+        let ok = false;
+        let chosenLh = bestLh;
+
+        for (let t = 0; t < 9; t++) {
+          const lh = lhMax - (t * (lhMax - lhMin) / 8);
+          apply(mid, lh);
+          if (fits()) {
+            ok = true;
+            chosenLh = lh;
+            break;
+          }
+        }
+
+        if (ok) {
+          bestFont = mid;
+          bestLh = chosenLh;
+          lo = mid + 1;
+        } else {
+          hi = mid - 1;
         }
       }
 
-      if (ok) {
-        bestFont = mid;
-        bestLh = chosenLh;
-        lo = mid + 1;
-      } else {
-        hi = mid - 1;
-      }
+      apply(bestFont, bestLh);
     }
-
-    apply(bestFont, bestLh);
-  }
-}
-
-  function setCellHeightForMonth(monthEl){
-    const header = monthEl.querySelector(".monthHeader");
-    const headerH = header && header.style.display !== "none" ? header.offsetHeight : 0;
-
-    const available = window.innerHeight - headerH;
-
-    const rows = 6;
-    const cellH = available / rows;
-
-    monthEl.style.setProperty("--cell-h", `${cellH}px`);
   }
 
   function dayKeyLocal(d) {
@@ -169,7 +170,9 @@ function fitLogsInMonth(monthEl){
   let minDayKey = null;
 
   for (const it of items) {
-    const d = new Date(it.ts_iso);
+    const d = parseTs(it.ts_iso);
+    if (!d) continue;
+
     const k = dayKeyLocal(d);
     if (!byDay.has(k)) byDay.set(k, []);
     byDay.get(k).push(it);
@@ -220,6 +223,7 @@ function fitLogsInMonth(monthEl){
 
     const header = document.createElement("div");
     header.className = "monthHeader";
+    header.style.display = "none";
 
     const title = document.createElement("div");
     title.className = "monthTitle";
@@ -241,35 +245,34 @@ function fitLogsInMonth(monthEl){
 
     grid.innerHTML = "";
 
-    header.style.display = "none";
+    const label = document.createElement("div");
+    label.className = "monthLabelInGrid";
+    label.style.gridRow = "1";
 
-const label = document.createElement("div");
-label.className = "monthLabelInGrid";
-label.style.gridRow = "1";
+    const spanCols = startOffset === 0 ? 7 : startOffset;
+    label.style.gridColumn = `1 / span ${spanCols}`;
 
-const spanCols = startOffset === 0 ? 7 : startOffset;
-label.style.gridColumn = `1 / span ${spanCols}`;
+    const t = document.createElement("span");
+    t.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
+    label.appendChild(t);
+    grid.appendChild(label);
 
-const t = document.createElement("span");
-t.textContent = `${monthNames[m0]} ${String(y).slice(2)}`;
-label.appendChild(t);
-grid.appendChild(label);
-
-const loopStart = startOffset === 0 ? 7 : startOffset;
+    const loopStart = startOffset === 0 ? 7 : startOffset;
 
     for (let slot = loopStart; slot < totalCells; slot++) {
       const cell = document.createElement("div");
       cell.className = "cell";
+
       const row = Math.floor(slot / 7);
-const col = slot % 7;
+      const col = slot % 7;
 
-if (slot < loopStart + 7) cell.classList.add("is-topweek");
-if (col === 0) cell.classList.add("is-monday");
-if (col === 6) cell.classList.add("is-sunday");
+      if (slot < loopStart + 7) cell.classList.add("is-topweek");
+      if (col === 0) cell.classList.add("is-monday");
+      if (col === 6) cell.classList.add("is-sunday");
 
-if (startOffset !== 0 && row === 0 && col === startOffset) {
-  cell.classList.add("is-monday");
-}
+      if (startOffset !== 0 && row === 0 && col === startOffset) {
+        cell.classList.add("is-monday");
+      }
 
       const inner = document.createElement("div");
       inner.className = "cellInner";
@@ -303,9 +306,9 @@ if (startOffset !== 0 && row === 0 && col === startOffset) {
           const lines = [];
           const n = Math.min(arr.length, 20);
           for (let j = 0; j < n; j++) {
-            const t = arr[j].ts_display;
+            const tt = arr[j].ts_display;
             const s = stripHtml(arr[j].html);
-            lines.push(s ? `${t} ${s}` : t);
+            lines.push(s ? `${tt} ${s}` : tt);
           }
           if (arr.length > n) lines.push("…");
           logs.textContent = lines.join("\n");
@@ -322,7 +325,7 @@ if (startOffset !== 0 && row === 0 && col === startOffset) {
     monthEl.appendChild(grid);
 
     stream.appendChild(monthEl);
-    // setCellHeightForMonth(monthEl);
+
     updateDiagAngle(monthEl);
     fitLogsInMonth(monthEl);
 
@@ -338,16 +341,12 @@ if (startOffset !== 0 && row === 0 && col === startOffset) {
   }
 
   viewport.scrollTop = 0;
-  
-  window.addEventListener("resize", () => {
-  document.querySelectorAll(".month").forEach(m => {
-    // setCellHeightForMonth(m);
-    updateDiagAngle(m);
-    requestAnimationFrame(() => warpMonthLabel(m));
-    fitLogsInMonth(m);
-  });
-});
-  
-  
-})();
 
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".month").forEach(m => {
+      updateDiagAngle(m);
+      requestAnimationFrame(() => warpMonthLabel(m));
+      fitLogsInMonth(m);
+    });
+  });
+})();
