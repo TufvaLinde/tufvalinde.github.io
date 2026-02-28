@@ -255,7 +255,7 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
     monthEl.appendChild(grid);
 
     stream.appendChild(monthEl);
-    setCellHeightForMonth(monthEl);
+    // setCellHeightForMonth(monthEl);
     updateDiagAngle(monthEl);
     fitLogsInMonth(monthEl);
 
