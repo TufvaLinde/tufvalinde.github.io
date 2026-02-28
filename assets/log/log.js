@@ -105,10 +105,10 @@
       const text = (logs.textContent || "").trim();
       if (!text) continue;
 
-      const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : 28);
-      const minFont = 6;
+      const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : (text.length <= 120 ? 28 : 14));
+      const minFont = 1;
 
-      const lhMin = 0.80;
+      const lhMin = 0.5;
       const lhMax = 1.15;
 
       function apply(fontPx, lh){
@@ -306,10 +306,14 @@
           const lines = [];
           const n = Math.min(arr.length, 20);
           for (let j = 0; j < n; j++) {
-            const tt = arr[j].ts_display;
-            const s = stripHtml(arr[j].html);
-            lines.push(s ? `${tt} ${s}` : tt);
-          }
+  const d = parseTs(arr[j].ts_iso);
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mm = String(d.getMinutes()).padStart(2, "0");
+  const time = `T${hh}:${mm}`;
+
+  const s = stripHtml(arr[j].html);
+  lines.push(s ? `${time} ${s}` : time);
+}
           if (arr.length > n) lines.push("…");
           logs.textContent = lines.join("\n");
         }

@@ -116,6 +116,11 @@
   line-height: var(--log-lh, 1.0);
   white-space: pre-wrap;
   word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  word-break: break-word;
   overflow: hidden;
 }
 
