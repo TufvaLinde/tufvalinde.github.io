@@ -105,21 +105,18 @@
 }
 
 .dayNum{
-  display: inline;
-  font-size: 11px;
-  opacity: .75;
-  line-height: 1.1;
-  margin-right: 6px;
+  display: block;
+  line-height: 1;
+  margin: 0;
 }
 
 .logs{
-  display: inline;
+  display: block;
   font-size: var(--log-font, 10px);
-  line-height: var(--log-lh, 1.05);
+  line-height: var(--log-lh, 1.0);
   white-space: pre-wrap;
   word-break: break-word;
   overflow: hidden;
-  font-weight: 700;
 }
 
 .monthLabelInGrid{

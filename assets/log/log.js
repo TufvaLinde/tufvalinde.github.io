@@ -99,9 +99,9 @@ function fitLogsInMonth(monthEl){
     const lhMax = 1.15;
 
     function apply(fontPx, lh){
-      cell.style.setProperty("--log-font", fontPx + "px");
-      cell.style.setProperty("--log-lh", String(lh));
-    }
+  logs.style.fontSize = fontPx + "px";
+  logs.style.lineHeight = String(lh);
+}
 
     function fits(){
       return inner.scrollHeight <= inner.clientHeight && inner.scrollWidth <= inner.clientWidth;
