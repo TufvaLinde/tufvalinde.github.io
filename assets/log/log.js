@@ -23,13 +23,48 @@ function warpMonthLabel(monthEl){
   span.style.transform = "none";
   span.style.fontSize = "200px";
   span.style.lineHeight = "1";
+  span.style.whiteSpace = "nowrap";
+  span.style.display = "block";
 
-  const textW = Math.max(1, span.scrollWidth);
-  const textH = Math.max(1, span.scrollHeight);
+  const probe = document.createElement("span");
+  probe.textContent = span.textContent;
+  probe.style.position = "absolute";
+  probe.style.visibility = "hidden";
+  probe.style.left = "-99999px";
+  probe.style.top = "0";
+  probe.style.fontFamily = getComputedStyle(span).fontFamily;
+  probe.style.fontWeight = getComputedStyle(span).fontWeight;
+  probe.style.letterSpacing = getComputedStyle(span).letterSpacing;
+  probe.style.fontSize = span.style.fontSize;
+  probe.style.lineHeight = "1";
+  probe.style.whiteSpace = "nowrap";
+  document.body.appendChild(probe);
+
+  const textW = Math.max(1, probe.getBoundingClientRect().width);
+
+  const capProbe = document.createElement("span");
+  capProbe.textContent = "H";
+  capProbe.style.position = "absolute";
+  capProbe.style.visibility = "hidden";
+  capProbe.style.left = "-99999px";
+  capProbe.style.top = "0";
+  capProbe.style.fontFamily = probe.style.fontFamily;
+  capProbe.style.fontWeight = probe.style.fontWeight;
+  capProbe.style.letterSpacing = probe.style.letterSpacing;
+  capProbe.style.fontSize = probe.style.fontSize;
+  capProbe.style.lineHeight = "1";
+  capProbe.style.whiteSpace = "nowrap";
+  document.body.appendChild(capProbe);
+
+  const capH = Math.max(1, capProbe.getBoundingClientRect().height);
+
+  document.body.removeChild(probe);
+  document.body.removeChild(capProbe);
 
   const sx = boxW / textW;
-  const sy = (boxH / textH) * 1.12;
+  const sy = (boxH / capH);
 
+  span.style.transformOrigin = "0 0";
   span.style.transform = `scale(${sx}, ${sy})`;
 }
 
