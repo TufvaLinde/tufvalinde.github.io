@@ -82,33 +82,65 @@ function warpMonthLabel(monthEl){
   monthEl.style.setProperty("--diag-angle", `${angleDeg}deg`);
 }
   
-  function fitLogsInMonth(monthEl){
+function fitLogsInMonth(monthEl){
   const cells = monthEl.querySelectorAll(".cell:not(.is-outside):not(.is-empty)");
   for (const cell of cells) {
     const inner = cell.querySelector(".cellInner");
     const logs = cell.querySelector(".logs");
     if (!inner || !logs) continue;
 
-    let lo = 6;
-    let hi = 11;
-    let best = lo;
+    const text = (logs.textContent || "").trim();
+    if (!text) continue;
+
+    const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : 28);
+    const minFont = 6;
+
+    const lhMin = 0.80;
+    const lhMax = 1.15;
+
+    function apply(fontPx, lh){
+      cell.style.setProperty("--log-font", fontPx + "px");
+      cell.style.setProperty("--log-lh", String(lh));
+    }
+
+    function fits(){
+      return inner.scrollHeight <= inner.clientHeight && inner.scrollWidth <= inner.clientWidth;
+    }
+
+    let bestFont = minFont;
+    let bestLh = 1.05;
+
+    let lo = minFont;
+    let hi = maxFont;
 
     while (lo <= hi) {
       const mid = (lo + hi) >> 1;
-      cell.style.setProperty("--log-font", mid + "px");
-      const ok = inner.scrollHeight <= inner.clientHeight;
+
+      let ok = false;
+      let chosenLh = bestLh;
+
+      for (let t = 0; t < 9; t++) {
+        const lh = lhMax - (t * (lhMax - lhMin) / 8);
+        apply(mid, lh);
+        if (fits()) {
+          ok = true;
+          chosenLh = lh;
+          break;
+        }
+      }
+
       if (ok) {
-        best = mid;
+        bestFont = mid;
+        bestLh = chosenLh;
         lo = mid + 1;
       } else {
         hi = mid - 1;
       }
     }
 
-    cell.style.setProperty("--log-font", best + "px");
+    apply(bestFont, bestLh);
   }
 }
-
 
   function setCellHeightForMonth(monthEl){
     const header = monthEl.querySelector(".monthHeader");

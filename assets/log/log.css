@@ -114,9 +114,12 @@
 
 .logs{
   display: inline;
-  font-size: var(--log-font, 5rem);
+  font-size: var(--log-font, 10px);
+  line-height: var(--log-lh, 1.05);
   white-space: pre-wrap;
+  word-break: break-word;
   overflow: hidden;
+  font-weight: 700;
 }
 
 .monthLabelInGrid{
