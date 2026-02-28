@@ -231,7 +231,7 @@ function warpMonthLabel(monthEl){
       const row = Math.floor(slot / 7);
 const col = slot % 7;
 
-if (row === 0) cell.classList.add("is-topweek");
+if (slot < loopStart + 7) cell.classList.add("is-topweek");
 if (col === 0) cell.classList.add("is-monday");
 if (col === 6) cell.classList.add("is-sunday");
 
@@ -311,7 +311,7 @@ if (useInlineMonthLabel && row === 0 && col === startOffset) {
   document.querySelectorAll(".month").forEach(m => {
     // setCellHeightForMonth(m);
     updateDiagAngle(m);
-    requestAnimationFrame(() => warpMonthLabel(monthEl));
+    requestAnimationFrame(() => warpMonthLabel(m));
     fitLogsInMonth(m);
   });
 });
