@@ -108,7 +108,7 @@
       const maxFont = text.length <= 6 ? 120 : (text.length <= 20 ? 64 : (text.length <= 120 ? 28 : 14));
       const minFont = 1;
 
-      const lhMin = 0.5;
+      const lhMin = 0.55;
       const lhMax = 1.15;
 
       function apply(fontPx, lh){
