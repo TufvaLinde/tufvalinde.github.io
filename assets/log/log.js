@@ -306,10 +306,9 @@
           const lines = [];
           const n = Math.min(arr.length, 20);
           for (let j = 0; j < n; j++) {
-  const d = parseTs(arr[j].ts_iso);
-  const hh = String(d.getHours()).padStart(2, "0");
-  const mm = String(d.getMinutes()).padStart(2, "0");
-  const time = `T${hh}:${mm}`;
+  const src = String(arr[j].ts_display || arr[j].ts_iso || "");
+const m = src.match(/(?:T|\s)(\d{2}):(\d{2})/);
+const time = m ? `T${m[1]}:${m[2]}` : "T??:??";
 
   const s = stripHtml(arr[j].html);
   lines.push(s ? `${time} ${s}` : time);
