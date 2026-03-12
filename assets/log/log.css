@@ -144,7 +144,6 @@
 .monthLabelInGrid span{
   display: block;
   line-height: 1;
-  font-weight: 900;
   
   font-family: "Panchang", sans-serif;
   white-space: nowrap;
