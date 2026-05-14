@@ -1,6 +1,7 @@
 ---
 title: draft
 layout: emptyslate
+permalink: /draft-preview/
 ---
 
 

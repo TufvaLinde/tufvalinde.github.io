@@ -15,4 +15,4 @@ answers travelers have given me in descending order starting from the most popul
 - *"to escape the winter"* (3)
 - *"to find myself"* (2)
 - *"to get a tan"* (1)
-- -*"to surf"* (1)
+- *"to surf"* (1)

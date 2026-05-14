@@ -1,12 +1,5 @@
-.wrapper {
-  max-width: none;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-
 #logViewport{
-  max-width: 30vw;
+  margin-inline: 25vw;
   height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
