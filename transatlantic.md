@@ -18,7 +18,7 @@ I know some people worry about the risk of us sinking and drowning and such. I c
 
 <margin-note target="blast" color="rgb(0, 0, 0)">
   <b>transatlantic email blast</b>
-  <form class="email-blast-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form class="email-blast-form" action="https://formspree.io/f/meedgqgw" method="POST">
   <label>
     your email
     <input type="email" name="email" required>
