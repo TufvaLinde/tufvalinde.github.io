@@ -1,0 +1,198 @@
+.passage-map-shell {
+  width: 100vw;
+  min-height: 50vh;
+  margin-left: calc(50% - 50vw);
+
+  display: grid;
+  grid-template-columns: 50vw minmax(280px, 1fr);
+  align-items: center;
+  gap: 2rem;
+
+  padding: 4vh 4vw;
+  box-sizing: border-box;
+}
+
+.passage-timestamp {
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+  font-family: serif;
+}
+
+.passage-map-shell {
+  position: relative;
+}
+
+.h2 {
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+  font-family: serif;
+}
+
+.passage-connector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.passage-connector line {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.passage-map {
+  width: 50vw;
+  height: 70vh;
+
+  clip-path: shape(
+    from 35.20% 91.10%,
+    curve to 22.40% 87.30% with 29.10% 90.80%,
+    curve to 11.20% 78.40% with 15.80% 84.60%,
+    curve to 6.10% 66.20% with 7.00% 72.40%,
+    curve to 4.90% 52.70% with 4.40% 59.10%,
+    curve to 5.80% 38.10% with 4.80% 45.20%,
+    curve to 11.90% 24.80% with 7.90% 30.00%,
+    curve to 22.90% 12.60% with 16.30% 17.90%,
+    curve to 35.80% 5.10% with 28.40% 7.40%,
+    curve to 50.90% 4.20% with 42.60% 2.90%,
+    curve to 66.40% 7.10% with 58.70% 5.40%,
+    curve to 79.20% 14.40% with 73.10% 9.60%,
+    curve to 89.10% 25.30% with 85.70% 18.80%,
+    curve to 94.30% 38.90% with 93.80% 31.40%,
+    curve to 95.60% 53.40% with 95.90% 46.10%,
+    curve to 93.20% 67.80% with 95.30% 60.70%,
+    curve to 86.70% 80.40% with 91.20% 75.10%,
+    curve to 75.30% 88.60% with 81.50% 85.10%,
+    curve to 61.40% 93.10% with 68.20% 91.90%,
+    curve to 48.60% 94.00% with 54.80% 94.40%,
+    curve to 35.20% 91.10% with 42.30% 93.20%
+  );
+}
+
+.passage-log-panel {
+  align-self: baseline;
+  max-width: 420px;
+  padding: 1.25rem;
+  background: Canvas;
+  color: CanvasText;
+}
+
+.passage-log-panel h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 0.9;
+}
+
+.passage-log-panel dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0;
+}
+
+.passage-log-panel dt {
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.passage-log-panel dd {
+  margin: 0;
+}
+
+.passage-log-panel .observation {
+  margin: 1.25rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  font-family: serif;
+}
+
+.wrapper {
+  margin: auto;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  line-height: 0.8;
+  margin-top: 3vh;
+}
+
+.update-text {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.email-blast-form {
+  max-width: 300px;
+  display: grid;
+  gap: 0.75rem;
+  margin: 0 auto;
+  margin-block: 20px;
+}
+
+.email-blast-form label {
+  display: grid;
+  opacity: 0.55;
+}
+
+.email-blast-form input {
+font: inherit;
+  border: gray;
+  background-color: #ffffff;
+  color: inherit;
+  padding: 0.5rem;
+}
+
+.blast-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+}
+
+
+.blast-button::before {
+  position: absolute;
+  inset: 0;
+  background: white;
+  clip-path: inset(100% 0 0 0);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.blast-button:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+
+.blast-button:hover {
+  color: white;
+  background-color: black;
+}
+
+@media (max-width: 800px) {
+  .passage-map-shell {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .passage-map {
+    width: 100%;
+    height: 60vh;
+  }
+
+  .passage-log-panel {
+    max-width: none;
+  }
+}

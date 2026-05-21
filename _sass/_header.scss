@@ -23,13 +23,18 @@
 }
 
 .site-header {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   border: none;
   background: none;
+  height: 100%;
+  min-height: 30vh;
   box-shadow: none;
   display: flex;
   align-items: center;
+}
+
+.site-header.is-subpage {
+  pointer-events: auto;
+  min-height: 18vh;
 }
 
 .home-header {
@@ -55,7 +60,6 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  margin-top: 25vh;
   font-size: clamp(1.5rem, 6vw, 3rem);
   line-height: 1;
   position: relative;
@@ -73,7 +77,13 @@
 .name-grid a {
   color: black;
   text-decoration: none;
-  transition: color 0.25s ease-in-out;
+}
+
+.name-grid a,
+.linked-letter,
+.linked-letter .suffix {
+ transition: color 0.25s ease-in-out;
+ transition-delay: 0s;
 }
 
 .linked-letter {
@@ -83,7 +93,6 @@
   justify-content: center;
   color: black;
   cursor: pointer;
-  transition: color 0.25s ease-in-out;
 }
 
 .linked-letter:focus,
@@ -108,13 +117,10 @@
   white-space: nowrap;
   letter-spacing: normal;
   text-align:left;
-  transition: color 0.25s ease-in-out;
+  cursor: pointer;
 }
 
-.linked-letter:hover {
-  color: rgb(156, 203, 206);
-}
-
+.linked-letter:hover,
 .linked-letter:hover .suffix {
   color: rgb(156, 203, 206);
 }
